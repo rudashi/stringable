@@ -22,7 +22,7 @@ test.each([
         .toBe(expected);
 });
 
-it('It should returns empty string if nothing is between two values', () => {
+it('should returns empty string if nothing is between two values', () => {
 
     expect(Stringable.of('foobarbar').betweenFirst('foo', 'bar').toString())
         .toBe('');

@@ -23,13 +23,13 @@ test.each([
         .toBe(expected);
 });
 
-it('It should returns everything before last value', () => {
+it('should returns everything before last value', () => {
 
     expect(Stringable.of('This is my name').between('That', 'name').toString())
         .toBe('This is my ');
 });
 
-it('It should returns everything after first value', () => {
+it('should returns everything after first value', () => {
 
     expect(Stringable.of('This is my name').between('This', 'surname').toString())
         .toBe(' is my name');

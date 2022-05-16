@@ -2,7 +2,7 @@
 
 const {Stringable} = require('../src/Stringable');
 
-it('It determines if string contains the given value', () => {
+it('determines if string contains the given value', () => {
 
     expect(Stringable.of('This is my name').contains('my')).toBe(true);
     expect(Stringable.of('Taylor').contains('ylo', true)).toBe(true);
@@ -15,7 +15,7 @@ it('It determines if string contains the given value', () => {
 
 });
 
-it('It determines if string contains any of the values', () => {
+it('determines if string contains any of the values', () => {
 
     expect(Stringable.of('This is my name').contains(['my', 'foo'])).toBe(true);
     expect(Stringable.of('Taylor').contains(['ylo'], true)).toBe(true);

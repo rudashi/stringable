@@ -21,7 +21,7 @@ test.each([
         .toBe(expected);
 });
 
-it('It should returns empty string if nothing is before', () => {
+it('should returns empty string if nothing is before', () => {
 
     expect(Stringable.of('yvette').beforeLast('yve').toString())
         .toBe('');

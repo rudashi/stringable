@@ -2,7 +2,7 @@
 
 const {Stringable} = require('../src/Stringable');
 
-it('It should returns string with prefix', () => {
+it('should returns string with prefix', () => {
 
     expect(Stringable.of('this/string').start('/').toString())
         .toBe('/this/string');
