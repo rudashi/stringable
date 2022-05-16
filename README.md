@@ -27,6 +27,9 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - lower
 - replace
 - replaceArray
+- replaceFirst
+- replaceLast
+- replaceMatches
 - start
 - startsWith
 - substr
@@ -59,9 +62,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - plural
 - prepend
 - remove
-- replaceFirst
-- replaceLast
-- replaceMatches
 - rtrim
 - scan
 - singular

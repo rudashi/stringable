@@ -210,6 +210,41 @@ export class Stringable {
         return this;
     }
 
+    public replaceFirst = (search: string, replace: string): this => {
+
+        if (search === '') {
+            return this;
+        }
+
+        this.value = this.value.replace(search, replace);
+
+        return this;
+    }
+
+    public replaceLast = (search: string, replace: string): this => {
+
+        if (search === '') {
+            return this;
+        }
+
+        const position = this.value.lastIndexOf(search);
+
+        if (position >= 0) {
+            this.value = this.value.substring(0, position)
+                + replace
+                + this.value.substring(position + search.length, this.value.length);
+        }
+
+        return this;
+    }
+
+    public replaceMatches = (pattern: RegExp|string, replace: string): this => {
+
+        this.value = this.value.replaceAll(new RegExp(pattern, 'g'), replace);
+
+        return this;
+    }
+
     public start = (prefix: string): this => {
 
         if (!new Stringable(this.value).startsWith(prefix)) {
