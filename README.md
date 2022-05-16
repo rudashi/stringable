@@ -24,15 +24,21 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - endsWith
 - exactly
 - explode
+- length
+- limit
 - lower
+- ltrim
+- remove
 - replace
 - replaceArray
 - replaceFirst
 - replaceLast
 - replaceMatches
+- rtrim
 - start
 - startsWith
 - substr
+- trim
 - upper
 
 ## TO DO
@@ -47,9 +53,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - isUuid
 - kebab
 - lcfirst
-- length
-- limit
-- ltrim
 - markdown
 - mask
 - match
@@ -61,8 +64,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - pipe
 - plural
 - prepend
-- remove
-- rtrim
 - scan
 - singular
 - slug
@@ -75,7 +76,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - tap
 - test
 - title
-- trim
 - ucfirst
 - ucsplit
 - when

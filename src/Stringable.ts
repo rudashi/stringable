@@ -165,9 +165,45 @@ export class Stringable {
         return array;
     }
 
+    public length = () => {
+
+        return this.value.length;
+    }
+
+    public limit = (limit: number = 100, end: string = '...'): this => {
+
+        if (limit >= this.length()) {
+            return this;
+        }
+
+        this.value = this.value.slice(0, limit).trimEnd() + end;
+
+        return this;
+    }
+
     public lower = (): this => {
 
         this.value = this.value.toLocaleLowerCase();
+
+        return this;
+    }
+
+    public ltrim = (characters?: string): this => {
+
+        this.value = characters
+            ? this.replaceFirst(characters, '').toString()
+            : this.value.trimStart();
+
+        return this;
+    }
+
+    public remove = (search: string|Array<string>, caseSensitive: boolean = true): this => {
+
+        search = search instanceof Array ? search : [search];
+
+        search.map(e => {
+            this.value = this.value.replace(new RegExp(e, caseSensitive ? 'g' : 'gi'), '');
+        });
 
         return this;
     }
@@ -232,7 +268,7 @@ export class Stringable {
         if (position >= 0) {
             this.value = this.value.substring(0, position)
                 + replace
-                + this.value.substring(position + search.length, this.value.length);
+                + this.value.substring(position + search.length, this.length());
         }
 
         return this;
@@ -241,6 +277,15 @@ export class Stringable {
     public replaceMatches = (pattern: RegExp|string, replace: string): this => {
 
         this.value = this.value.replaceAll(new RegExp(pattern, 'g'), replace);
+
+        return this;
+    }
+
+    public rtrim = (characters?: string): this => {
+
+        this.value = characters
+            ? this.replaceLast(characters, '').toString()
+            : this.value.trimEnd();
 
         return this;
     }
@@ -268,6 +313,15 @@ export class Stringable {
     public substr = (start: number, length:number|null = null): this => {
 
         this.value = Str.substr(this.value, start, length);
+
+        return this;
+    }
+
+    public trim = (characters?: string): this => {
+
+        this.value = characters
+            ? this.ltrim(characters).rtrim(characters).toString()
+            : this.value.trim();
 
         return this;
     }
