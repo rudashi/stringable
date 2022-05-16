@@ -1,0 +1,12 @@
+version: "3"
+services:
+  ts-node-docker:
+    container_name: ts-node-docker
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/var/www/html/app'
+    ports:
+      - '3001:3000'
+    tty: true

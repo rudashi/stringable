@@ -1,0 +1,18 @@
+{
+    "name": "stringable",
+    "version": "1.0.0",
+    "description": "Javascript Version's of Laravel's Illuminate\\Support\\Str",
+    "scripts": {
+        "test": "jest"
+    },
+    "author": "Borys Żmuda <rudashi@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+        "typescript": "^4.6.3"
+    },
+    "devDependencies": {
+        "jest": "^28.0.3",
+        "ts-jest": "^28.0.1",
+        "@types/jest": "^27.5.0"
+    }
+}
