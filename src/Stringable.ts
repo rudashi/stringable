@@ -8,7 +8,7 @@ export class Stringable {
         this.value = string === null ? '' : String(string);
     }
 
-    static of(string: any) {
+    static of(string: any): Stringable {
         return new Stringable(string);
     }
 
@@ -165,7 +165,14 @@ export class Stringable {
         return array;
     }
 
-    public length = () => {
+    public lcfirst = (): this => {
+
+        this.value = this.value[0].toLocaleLowerCase() + this.value.slice(1);
+
+        return this;
+    }
+
+    public length = (): number => {
 
         return this.value.length;
     }
@@ -195,6 +202,28 @@ export class Stringable {
             : this.value.trimStart();
 
         return this;
+    }
+
+    public match = (pattern: RegExp|string): string => {
+
+        const matches = this.value.match(new RegExp(pattern));
+
+        if (matches) {
+            return matches[1] ?? matches[0];
+        }
+        return '';
+    }
+
+    public matchAll = (pattern: RegExp|string): Array<string> => {
+
+        const matches = this.value.matchAll(new RegExp(pattern, 'g'));
+        const result = [];
+
+        for (const match of matches) {
+            result.push(match[1] ?? match[0]);
+        }
+
+        return result;
     }
 
     public remove = (search: string|Array<string>, caseSensitive: boolean = true): this => {
@@ -317,6 +346,19 @@ export class Stringable {
         return this;
     }
 
+    public swap = (map: Record<string, string>): this => {
+
+        const keys = Object.keys(map)
+            .map((key: string) => key.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&'));
+
+        this.value = this.value
+            .split(RegExp(`(${keys.join('|')})`))
+            .map((key: string) => map[key] || key)
+            .join('');
+
+        return this;
+    }
+
     public trim = (characters?: string): this => {
 
         this.value = characters
@@ -326,9 +368,38 @@ export class Stringable {
         return this;
     }
 
+    public ucfirst = (): this => {
+
+        this.value = this.value[0].toLocaleUpperCase() + this.value.slice(1);
+
+        return this;
+    }
+
     public upper = (): this => {
 
         this.value = this.value.toLocaleUpperCase();
+
+        return this;
+    }
+
+    public wordCount = (): number => {
+
+        return this.value.trim().split(/\s+/).length;
+    }
+
+    public words = (words: number = 100, end: string = '...'): this => {
+
+        if (this.wordCount() <= words) {
+            return this;
+        }
+
+        const match = this.value.match(new RegExp(`^\\s*(?:\\S+\\s*){1,${words}}`, 'u'));
+
+        if (match === null) {
+            return this;
+        }
+
+        this.value = match[0].trimEnd() + end;
 
         return this;
     }

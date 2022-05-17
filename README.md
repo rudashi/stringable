@@ -1,5 +1,10 @@
 # Stringable
 
+![GitHub last commit](https://img.shields.io/github/last-commit/rudashi/stringable)
+![GitHub repo size](https://img.shields.io/github/repo-size/rudashi/stringable)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rudashi/stringable/Node.js%20CI)
+![Twitter Follow](https://img.shields.io/twitter/follow/BorysZmuda?style=social)
+
 Javascript Version's of Laravel's Illuminate\Support\Str
 
 Based on great [Laravel](https://laravel.com/docs/9.x/helpers#fluent-strings-method-list) string helper
@@ -24,10 +29,13 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - endsWith
 - exactly
 - explode
+- lcfirst
 - length
 - limit
 - lower
 - ltrim
+- match
+- matchAll
 - remove
 - replace
 - replaceArray
@@ -38,8 +46,12 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - start
 - startsWith
 - substr
+- swap
 - trim
+- ucfirst
 - upper
+- wordCount
+- words
 
 ## TO DO
 
@@ -52,11 +64,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - isNotEmpty
 - isUuid
 - kebab
-- lcfirst
 - markdown
 - mask
-- match
-- matchAll
 - newLine
 - padBoth
 - padLeft
@@ -72,11 +81,9 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - squish
 - studly
 - substrReplace
-- swap
 - tap
 - test
 - title
-- ucfirst
 - ucsplit
 - when
 - whenContains
@@ -90,5 +97,3 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - whenIsAscii
 - whenIsUuid
 - whenTest
-- wordCount
-- words
