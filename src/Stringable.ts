@@ -165,6 +165,14 @@ export class Stringable {
         return array;
     }
 
+    public isEmpty = (): boolean => {
+        return this.value === '';
+    }
+
+    public isNotEmpty = (): boolean => {
+        return ! this.isEmpty();
+    }
+
     public lcfirst = (): this => {
 
         this.value = this.value[0].toLocaleLowerCase() + this.value.slice(1);
@@ -224,6 +232,47 @@ export class Stringable {
         }
 
         return result;
+    }
+
+    public newLine = (count: number = 1): this => {
+
+        this.append('\n'.repeat(count));
+
+        return this;
+    }
+
+    public padBoth = (length: number = 0, pad: string = ' '): this => {
+
+        const half = Math.ceil((length - this.length()) / 2) + this.length();
+
+        this.padRight(half, pad).padLeft(length, pad);
+
+        return this;
+    }
+
+    public padLeft = (length: number = 0, pad: string = ' '): this => {
+
+        if (length > this.length()) {
+            this.value = this.value.padStart(length, pad);
+        }
+
+        return this;
+    }
+
+    public padRight = (length: number = 0, pad: string = ' '): this => {
+
+        if (length > this.length()) {
+            this.value = this.value.padEnd(length, pad);
+        }
+
+        return this;
+    }
+
+    public prepend = (...values: Array<string>): this => {
+
+        this.value = values.join('') + this.value;
+
+        return this;
     }
 
     public remove = (search: string|Array<string>, caseSensitive: boolean = true): this => {
@@ -346,6 +395,38 @@ export class Stringable {
         return this;
     }
 
+    public substrCount = (needle: string, offset: number = 0, length: number = 0): number => {
+
+        if (this.length() === 0 || needle.length === 0 || this.value.indexOf(needle) === -1) {
+            return 0;
+        }
+
+        let word = this.value;
+
+        word = word.substring(offset >= 0 ? offset : word.length + offset);
+        word = word.substring(0, length > 0 ? length : word.length + length);
+
+        let match = word.match(new RegExp(needle, 'g'));
+
+        return match === null ? 0 : match.length;
+    }
+
+    public substrReplace = (replace: string, offset: number = 0, length: number|null = null): this => {
+
+        length = length !== null ? length : this.length();
+        offset = offset >=0 ? offset : offset + this.length();
+        length = length >=0 ? length : length + this.length() - offset;
+
+        this.value = [
+            this.value.slice(0, offset),
+            replace.substring(0, length),
+            replace.slice(length),
+            this.value.slice(offset + length)
+        ].join('')
+
+        return this;
+    }
+
     public swap = (map: Record<string, string>): this => {
 
         const keys = Object.keys(map)
@@ -373,6 +454,10 @@ export class Stringable {
         this.value = this.value[0].toLocaleUpperCase() + this.value.slice(1);
 
         return this;
+    }
+
+    public ucsplit = (): Array<string> => {
+        return this.value.split(/(?=\p{Lu})/u).map(i => i.trim());
     }
 
     public upper = (): this => {
