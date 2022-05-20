@@ -39,9 +39,7 @@ export class Stringable {
 
     public ascii = (): this => {
 
-        this.value = this.value !== null
-            ? this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
-            : '';
+        this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
         return this;
     }
@@ -454,7 +452,7 @@ export class Stringable {
 
         let match = word.match(new RegExp(needle, 'g'));
 
-        return match === null ? 0 : match.length;
+        return match ? match.length : 0;
     }
 
     public substrReplace = (replace: string, offset: number = 0, length: number|null = null): this => {
@@ -538,11 +536,9 @@ export class Stringable {
 
         const match = this.value.match(new RegExp(`^\\s*(?:\\S+\\s*){1,${words}}`, 'u'));
 
-        if (match === null) {
-            return this;
+        if (match) {
+            this.value = match[0].trimEnd() + end;
         }
-
-        this.value = match[0].trimEnd() + end;
 
         return this;
     }

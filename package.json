@@ -2,11 +2,28 @@
     "name": "stringable",
     "version": "1.0.0",
     "description": "Javascript Version's of Laravel's Illuminate\\Support\\Str",
+    "main": "index.js",
+    "files": [
+        "src"
+    ],
+    "keywords": [
+        "string",
+        "laravel",
+        "str",
+        "stringable",
+        "helper",
+        "util"
+    ],
     "scripts": {
         "test": "jest"
     },
-    "author": "Borys Żmuda <rudashi@gmail.com>",
+    "author": {
+        "name": "Borys Żmuda",
+        "email": "rudashi@gmail.com",
+        "github": "https://rudashi.github.io"
+    },
     "license": "ISC",
+    "homepage": "https://github.com/rudashi/stringable#readme",
     "dependencies": {
         "typescript": "^4.6.3"
     },
