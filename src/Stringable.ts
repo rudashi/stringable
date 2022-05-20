@@ -174,6 +174,32 @@ export class Stringable {
         return this;
     }
 
+    public is = (pattern: string|Array<string>): boolean => {
+
+        pattern = pattern instanceof Array ? pattern : [pattern];
+
+        if (pattern.length === 0) {
+            return false;
+        }
+
+        return pattern.some(p => {
+
+            if (p === this.value) {
+                return true;
+            }
+
+            if (p === '' || p === null) {
+                return false;
+            }
+
+            if (p.includes('*')) {
+                return (new RegExp(p.replace(/\*/g, '.*'))).test(this.value);
+            }
+
+            return (new RegExp(p, 'u').test(this.value));
+        });
+    }
+
     public isEmpty = (): boolean => {
         return this.value === '';
     }
@@ -377,6 +403,13 @@ export class Stringable {
         this.value = characters
             ? this.replaceLast(characters, '').toString()
             : this.value.trimEnd();
+
+        return this;
+    }
+
+    public squish = (): this => {
+
+        this.trim().replaceMatches(/\s+|\u3164+/g, ' ');
 
         return this;
     }
