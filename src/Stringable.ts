@@ -30,7 +30,7 @@ export class Stringable {
         return this;
     }
 
-    public append = (...values: string[]): this => {
+    public append = (...values: Array<string>): this => {
 
         this.value += values.join('');
 
@@ -388,7 +388,7 @@ export class Stringable {
         return values.some(needle => this.value.startsWith(String(needle)));
     }
 
-    public substr = (start: number, length:number|null = null): this => {
+    public substr = (start: number, length: number|null = null): this => {
 
         this.value = Str.substr(this.value, start, length);
 
