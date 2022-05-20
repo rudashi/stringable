@@ -165,12 +165,25 @@ export class Stringable {
         return array;
     }
 
+    public finish = (cap: string): this => {
+
+        const quoted = cap.replace(/[-\[\]\/{}()*+?.\\^$|]/g, '\\$&');
+
+        this.replaceMatches('(?:'+quoted+')+$', '').append(cap);
+
+        return this;
+    }
+
     public isEmpty = (): boolean => {
         return this.value === '';
     }
 
     public isNotEmpty = (): boolean => {
         return ! this.isEmpty();
+    }
+
+    public isUuid = (): boolean => {
+        return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this.value);
     }
 
     public lcfirst = (): this => {
@@ -436,6 +449,18 @@ export class Stringable {
             .split(RegExp(`(${keys.join('|')})`))
             .map((key: string) => map[key] || key)
             .join('');
+
+        return this;
+    }
+
+    public test = (pattern: RegExp|string): boolean => {
+
+        return new RegExp(pattern).test(this.value);
+    }
+
+    public title = (): this => {
+
+        this.value = this.value.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase());
 
         return this;
     }

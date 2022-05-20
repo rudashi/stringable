@@ -29,8 +29,10 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - endsWith
 - exactly
 - explode
+- finish
 - isEmpty
 - isNotEmpty
+- isUuid
 - lcfirst
 - length
 - limit
@@ -56,6 +58,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - substrCount *
 - substrReplace
 - swap
+- test
+- title
 - trim
 - ucfirst
 - ucsplit
@@ -67,10 +71,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 
 - camel
 - excerpt
-- finish
 - is
 - isAscii
-- isUuid
 - kebab
 - markdown
 - mask
@@ -84,8 +86,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - squish
 - studly
 - tap
-- test
-- title
 - when
 - whenContains
 - whenContainsAll
