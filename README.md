@@ -28,6 +28,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - containsAll
 - dirname
 - endsWith
+- excerpt
 - exactly
 - explode
 - finish
@@ -76,7 +77,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 
 ## TO DO
 
-- excerpt
 - isAscii
 - markdown
 - mask

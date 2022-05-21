@@ -1,5 +1,5 @@
 import {Str} from './Str';
-import {CamelDirectory, SnakeDirectory, StudlyDirectory} from './types';
+import {CamelDirectory, ExcerptOptions, SnakeDirectory, StudlyDirectory} from './types';
 
 export class Stringable {
 
@@ -161,6 +161,37 @@ export class Stringable {
         let values = Array.isArray(needles) ? needles : [needles];
 
         return values.some(needle => this.value.endsWith(String(needle)));
+    }
+
+    public excerpt = (phrase: string = '', {radius = 100, omission = '...'}: ExcerptOptions = {radius: 100, omission: '...'}): this => {
+
+        if (this.value === phrase) {
+            return this;
+        }
+
+        const matches = phrase === null
+            ? ['', '', '', this.value.substring(0, radius)]
+            : this.value.match(new RegExp('^(.*?)('+phrase+')(.*)$', 'iu'));
+
+        if (!matches) {
+            this.value = '';
+
+            return this;
+        }
+
+        let start = matches[1].trimStart();
+        let end = matches[3].trimEnd();
+
+        if (radius < start.length) {
+            start = omission + start.substring(start.length - radius, start.length);
+        }
+        if (radius < end.length) {
+            end = end.substring(0, radius) + omission;
+        }
+
+        this.value = start + matches[2] + end;
+
+        return this;
     }
 
     public exactly = (value: Stringable|string): boolean => {

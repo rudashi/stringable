@@ -15,6 +15,7 @@
         "util"
     ],
     "scripts": {
+        "build": "tsc",
         "test": "jest"
     },
     "author": {

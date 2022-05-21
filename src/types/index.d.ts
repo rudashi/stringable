@@ -1,11 +1,16 @@
-export interface SnakeDirectory {
+export type SnakeDirectory = {
     [key: string]: Record<string, string>
 }
 
-export interface StudlyDirectory {
+export type StudlyDirectory = {
     [key: string]: string
 }
 
-export interface CamelDirectory {
+export type CamelDirectory = {
     [key: string]: string
+}
+
+export type ExcerptOptions = {
+    radius?: number,
+    omission?: string
 }
