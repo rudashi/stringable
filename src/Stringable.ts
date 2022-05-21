@@ -1,8 +1,15 @@
 import {Str} from './Str';
+import {CamelDirectory, SnakeDirectory, StudlyDirectory} from './types';
 
 export class Stringable {
 
     private value: string;
+
+    private static camelCache: CamelDirectory = {};
+
+    private static snakeCache: SnakeDirectory = {};
+
+    private static studlyCache: StudlyDirectory = {};
 
     constructor(string: any) {
         this.value = string === null ? '' : String(string);
@@ -91,6 +98,21 @@ export class Stringable {
         }
 
         this.value = new Stringable(this.value).after(from).before(to).toString();
+
+        return this;
+    }
+
+    public camel = (): this => {
+
+        const key = this.value;
+
+        if (typeof Stringable.camelCache[key] !== 'undefined') {
+            this.value = Stringable.camelCache[key];
+
+            return this;
+        }
+
+        this.value = Stringable.camelCache[key] = this.studly().lcfirst().toString();
 
         return this;
     }
@@ -208,6 +230,10 @@ export class Stringable {
 
     public isUuid = (): boolean => {
         return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this.value);
+    }
+
+    public kebab = (): this => {
+        return this.snake('-');
     }
 
     public lcfirst = (): this => {
@@ -405,9 +431,41 @@ export class Stringable {
         return this;
     }
 
+    public snake = (delimiter: string = '_'): this => {
+
+        const key = this.value;
+
+        if (typeof Stringable.snakeCache[key] !== 'undefined' && typeof Stringable.snakeCache[key][delimiter] !== 'undefined') {
+            this.value = Stringable.snakeCache[key][delimiter];
+
+            return this;
+        }
+
+        if (this.value !== this.value.toLocaleLowerCase()) {
+            this.value = this.value
+                .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
+                .replace(new RegExp(/\s+/, 'gu'),'')
+                .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'),'$1'+delimiter)
+                .toLocaleLowerCase();
+        }
+
+        return this;
+    }
+
+    public split = (pattern: RegExp|number|string): Array<string> => {
+
+        if (typeof pattern === 'number') {
+            return pattern === 0 ? [] : this.matchAll('.{1,' + pattern + '}');
+        }
+
+        const segments = this.value.split(new RegExp(pattern));
+
+        return ! (typeof segments === 'undefined' || segments.length < 1) ? segments : [];
+    }
+
     public squish = (): this => {
 
-        this.trim().replaceMatches(/\s+|\u3164+/g, ' ');
+        this.trim().replaceMatches(/\s+|\u3164+/, ' ');
 
         return this;
     }
@@ -430,6 +488,25 @@ export class Stringable {
         const values = Array.isArray(needles) ? needles : [needles];
 
         return values.some(needle => this.value.startsWith(String(needle)));
+    }
+
+    public studly = (): this => {
+
+        const key = this.value;
+
+        if (typeof Stringable.studlyCache[key] !== 'undefined') {
+            this.value = Stringable.studlyCache[key];
+
+            return this;
+        }
+
+        this.value = Stringable.studlyCache[key] = this.value.trim()
+            .replace(/[_\-]/g, ' ')
+            .replace(/\s+|\u3164+/g, ' ')
+            .split(' ')
+            .reduce((str, w) => str + w[0].toLocaleUpperCase() + w.slice(1), '');
+
+        return this;
     }
 
     public substr = (start: number, length: number|null = null): this => {

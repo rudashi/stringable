@@ -23,6 +23,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - beforeLast
 - between
 - betweenFirst
+- camel
 - contains
 - containsAll
 - dirname
@@ -30,9 +31,11 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - exactly
 - explode
 - finish
+- is
 - isEmpty
 - isNotEmpty
 - isUuid
+- kebab
 - lcfirst
 - length
 - limit
@@ -52,8 +55,12 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - replaceLast
 - replaceMatches
 - rtrim
+- snake
+- split
+- squish
 - start
 - startsWith
+- studly
 - substr
 - substrCount *
 - substrReplace
@@ -69,11 +76,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 
 ## TO DO
 
-- camel
 - excerpt
-- is
 - isAscii
-- kebab
 - markdown
 - mask
 - pipe
@@ -81,10 +85,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - scan
 - singular
 - slug
-- snake
-- split
-- squish
-- studly
 - tap
 - when
 - whenContains
