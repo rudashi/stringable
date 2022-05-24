@@ -19,4 +19,9 @@ export class Str {
         return value.slice(start, start + length);
     }
 
+    static preg_quote(value: string, delimiter: string = '') {
+
+        return value.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + delimiter + '-]', 'g'), '\\$&')
+    }
+
 }
