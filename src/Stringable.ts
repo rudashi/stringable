@@ -721,8 +721,33 @@ export class Stringable {
         return this;
     }
 
+    public toHtmlString = (): Element|Node|null => {
+
+        const template = document.createElement('template');
+
+        template.innerHTML = this.toString();
+
+        return template.content.firstChild;
+    }
+
+    public dump = (): this => {
+
+        console.log(this._value);
+
+        return this;
+    }
+
+    public dd = () => {
+        this.dump();
+        throw new Error();
+    }
+
     public toString = (): string => {
         return this._value;
+    }
+
+    public value = (): string => {
+        return this.toString();
     }
 
 }

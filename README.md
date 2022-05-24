@@ -27,6 +27,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - contains
 - containsAll
 - dirname
+- dd *
+- dump *
 - endsWith
 - excerpt
 - exactly
@@ -72,12 +74,14 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - swap
 - test
 - title
+- toHtmlString *
 - trim
 - ucfirst
 - ucsplit
 - upper
 - wordCount
 - words
+- value *
 
 ## TO DO
 
