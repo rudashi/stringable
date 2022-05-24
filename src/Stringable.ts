@@ -1,5 +1,5 @@
 import {Str} from './Str';
-import {CamelDirectory, ExcerptOptions, SnakeDirectory, StudlyDirectory} from './types';
+import {CamelDirectory, ExcerptOptions, PipeCallback, SnakeDirectory, StudlyDirectory} from './types';
 
 export class Stringable {
 
@@ -46,7 +46,7 @@ export class Stringable {
 
     public ascii = (): this => {
 
-        this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return this;
     }
@@ -218,7 +218,7 @@ export class Stringable {
 
     public finish = (cap: string): this => {
 
-        const quoted = cap.replace(/[-\[\]\/{}()*+?.\\^$|]/g, '\\$&');
+        const quoted = Str.preg_quote(cap, '/');
 
         this.replaceMatches('(?:'+quoted+')+$', '').append(cap);
 
@@ -249,6 +249,15 @@ export class Stringable {
 
             return (new RegExp(p, 'u').test(this.value));
         });
+    }
+
+    public isAscii = (): boolean => {
+
+        if (this.value === '') {
+            return true;
+        }
+
+        return !(/[^\x09\x10\x13\x0A\x0D\x20-\x7E]/).test(this.value);
     }
 
     public isEmpty = (): boolean => {
@@ -362,6 +371,15 @@ export class Stringable {
         return this;
     }
 
+    public pipe = (callback: PipeCallback): this => {
+
+        this.value = callback instanceof Function
+            ? callback(this.value)
+            : this.value[callback]();
+
+        return this;
+    }
+
     public prepend = (...values: Array<string>): this => {
 
         this.value = values.join('') + this.value;
@@ -462,6 +480,58 @@ export class Stringable {
         return this;
     }
 
+    public scan = (format: string): Array<string|null> => {
+
+        const selectors = format.match(new RegExp(/(%\[.*?]|%[.*]|[^%]+|(%.))/, 'g'));
+        const result: Array<string> = [];
+
+        if (selectors === null) {
+            return [null];
+        }
+
+        selectors.map((val) => {
+            if (val[0] === '%') {
+                result.push((() => {
+                    switch (val[1]) {
+                        case 's':
+                            return '(?:\\s?(.*))';
+                        case 'd':
+                            return '(\\' + val[1] + '+)';
+                        case '[':
+                            return '(' + val.substring(1) + '*)';
+                        default:
+                            return '(.*)';
+                    }
+                })());
+            } else {
+                result.push(Str.preg_quote(val, '/'));
+            }
+        });
+
+        const match = this.value.match(new RegExp(result.join(''), 'u'));
+
+        if (!match || !match[1]) {
+            return [null];
+        }
+
+        match.shift();
+
+        return match;
+    }
+
+    public slug = (separator: string = '-', language: string|null = 'en'): this => {
+
+        if (language) {
+            this.ascii();
+        }
+
+        this.replace(['-', '_'], separator)
+            .replace('@', separator + 'at' + separator)
+            .snake(separator).trim();
+
+        return this;
+    }
+
     public snake = (delimiter: string = '_'): this => {
 
         const key = this.value;
@@ -472,7 +542,7 @@ export class Stringable {
             return this;
         }
 
-        if (this.value !== this.value.toLocaleLowerCase()) {
+        if (!(/^[a-z]+$/).test(this.value)) {
             this.value = this.value
                 .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
                 .replace(new RegExp(/\s+/, 'gu'),'')

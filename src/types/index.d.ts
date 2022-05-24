@@ -14,3 +14,15 @@ export type ExcerptOptions = {
     radius?: number,
     omission?: string
 }
+
+export type PipeCallback =
+    Function
+    | 'toLocaleUpperCase'
+    | 'toLocaleLowerCase'
+    | 'toUpperCase'
+    | 'toLowerCase'
+    | 'trim'
+    | 'trimStart'
+    | 'trimEnd'
+    | 'toString'
+;

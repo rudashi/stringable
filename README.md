@@ -33,6 +33,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - explode
 - finish
 - is
+- isAscii
 - isEmpty
 - isNotEmpty
 - isUuid
@@ -48,6 +49,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - padBoth
 - padLeft
 - padRight
+- pipe
 - prepend
 - remove
 - replace
@@ -56,6 +58,8 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - replaceLast
 - replaceMatches
 - rtrim
+- scan
+- slug
 - snake
 - split
 - squish
@@ -77,14 +81,10 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 
 ## TO DO
 
-- isAscii
 - markdown
 - mask
-- pipe
 - plural
-- scan
 - singular
-- slug
 - tap
 - when
 - whenContains
