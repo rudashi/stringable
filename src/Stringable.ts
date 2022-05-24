@@ -3,7 +3,7 @@ import {CamelDirectory, ExcerptOptions, PipeCallback, SnakeDirectory, StudlyDire
 
 export class Stringable {
 
-    private value: string;
+    private _value: string;
 
     private static camelCache: CamelDirectory = {};
 
@@ -12,7 +12,7 @@ export class Stringable {
     private static studlyCache: StudlyDirectory = {};
 
     constructor(string: any) {
-        this.value = string === null ? '' : String(string);
+        this._value = string === null ? '' : String(string);
     }
 
     static of(string: any): Stringable {
@@ -21,8 +21,8 @@ export class Stringable {
 
     public after = (search: string = ''): this => {
 
-        if (search !== '' && this.value.indexOf(search) >= 0) {
-            this.value = this.value.substring(this.value.indexOf(search) + search.length);
+        if (search !== '' && this._value.indexOf(search) >= 0) {
+            this._value = this._value.substring(this._value.indexOf(search) + search.length);
         }
 
         return this;
@@ -30,8 +30,8 @@ export class Stringable {
 
     public afterLast = (search: string = ''): this => {
 
-        if (search !== '' && this.value.indexOf(search) >= 0) {
-            this.value = this.value.substring(this.value.lastIndexOf(search) + search.length);
+        if (search !== '' && this._value.indexOf(search) >= 0) {
+            this._value = this._value.substring(this._value.lastIndexOf(search) + search.length);
         }
 
         return this;
@@ -39,24 +39,24 @@ export class Stringable {
 
     public append = (...values: Array<string>): this => {
 
-        this.value += values.join('');
+        this._value += values.join('');
 
         return this;
     }
 
     public ascii = (): this => {
 
-        this.value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        this._value = this._value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return this;
     }
 
     public basename = (extension: string|null = null): this => {
 
-        this.value = this.value.split('/').reverse()[0];
+        this._value = this._value.split('/').reverse()[0];
 
         if (extension) {
-            this.value = new Stringable(this.value).before(extension).toString();
+            this._value = new Stringable(this._value).before(extension).toString();
         }
 
         return this;
@@ -64,8 +64,8 @@ export class Stringable {
 
     public before = (search: string = ''): this => {
 
-        if (search !== '' && this.value.indexOf(search) >= 0) {
-            this.value = this.value.substring(0, this.value.indexOf(search));
+        if (search !== '' && this._value.indexOf(search) >= 0) {
+            this._value = this._value.substring(0, this._value.indexOf(search));
         }
 
         return this;
@@ -73,8 +73,8 @@ export class Stringable {
 
     public beforeLast = (search: string = ''): this => {
 
-        if (search !== '' && this.value.indexOf(search) >= 0) {
-            this.value = this.value.substring(0, this.value.lastIndexOf(search));
+        if (search !== '' && this._value.indexOf(search) >= 0) {
+            this._value = this._value.substring(0, this._value.lastIndexOf(search));
         }
 
         return this;
@@ -86,7 +86,7 @@ export class Stringable {
             return this;
         }
 
-        this.value = new Stringable(this.value).after(from).beforeLast(to).toString();
+        this._value = new Stringable(this._value).after(from).beforeLast(to).toString();
 
         return this;
     }
@@ -97,22 +97,22 @@ export class Stringable {
             return this;
         }
 
-        this.value = new Stringable(this.value).after(from).before(to).toString();
+        this._value = new Stringable(this._value).after(from).before(to).toString();
 
         return this;
     }
 
     public camel = (): this => {
 
-        const key = this.value;
+        const key = this._value;
 
         if (typeof Stringable.camelCache[key] !== 'undefined') {
-            this.value = Stringable.camelCache[key];
+            this._value = Stringable.camelCache[key];
 
             return this;
         }
 
-        this.value = Stringable.camelCache[key] = this.studly().lcfirst().toString();
+        this._value = Stringable.camelCache[key] = this.studly().lcfirst().toString();
 
         return this;
     }
@@ -130,7 +130,7 @@ export class Stringable {
             this.lower();
         }
 
-        return values.some(needle => this.value.includes(String(needle)));
+        return values.some(needle => this._value.includes(String(needle)));
     }
 
     public containsAll = (needles: Array<string>, ignoreCase: boolean = false): boolean => {
@@ -140,14 +140,14 @@ export class Stringable {
             this.lower();
         }
 
-        return needles.every(needle => this.value.includes(needle));
+        return needles.every(needle => this._value.includes(needle));
     }
 
     public dirname = (levels: number = 1): this => {
 
         const components = this.explode('/', levels * -1);
 
-        this.value = components.join('/');
+        this._value = components.join('/');
 
         return this;
     }
@@ -160,21 +160,21 @@ export class Stringable {
 
         let values = Array.isArray(needles) ? needles : [needles];
 
-        return values.some(needle => this.value.endsWith(String(needle)));
+        return values.some(needle => this._value.endsWith(String(needle)));
     }
 
     public excerpt = (phrase: string = '', {radius = 100, omission = '...'}: ExcerptOptions = {radius: 100, omission: '...'}): this => {
 
-        if (this.value === phrase) {
+        if (this._value === phrase) {
             return this;
         }
 
         const matches = phrase === null
-            ? ['', '', '', this.value.substring(0, radius)]
-            : this.value.match(new RegExp('^(.*?)('+phrase+')(.*)$', 'iu'));
+            ? ['', '', '', this._value.substring(0, radius)]
+            : this._value.match(new RegExp('^(.*?)('+phrase+')(.*)$', 'iu'));
 
         if (!matches) {
-            this.value = '';
+            this._value = '';
 
             return this;
         }
@@ -189,7 +189,7 @@ export class Stringable {
             end = end.substring(0, radius) + omission;
         }
 
-        this.value = start + matches[2] + end;
+        this._value = start + matches[2] + end;
 
         return this;
     }
@@ -200,12 +200,12 @@ export class Stringable {
             value = value.toString();
         }
 
-        return this.value === value;
+        return this._value === value;
     }
 
     public explode = (delimiter: string, limit?: number): Array<string> => {
 
-        const array = this.value.split(delimiter);
+        const array = this._value.split(delimiter);
 
         if (limit !== undefined && array.length >= limit) {
             limit < 0
@@ -235,7 +235,7 @@ export class Stringable {
 
         return pattern.some(p => {
 
-            if (p === this.value) {
+            if (p === this._value) {
                 return true;
             }
 
@@ -244,24 +244,24 @@ export class Stringable {
             }
 
             if (p.includes('*')) {
-                return (new RegExp(p.replace(/\*/g, '.*'))).test(this.value);
+                return (new RegExp(p.replace(/\*/g, '.*'))).test(this._value);
             }
 
-            return (new RegExp(p, 'u').test(this.value));
+            return (new RegExp(p, 'u').test(this._value));
         });
     }
 
     public isAscii = (): boolean => {
 
-        if (this.value === '') {
+        if (this._value === '') {
             return true;
         }
 
-        return !(/[^\x09\x10\x13\x0A\x0D\x20-\x7E]/).test(this.value);
+        return !(/[^\x09\x10\x13\x0A\x0D\x20-\x7E]/).test(this._value);
     }
 
     public isEmpty = (): boolean => {
-        return this.value === '';
+        return this._value === '';
     }
 
     public isNotEmpty = (): boolean => {
@@ -269,7 +269,7 @@ export class Stringable {
     }
 
     public isUuid = (): boolean => {
-        return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this.value);
+        return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this._value);
     }
 
     public kebab = (): this => {
@@ -278,14 +278,14 @@ export class Stringable {
 
     public lcfirst = (): this => {
 
-        this.value = this.value[0].toLocaleLowerCase() + this.value.slice(1);
+        this._value = this._value[0].toLocaleLowerCase() + this._value.slice(1);
 
         return this;
     }
 
     public length = (): number => {
 
-        return this.value.length;
+        return this._value.length;
     }
 
     public limit = (limit: number = 100, end: string = '...'): this => {
@@ -294,30 +294,30 @@ export class Stringable {
             return this;
         }
 
-        this.value = this.value.slice(0, limit).trimEnd() + end;
+        this._value = this._value.slice(0, limit).trimEnd() + end;
 
         return this;
     }
 
     public lower = (): this => {
 
-        this.value = this.value.toLocaleLowerCase();
+        this._value = this._value.toLocaleLowerCase();
 
         return this;
     }
 
     public ltrim = (characters?: string): this => {
 
-        this.value = characters
+        this._value = characters
             ? this.replaceFirst(characters, '').toString()
-            : this.value.trimStart();
+            : this._value.trimStart();
 
         return this;
     }
 
     public match = (pattern: RegExp|string): string => {
 
-        const matches = this.value.match(new RegExp(pattern));
+        const matches = this._value.match(new RegExp(pattern));
 
         if (matches) {
             return matches[1] ?? matches[0];
@@ -327,7 +327,7 @@ export class Stringable {
 
     public matchAll = (pattern: RegExp|string): Array<string> => {
 
-        const matches = this.value.matchAll(new RegExp(pattern, 'g'));
+        const matches = this._value.matchAll(new RegExp(pattern, 'g'));
         const result = [];
 
         for (const match of matches) {
@@ -356,7 +356,7 @@ export class Stringable {
     public padLeft = (length: number = 0, pad: string = ' '): this => {
 
         if (length > this.length()) {
-            this.value = this.value.padStart(length, pad);
+            this._value = this._value.padStart(length, pad);
         }
 
         return this;
@@ -365,7 +365,7 @@ export class Stringable {
     public padRight = (length: number = 0, pad: string = ' '): this => {
 
         if (length > this.length()) {
-            this.value = this.value.padEnd(length, pad);
+            this._value = this._value.padEnd(length, pad);
         }
 
         return this;
@@ -373,16 +373,16 @@ export class Stringable {
 
     public pipe = (callback: PipeCallback): this => {
 
-        this.value = callback instanceof Function
-            ? callback(this.value)
-            : this.value[callback]();
+        this._value = callback instanceof Function
+            ? callback(this._value)
+            : this._value[callback]();
 
         return this;
     }
 
     public prepend = (...values: Array<string>): this => {
 
-        this.value = values.join('') + this.value;
+        this._value = values.join('') + this._value;
 
         return this;
     }
@@ -392,7 +392,7 @@ export class Stringable {
         search = search instanceof Array ? search : [search];
 
         search.map(e => {
-            this.value = this.value.replace(new RegExp(e, caseSensitive ? 'g' : 'gi'), '');
+            this._value = this._value.replace(new RegExp(e, caseSensitive ? 'g' : 'gi'), '');
         });
 
         return this;
@@ -401,7 +401,7 @@ export class Stringable {
     public replace = (search: string|Array<string>, replace: string|Array<string>): this => {
 
         if (typeof search === 'string' && typeof replace === 'string') {
-            this.value = this.value.replaceAll(search, replace);
+            this._value = this._value.replaceAll(search, replace);
 
             return this;
         }
@@ -414,7 +414,7 @@ export class Stringable {
         }
 
         for (const index of searchArray.keys()) {
-            this.value = this.value.replaceAll(searchArray[index], replaceArray[index]);
+            this._value = this._value.replaceAll(searchArray[index], replaceArray[index]);
         }
 
         return this;
@@ -426,12 +426,12 @@ export class Stringable {
             replace = Object.values(replace);
         }
 
-        let segments = this.value.split(search);
+        let segments = this._value.split(search);
         let results = segments.shift() ?? '';
 
         segments.map(segment => results += (replace.shift() ?? search) + segment);
 
-        this.value = results;
+        this._value = results;
 
         return this;
     }
@@ -442,7 +442,7 @@ export class Stringable {
             return this;
         }
 
-        this.value = this.value.replace(search, replace);
+        this._value = this._value.replace(search, replace);
 
         return this;
     }
@@ -453,12 +453,12 @@ export class Stringable {
             return this;
         }
 
-        const position = this.value.lastIndexOf(search);
+        const position = this._value.lastIndexOf(search);
 
         if (position >= 0) {
-            this.value = this.value.substring(0, position)
+            this._value = this._value.substring(0, position)
                 + replace
-                + this.value.substring(position + search.length, this.length());
+                + this._value.substring(position + search.length, this.length());
         }
 
         return this;
@@ -466,16 +466,16 @@ export class Stringable {
 
     public replaceMatches = (pattern: RegExp|string, replace: string): this => {
 
-        this.value = this.value.replaceAll(new RegExp(pattern, 'g'), replace);
+        this._value = this._value.replaceAll(new RegExp(pattern, 'g'), replace);
 
         return this;
     }
 
     public rtrim = (characters?: string): this => {
 
-        this.value = characters
+        this._value = characters
             ? this.replaceLast(characters, '').toString()
-            : this.value.trimEnd();
+            : this._value.trimEnd();
 
         return this;
     }
@@ -508,7 +508,7 @@ export class Stringable {
             }
         });
 
-        const match = this.value.match(new RegExp(result.join(''), 'u'));
+        const match = this._value.match(new RegExp(result.join(''), 'u'));
 
         if (!match || !match[1]) {
             return [null];
@@ -534,16 +534,16 @@ export class Stringable {
 
     public snake = (delimiter: string = '_'): this => {
 
-        const key = this.value;
+        const key = this._value;
 
         if (typeof Stringable.snakeCache[key] !== 'undefined' && typeof Stringable.snakeCache[key][delimiter] !== 'undefined') {
-            this.value = Stringable.snakeCache[key][delimiter];
+            this._value = Stringable.snakeCache[key][delimiter];
 
             return this;
         }
 
-        if (!(/^[a-z]+$/).test(this.value)) {
-            this.value = this.value
+        if (!(/^[a-z]+$/).test(this._value)) {
+            this._value = this._value
                 .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
                 .replace(new RegExp(/\s+/, 'gu'),'')
                 .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'),'$1'+delimiter)
@@ -559,7 +559,7 @@ export class Stringable {
             return pattern === 0 ? [] : this.matchAll('.{1,' + pattern + '}');
         }
 
-        const segments = this.value.split(new RegExp(pattern));
+        const segments = this._value.split(new RegExp(pattern));
 
         return ! (typeof segments === 'undefined' || segments.length < 1) ? segments : [];
     }
@@ -573,8 +573,8 @@ export class Stringable {
 
     public start = (prefix: string): this => {
 
-        if (!new Stringable(this.value).startsWith(prefix)) {
-            this.value = `${prefix}${this.value}`;
+        if (!new Stringable(this._value).startsWith(prefix)) {
+            this._value = `${prefix}${this._value}`;
         }
 
         return this;
@@ -588,20 +588,20 @@ export class Stringable {
 
         const values = Array.isArray(needles) ? needles : [needles];
 
-        return values.some(needle => this.value.startsWith(String(needle)));
+        return values.some(needle => this._value.startsWith(String(needle)));
     }
 
     public studly = (): this => {
 
-        const key = this.value;
+        const key = this._value;
 
         if (typeof Stringable.studlyCache[key] !== 'undefined') {
-            this.value = Stringable.studlyCache[key];
+            this._value = Stringable.studlyCache[key];
 
             return this;
         }
 
-        this.value = Stringable.studlyCache[key] = this.value.trim()
+        this._value = Stringable.studlyCache[key] = this._value.trim()
             .replace(/[_\-]/g, ' ')
             .replace(/\s+|\u3164+/g, ' ')
             .split(' ')
@@ -612,18 +612,18 @@ export class Stringable {
 
     public substr = (start: number, length: number|null = null): this => {
 
-        this.value = Str.substr(this.value, start, length);
+        this._value = Str.substr(this._value, start, length);
 
         return this;
     }
 
     public substrCount = (needle: string, offset: number = 0, length: number = 0): number => {
 
-        if (this.length() === 0 || needle.length === 0 || this.value.indexOf(needle) === -1) {
+        if (this.length() === 0 || needle.length === 0 || this._value.indexOf(needle) === -1) {
             return 0;
         }
 
-        let word = this.value;
+        let word = this._value;
 
         word = word.substring(offset >= 0 ? offset : word.length + offset);
         word = word.substring(0, length > 0 ? length : word.length + length);
@@ -639,11 +639,11 @@ export class Stringable {
         offset = offset >=0 ? offset : offset + this.length();
         length = length >=0 ? length : length + this.length() - offset;
 
-        this.value = [
-            this.value.slice(0, offset),
+        this._value = [
+            this._value.slice(0, offset),
             replace.substring(0, length),
             replace.slice(length),
-            this.value.slice(offset + length)
+            this._value.slice(offset + length)
         ].join('')
 
         return this;
@@ -654,7 +654,7 @@ export class Stringable {
         const keys = Object.keys(map)
             .map((key: string) => key.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&'));
 
-        this.value = this.value
+        this._value = this._value
             .split(RegExp(`(${keys.join('|')})`))
             .map((key: string) => map[key] || key)
             .join('');
@@ -664,46 +664,46 @@ export class Stringable {
 
     public test = (pattern: RegExp|string): boolean => {
 
-        return new RegExp(pattern).test(this.value);
+        return new RegExp(pattern).test(this._value);
     }
 
     public title = (): this => {
 
-        this.value = this.value.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase());
+        this._value = this._value.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase());
 
         return this;
     }
 
     public trim = (characters?: string): this => {
 
-        this.value = characters
+        this._value = characters
             ? this.ltrim(characters).rtrim(characters).toString()
-            : this.value.trim();
+            : this._value.trim();
 
         return this;
     }
 
     public ucfirst = (): this => {
 
-        this.value = this.value[0].toLocaleUpperCase() + this.value.slice(1);
+        this._value = this._value[0].toLocaleUpperCase() + this._value.slice(1);
 
         return this;
     }
 
     public ucsplit = (): Array<string> => {
-        return this.value.split(/(?=\p{Lu})/u).map(i => i.trim());
+        return this._value.split(/(?=\p{Lu})/u).map(i => i.trim());
     }
 
     public upper = (): this => {
 
-        this.value = this.value.toLocaleUpperCase();
+        this._value = this._value.toLocaleUpperCase();
 
         return this;
     }
 
     public wordCount = (): number => {
 
-        return this.value.trim().split(/\s+/).length;
+        return this._value.trim().split(/\s+/).length;
     }
 
     public words = (words: number = 100, end: string = '...'): this => {
@@ -712,17 +712,17 @@ export class Stringable {
             return this;
         }
 
-        const match = this.value.match(new RegExp(`^\\s*(?:\\S+\\s*){1,${words}}`, 'u'));
+        const match = this._value.match(new RegExp(`^\\s*(?:\\S+\\s*){1,${words}}`, 'u'));
 
         if (match) {
-            this.value = match[0].trimEnd() + end;
+            this._value = match[0].trimEnd() + end;
         }
 
         return this;
     }
 
     public toString = (): string => {
-        return this.value;
+        return this._value;
     }
 
 }
