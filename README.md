@@ -34,6 +34,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - exactly
 - explode
 - finish
+- headline *
 - is
 - isAscii
 - isEmpty
@@ -54,11 +55,13 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - pipe
 - prepend
 - remove
+- repeat *
 - replace
 - replaceArray
 - replaceFirst
 - replaceLast
 - replaceMatches
+- reverse *
 - rtrim
 - scan
 - slug
@@ -72,6 +75,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - substrCount *
 - substrReplace
 - swap
+- tap
 - test
 - title
 - toHtmlString *
@@ -81,7 +85,13 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - upper
 - wordCount
 - words
+- wrap *
 - value *
+
+## Strings methods
+- Str.preg_quote
+- Str.random
+- Str.substr
 
 ## TO DO
 
@@ -89,7 +99,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - mask
 - plural
 - singular
-- tap
 - when
 - whenContains
 - whenContainsAll

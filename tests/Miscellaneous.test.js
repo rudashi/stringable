@@ -45,3 +45,10 @@ it('converts the string instance to an instance of Element or Node', () => {
         .toBeInstanceOf(Node);
 
 });
+
+it('returns the string', function () {
+
+    expect(Stringable.of('foo').value()).toBe('foo');
+    expect(Stringable.of('foo').toString()).toBe('foo');
+
+});

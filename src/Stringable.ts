@@ -1,5 +1,11 @@
 import {Str} from './Str';
-import {CamelDirectory, ExcerptOptions, PipeCallback, SnakeDirectory, StudlyDirectory} from './types';
+import {
+    CamelDirectory,
+    ExcerptOptions,
+    PipeCallback,
+    SnakeDirectory,
+    StudlyDirectory
+} from './types';
 
 export class Stringable {
 
@@ -225,6 +231,20 @@ export class Stringable {
         return this;
     }
 
+    public headline = (): this => {
+
+        let parts = this._value.split(/\s|_/gu);
+
+        if (parts.length === 1) {
+            parts = parts[0].split(/(?=\p{Lu})/u).map(i => i.trim());
+        }
+        this._value = parts.join('_').split(/[-_]/g).map(p =>
+            p.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase())
+        ).filter(Boolean).join(' ');
+
+        return this;
+    }
+
     public is = (pattern: string|Array<string>): boolean => {
 
         pattern = pattern instanceof Array ? pattern : [pattern];
@@ -398,6 +418,13 @@ export class Stringable {
         return this;
     }
 
+    public repeat = (times: number): this => {
+
+        this._value =  this._value.repeat(times)
+
+        return this;
+    }
+
     public replace = (search: string|Array<string>, replace: string|Array<string>): this => {
 
         if (typeof search === 'string' && typeof replace === 'string') {
@@ -467,6 +494,13 @@ export class Stringable {
     public replaceMatches = (pattern: RegExp|string, replace: string): this => {
 
         this._value = this._value.replaceAll(new RegExp(pattern, 'g'), replace);
+
+        return this;
+    }
+
+    public reverse = (): this => {
+
+        this._value = [...this._value].reverse().join('');
 
         return this;
     }
@@ -662,6 +696,10 @@ export class Stringable {
         return this;
     }
 
+    public tap = (callback: Function): Stringable => {
+        return Str.tap(this, callback);
+    }
+
     public test = (pattern: RegExp|string): boolean => {
 
         return new RegExp(pattern).test(this._value);
@@ -717,6 +755,13 @@ export class Stringable {
         if (match) {
             this._value = match[0].trimEnd() + end;
         }
+
+        return this;
+    }
+
+    public wrap = (before: string, after?: string): this => {
+
+        this.prepend(before).append(after ?? before);
 
         return this;
     }
