@@ -32,7 +32,9 @@ export class Str {
             return value.slice(length);
         }
         if (start < 0 && length > 0) {
-            return value.slice(start, value.length + start + length)
+            return start <= -value.length
+                ? value.substring(0, length)
+                : value.slice(start, value.length + start + length)
         }
         if (length < 0) {
             return value.slice(start, length);

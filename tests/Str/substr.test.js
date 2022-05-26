@@ -15,4 +15,7 @@ it('returns the portion of string specified by the start and length parameters',
     expect(Str.substr('БГДЖИЛЁ', 0, 4)).toBe('БГДЖ');
     expect(Str.substr('БГДЖИЛЁ', -1, 1)).toBe('Ё');
     expect(Str.substr('Б', 2)).toBe('');
+
+    expect(Str.substr('taylor@email.com', -99, 5)).toBe('taylo');
+    expect(Str.substr('taylor@email.com', -7, 5)).toBe('ail.c');
 });
