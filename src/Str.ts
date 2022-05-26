@@ -42,7 +42,7 @@ export class Str {
 
     static tap(value: Stringable, callback: Function): Stringable {
 
-        callback(value);
+        callback(Stringable.of(value));
 
         return value;
     }

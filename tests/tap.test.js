@@ -25,10 +25,10 @@ it('returns always original string', function () {
     let fromTheTap = '';
 
     stringable = stringable.tap(str => {
-        fromTheTap = str.toString().substring(0, 3);
+        fromTheTap = str.substr(0, 3);
     });
 
     expect(fromTheTap.toString()).toBe('foo');
     expect(stringable.toString()).toBe('foobarbaz');
 
-}); 
+});

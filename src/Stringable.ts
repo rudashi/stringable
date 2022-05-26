@@ -22,7 +22,7 @@ export class Stringable {
     }
 
     static of(string: any): Stringable {
-        return new Stringable(string);
+        return new Stringable(string instanceof Stringable ? string.toString() : string);
     }
 
     public after = (search: string = ''): this => {
