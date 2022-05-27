@@ -46,12 +46,14 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - limit
 - lower
 - ltrim
+- mask
 - match
 - matchAll
 - newLine
 - padBoth
 - padLeft
 - padRight
+- parseCallback *
 - pipe
 - prepend
 - remove
@@ -70,6 +72,7 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 - squish
 - start
 - startsWith
+- stripTags *
 - studly
 - substr
 - substrCount *
@@ -96,7 +99,6 @@ Fluent strings provide a more fluent, object-oriented interface for working with
 ## TO DO
 
 - markdown
-- mask
 - plural
 - singular
 - when

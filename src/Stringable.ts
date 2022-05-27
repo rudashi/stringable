@@ -335,6 +335,31 @@ export class Stringable {
         return this;
     }
 
+    public mask = ($character: string, $index: number, $length: number|null = null): this => {
+
+        if ($character === '') {
+            return this;
+        }
+
+        const $segment = Str.substr(this._value, $index, $length);
+
+        if ($segment === '') {
+            return this;
+        }
+
+        const $startIndex = $index < 0
+            ? $index < -this._value.length ? 0 : this._value.length + $index
+            : $index;
+
+        const $start = this._value.substring(0, $startIndex);
+        const $mid   = $character[0].repeat($segment.length);
+        const $end   = this._value.substring($startIndex + $segment.length);
+
+        this._value =  $start + $mid + ($mid.length >= $end.length ? '' : $end);
+
+        return this;
+    }
+
     public match = (pattern: RegExp|string): string => {
 
         const matches = this._value.match(new RegExp(pattern));
@@ -389,6 +414,13 @@ export class Stringable {
         }
 
         return this;
+    }
+
+    public parseCallback = (method: string | null = null): Array<string|null> => {
+
+        return this.contains('@')
+            ? this.explode('@', 2)
+            : [this._value, method];
     }
 
     public pipe = (callback: PipeCallback): this => {
@@ -623,6 +655,28 @@ export class Stringable {
         const values = Array.isArray(needles) ? needles : [needles];
 
         return values.some(needle => this._value.startsWith(String(needle)));
+    }
+
+    public stripTags = (allowedTags: string = ''): this => {
+
+        const tags = /<\/?([a-z\d]*)\b[^>]*>?/gi;
+        const commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+
+        this.replaceMatches(commentsAndPhpTags, '');
+
+        while (true) {
+            const before = this._value
+
+            this._value = before.replace(tags, function ($0, $1) {
+                return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : ''
+            })
+
+            if (before === this._value) {
+                break;
+            }
+        }
+
+        return this;
     }
 
     public studly = (): this => {
