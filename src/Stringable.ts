@@ -801,6 +801,19 @@ export class Stringable {
         return this._value.split(/(?=\p{Lu})/u).map(i => i.trim());
     }
 
+    public unless = (value: Function|boolean|number, callback: Function, defaultValue: Function|null = null): this => {
+
+        value = value instanceof Function ? value(this) : value;
+
+        if (! value) {
+            return callback(this, value) ?? this;
+        } else if (defaultValue) {
+            return defaultValue(this, value) ?? this;
+        }
+
+        return this;
+    }
+
     public upper = (): this => {
 
         this._value = this._value.toLocaleUpperCase();
@@ -808,7 +821,7 @@ export class Stringable {
         return this;
     }
 
-    public when = (value: Function|boolean, callback: Function, defaultValue: Function|null = null): this => {
+    public when = (value: Function|boolean|number, callback: Function, defaultValue: Function|null = null): this => {
 
         value = value instanceof Function ? value(this) : value;
 
