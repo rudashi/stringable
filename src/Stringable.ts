@@ -288,6 +288,21 @@ export class Stringable {
         return ! this.isEmpty();
     }
 
+    public isJson = (): boolean => {
+
+        if (this.isEmpty()) {
+            return false;
+        }
+
+        try {
+            JSON.parse(this._value);
+        } catch (e) {
+            return false;
+        }
+
+        return true;
+    }
+
     public isUuid = (): boolean => {
         return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this._value);
     }
@@ -791,6 +806,63 @@ export class Stringable {
         this._value = this._value.toLocaleUpperCase();
 
         return this;
+    }
+
+    public when = (value: Function|boolean, callback: Function, defaultValue: Function|null = null): this => {
+
+        value = value instanceof Function ? value(this) : value;
+
+        if (value) {
+            return callback(this, value) ?? this;
+        } else if (defaultValue) {
+            return defaultValue(this, value) ?? this;
+        }
+
+        return this;
+    }
+
+    public whenContains = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.contains(needles), callback, defaultValue);
+    }
+
+    public whenContainsAll = (needles: Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.containsAll(needles), callback, defaultValue);
+    }
+
+    public whenEmpty = (callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.isEmpty(), callback, defaultValue);
+    }
+
+    public whenNotEmpty = (callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.isNotEmpty(), callback, defaultValue);
+    }
+
+    public whenEndsWith = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.endsWith(needles), callback, defaultValue);
+    }
+
+    public whenStartsWith = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.startsWith(needles), callback, defaultValue);
+    }
+
+    public whenExactly = (value: string, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.exactly(value), callback, defaultValue);
+    }
+
+    public whenIs = (pattern: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.is(pattern), callback, defaultValue);
+    }
+
+    public whenIsAscii = (callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.isAscii(), callback, defaultValue);
+    }
+
+    public whenIsUuid = (callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.isUuid(), callback, defaultValue);
+    }
+
+    public whenTest = (pattern: RegExp|string, callback: Function, defaultValue: Function|null = null): this => {
+        return this.when(this.test(pattern), callback, defaultValue);
     }
 
     public wordCount = (): number => {
