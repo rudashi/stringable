@@ -1,4 +1,4 @@
-import {Stringable} from "./Stringable";
+import {Stringable} from './Stringable';
 
 export class Str {
 

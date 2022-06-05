@@ -1,6 +1,7 @@
 import {Str} from './Str';
 import {
     CamelDirectory,
+    Closure,
     ExcerptOptions,
     PipeCallback,
     SnakeDirectory,
@@ -245,7 +246,7 @@ export class Stringable {
         return this;
     }
 
-    public is = (pattern: string|Array<string>): boolean => {
+    public is = (pattern: string|Array<string|null>): boolean => {
 
         pattern = pattern instanceof Array ? pattern : [pattern];
 
@@ -801,14 +802,18 @@ export class Stringable {
         return this._value.split(/(?=\p{Lu})/u).map(i => i.trim());
     }
 
-    public unless = (value: Function|boolean|number, callback: Function, defaultValue: Function|null = null): this => {
+    public unless = (value: Function|string|boolean|number, callback: Closure, defaultValue: Closure|string|null = null): this => {
 
         value = value instanceof Function ? value(this) : value;
 
         if (! value) {
-            return callback(this, value) ?? this;
+            return callback instanceof Function
+                ? callback(this, String(value)) ?? this
+                : Stringable.of(callback);
         } else if (defaultValue) {
-            return defaultValue(this, value) ?? this;
+            return defaultValue instanceof Function
+                ? defaultValue(this, String(value)) ?? this
+                : Stringable.of(defaultValue);
         }
 
         return this;
@@ -821,60 +826,64 @@ export class Stringable {
         return this;
     }
 
-    public when = (value: Function|boolean|number, callback: Function, defaultValue: Function|null = null): this => {
+    public when = (value: Function|string|boolean|number, callback: Closure, defaultValue: Closure = null): this => {
 
         value = value instanceof Function ? value(this) : value;
 
         if (value) {
-            return callback(this, value) ?? this;
+            return callback instanceof Function
+                ? callback(this, String(value)) ?? this
+                : Stringable.of(callback);
         } else if (defaultValue) {
-            return defaultValue(this, value) ?? this;
+            return defaultValue instanceof Function
+                ? defaultValue(this, String(value)) ?? this
+                : Stringable.of(defaultValue);
         }
 
         return this;
     }
 
-    public whenContains = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+    public whenContains = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.contains(needles), callback, defaultValue);
     }
 
-    public whenContainsAll = (needles: Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+    public whenContainsAll = (needles: Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.containsAll(needles), callback, defaultValue);
     }
 
-    public whenEmpty = (callback: Function, defaultValue: Function|null = null): this => {
+    public whenEmpty = (callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.isEmpty(), callback, defaultValue);
     }
 
-    public whenNotEmpty = (callback: Function, defaultValue: Function|null = null): this => {
+    public whenNotEmpty = (callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.isNotEmpty(), callback, defaultValue);
     }
 
-    public whenEndsWith = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+    public whenEndsWith = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.endsWith(needles), callback, defaultValue);
     }
 
-    public whenStartsWith = (needles: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+    public whenStartsWith = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.startsWith(needles), callback, defaultValue);
     }
 
-    public whenExactly = (value: string, callback: Function, defaultValue: Function|null = null): this => {
+    public whenExactly = (value: string, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.exactly(value), callback, defaultValue);
     }
 
-    public whenIs = (pattern: string|Array<string>, callback: Function, defaultValue: Function|null = null): this => {
+    public whenIs = (pattern: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.is(pattern), callback, defaultValue);
     }
 
-    public whenIsAscii = (callback: Function, defaultValue: Function|null = null): this => {
+    public whenIsAscii = (callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.isAscii(), callback, defaultValue);
     }
 
-    public whenIsUuid = (callback: Function, defaultValue: Function|null = null): this => {
+    public whenIsUuid = (callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.isUuid(), callback, defaultValue);
     }
 
-    public whenTest = (pattern: RegExp|string, callback: Function, defaultValue: Function|null = null): this => {
+    public whenTest = (pattern: RegExp|string, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.test(pattern), callback, defaultValue);
     }
 

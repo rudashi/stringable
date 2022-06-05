@@ -1,3 +1,5 @@
+import {Stringable} from '../Stringable';
+
 export type SnakeDirectory = {
     [key: string]: Record<string, string>
 }
@@ -25,4 +27,11 @@ export type PipeCallback =
     | 'trimStart'
     | 'trimEnd'
     | 'toString'
+;
+
+type Closure =
+    Function
+    | string
+    | null
+    | { (callback: Stringable, value: string ): Stringable }
 ;
