@@ -47,3 +47,17 @@ it('returns the string as `snake_case`', () => {
         .toBe('żółtałódka');
 
 });
+
+it('should cache the string to _snakeCache property', function () {
+
+    Stringable.flushCache();
+
+    expect(Stringable._snakeCache).toStrictEqual({});
+
+    Stringable.of('fooBar').snake();
+    expect(Stringable._snakeCache).toStrictEqual({fooBar: { _ :'foo_bar'}});
+
+    Stringable.of('fooBar').snake('-');
+    expect(Stringable._snakeCache).toStrictEqual({'fooBar': { '_' :'foo_bar', '-' :'foo-bar'}});
+
+});

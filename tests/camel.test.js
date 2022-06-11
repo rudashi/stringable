@@ -36,3 +36,17 @@ it('returns the string as `camelCase`', () => {
         .toBe('fooBarBaz');
 
 });
+
+it('should cache the string to _camelCache property', function () {
+
+    Stringable.flushCache();
+
+    expect(Stringable._camelCache).toStrictEqual({});
+
+    Stringable.of('foo').camel();
+    expect(Stringable._camelCache).toStrictEqual({foo: 'foo'});
+
+    Stringable.of('bar').camel();
+    expect(Stringable._camelCache).toStrictEqual({foo: 'foo', bar: 'bar'});
+
+});

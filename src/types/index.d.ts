@@ -29,7 +29,7 @@ export type PipeCallback =
     | 'toString'
 ;
 
-type Closure =
+export type Closure =
     Function
     | string
     | null

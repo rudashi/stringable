@@ -12,11 +12,11 @@ export class Stringable {
 
     private _value: string;
 
-    private static camelCache: CamelDirectory = {};
+    private static _camelCache: CamelDirectory = {};
 
-    private static snakeCache: SnakeDirectory = {};
+    private static _snakeCache: SnakeDirectory = {};
 
-    private static studlyCache: StudlyDirectory = {};
+    private static _studlyCache: StudlyDirectory = {};
 
     constructor(string: any) {
         this._value = string === null ? '' : String(string);
@@ -24,6 +24,12 @@ export class Stringable {
 
     static of(string: any): Stringable {
         return new Stringable(string instanceof Stringable ? string.toString() : string);
+    }
+
+    static flushCache(): void {
+        Stringable._camelCache = {};
+        Stringable._snakeCache = {};
+        Stringable._studlyCache = {};
     }
 
     public after = (search: string = ''): this => {
@@ -113,13 +119,13 @@ export class Stringable {
 
         const key = this._value;
 
-        if (typeof Stringable.camelCache[key] !== 'undefined') {
-            this._value = Stringable.camelCache[key];
+        if (typeof Stringable._camelCache[key] !== 'undefined') {
+            this._value = Stringable._camelCache[key];
 
             return this;
         }
 
-        this._value = Stringable.camelCache[key] = this.studly().lcfirst().toString();
+        this._value = Stringable._camelCache[key] = this.studly().lcfirst().toString();
 
         return this;
     }
@@ -618,8 +624,8 @@ export class Stringable {
 
         const key = this._value;
 
-        if (typeof Stringable.snakeCache[key] !== 'undefined' && typeof Stringable.snakeCache[key][delimiter] !== 'undefined') {
-            this._value = Stringable.snakeCache[key][delimiter];
+        if (typeof Stringable._snakeCache[key] !== 'undefined' && typeof Stringable._snakeCache[key][delimiter] !== 'undefined') {
+            this._value = Stringable._snakeCache[key][delimiter];
 
             return this;
         }
@@ -630,6 +636,13 @@ export class Stringable {
                 .replace(new RegExp(/\s+/, 'gu'),'')
                 .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'),'$1'+delimiter)
                 .toLocaleLowerCase();
+
+        }
+
+        if (typeof Stringable._snakeCache[key] !== 'undefined') {
+            Stringable._snakeCache[key][delimiter] = this._value;
+        } else {
+            Stringable._snakeCache[key] = { [delimiter]: this._value };
         }
 
         return this;
@@ -699,13 +712,13 @@ export class Stringable {
 
         const key = this._value;
 
-        if (typeof Stringable.studlyCache[key] !== 'undefined') {
-            this._value = Stringable.studlyCache[key];
+        if (typeof Stringable._studlyCache[key] !== 'undefined') {
+            this._value = Stringable._studlyCache[key];
 
             return this;
         }
 
-        this._value = Stringable.studlyCache[key] = this._value.trim()
+        this._value = Stringable._studlyCache[key] = this._value.trim()
             .replace(/[_\-]/g, ' ')
             .replace(/\s+|\u3164+/g, ' ')
             .split(' ')

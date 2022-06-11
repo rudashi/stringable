@@ -52,3 +52,19 @@ it('returns the string', function () {
     expect(Stringable.of('foo').toString()).toBe('foo');
 
 });
+
+it('can flush cached words', function () {
+
+    expect(Stringable._camelCache).toStrictEqual({});
+
+    Stringable.flushCache();
+    expect(Stringable._camelCache).toStrictEqual({});
+
+    Stringable.of('foo').camel();
+    expect(Stringable._camelCache).not.toStrictEqual({});
+    expect(Stringable._camelCache).toStrictEqual({foo: 'foo'});
+
+    Stringable.flushCache();
+    expect(Stringable._camelCache).toStrictEqual({});
+
+});

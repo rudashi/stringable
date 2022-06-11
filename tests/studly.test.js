@@ -36,3 +36,17 @@ it('returns the string as `StudlyCase`', () => {
         .toBe('ÖffentlicheÜberraschungen');
 
 });
+
+it('should cache the string to _studlyCache property', function () {
+
+    Stringable.flushCache();
+
+    expect(Stringable._studlyCache).toStrictEqual({});
+
+    Stringable.of('foo').studly();
+    expect(Stringable._studlyCache).toStrictEqual({foo: 'Foo'});
+
+    Stringable.of('bar').studly();
+    expect(Stringable._studlyCache).toStrictEqual({foo: 'Foo', bar: 'Bar'});
+
+});
