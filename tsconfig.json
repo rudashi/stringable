@@ -1,22 +1,28 @@
 {
     "compilerOptions": {
-        "rootDir": "./src",
-        "outDir": "./dist",
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "module": "ESNext",
-        "lib": ["ESNext", "DOM"],
+        "baseUrl": "./",
+        "outDir": "./dist/",
+        "target": "es6",
+        "module": "commonjs",
         "moduleResolution": "Node",
         "strict": true,
+
+        "useDefineForClassFields": true,
+        "lib": ["es7", "es2015", "DOM"],
+
         "sourceMap": true,
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "esModuleInterop": true,
-        "noEmit": true,
         "noUnusedLocals": true,
-        "noUnusedParameters": true,
         "noImplicitReturns": true,
-        "skipLibCheck": true
+        "declaration": true,
+        "declarationDir": "./types",
+        "types": ["node"],
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
     },
     "include": ["src/**/*", "tests/**/*"]
 }

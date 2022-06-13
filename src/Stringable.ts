@@ -482,9 +482,7 @@ export class Stringable {
     public replace = (search: string|Array<string>, replace: string|Array<string>): this => {
 
         if (typeof search === 'string' && typeof replace === 'string') {
-            this._value = this._value.replaceAll(search, replace);
-
-            return this;
+            return this.replaceMatches(Str.preg_quote(search), replace);
         }
 
         let searchArray = search instanceof Array ? search : [search];
@@ -495,7 +493,7 @@ export class Stringable {
         }
 
         for (const index of searchArray.keys()) {
-            this._value = this._value.replaceAll(searchArray[index], replaceArray[index]);
+            this._value = this._value.replace(searchArray[index], replaceArray[index]);
         }
 
         return this;
@@ -547,7 +545,7 @@ export class Stringable {
 
     public replaceMatches = (pattern: RegExp|string, replace: string): this => {
 
-        this._value = this._value.replaceAll(new RegExp(pattern, 'g'), replace);
+        this._value = this._value.replace(new RegExp(pattern, 'g'), replace);
 
         return this;
     }
