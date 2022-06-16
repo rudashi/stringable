@@ -116,6 +116,8 @@ chain multiple string operations together using a more readable syntax compared 
 - [markdown](#markdown)
 - [plural](#plural)
 - [singular](#singular)
+- [Str.createRandomStringsUsing](#strcreaterandomstringsusing)
+- [Str.createRandomStringsUsingSequence](#strcreaterandomstringsusingsequence)
 - [Str.orderedUuid](#strordereduuid)
 
 ## Fluent Strings
@@ -947,6 +949,10 @@ Stringable.of('foo').value();
 // 'foo'
 ```
 ## Strings
+### Str.createRandomStringsUsing()
+Not implemented
+### Str.createRandomStringsUsingSequence()
+Not implemented
 ### Str.orderedUuid()
 Not implemented
 ### Str.preg_quote()
