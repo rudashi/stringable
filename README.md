@@ -110,13 +110,13 @@ chain multiple string operations together using a more readable syntax compared 
 - [Str.preg_quote](#strpreg_quote)
 - [Str.random](#strrandom)
 - [Str.substr](#strsubstr)
+- [Str.uuid](#struuid)
 
 ## TO DO
 - [markdown](#markdown)
 - [plural](#plural)
 - [singular](#singular)
 - [Str.orderedUuid](#strordereduuid)
-- [Str.uuid](#struuid)
 
 ## Fluent Strings
 ### after()
@@ -969,4 +969,9 @@ Str.substr('The Laravel Framework', 4, 7);
 // 'Laravel'
 ```
 ### Str.uuid()
-Not implemented
+The Str::uuid method generates a UUID (version 4):
+```js
+Str.uuid();
+
+// Stringable object
+```

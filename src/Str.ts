@@ -1,4 +1,5 @@
 import {Stringable} from './Stringable';
+import crypto from 'crypto';
 
 export class Str {
 
@@ -47,6 +48,10 @@ export class Str {
         callback(Stringable.of(value));
 
         return value;
+    }
+
+    static uuid(): Stringable {
+        return Stringable.of(crypto.randomUUID());
     }
 
 }

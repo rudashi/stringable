@@ -18,11 +18,7 @@
         "build": "tsc -b",
         "test": "jest"
     },
-    "author": {
-        "name": "Borys Żmuda",
-        "email": "rudashi@gmail.com",
-        "github": "https://rudashi.github.io"
-    },
+    "author": "Borys Żmuda <rudashi@gmail.com>",
     "license": "ISC",
     "homepage": "https://github.com/rudashi/stringable#readme",
     "dependencies": {
@@ -33,5 +29,15 @@
         "jest-environment-jsdom": "^28.1.0",
         "ts-jest": "^28.0.3",
         "@types/jest": "^27.5.1"
+    },
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rudashi/stringable.git"
+    },
+    "bugs": {
+        "url": "https://github.com/rudashi/stringable/issues"
     }
 }
