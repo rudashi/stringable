@@ -8,7 +8,7 @@ RUN [ "/bin/bash", "-c", "yarn install --pure-lockfile 2> >(grep -v warning 1>&2
 
 ENV PATH /usr/node_modules/.bin:$PATH
 
-RUN npm install -g npm@8.9.0
+RUN npm install -g npm@8.13.0
 
 COPY . .
 
