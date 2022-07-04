@@ -13,6 +13,7 @@ export declare type ExcerptOptions = {
     omission?: string;
 };
 export declare type PipeCallback = Function | 'toLocaleUpperCase' | 'toLocaleLowerCase' | 'toUpperCase' | 'toLowerCase' | 'trim' | 'trimStart' | 'trimEnd' | 'toString';
-export declare type Closure = Function | string | null | {
+export declare type Callable = Function | null;
+export declare type Closure = Callable | string | {
     (callback: Stringable, value: string): Stringable;
 };
