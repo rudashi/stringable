@@ -7,7 +7,7 @@
 
 Javascript version's of Laravel's `Illuminate\Support\Str`
 
-Based on great [Laravel](https://laravel.com/docs/MASTER/helpers#fluent-strings-method-list) string helper
+Based on great [Laravel](https://laravel.com/docs/master/helpers#fluent-strings-method-list) string helper
 
 ## Introduction
 Fluent strings provide a more fluent, object-oriented interface for working with string values, allowing you to 

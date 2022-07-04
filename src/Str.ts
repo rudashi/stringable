@@ -1,7 +1,18 @@
 import {Stringable} from './Stringable';
+import {Callable} from './types';
 import crypto from 'crypto';
 
 export class Str {
+
+    protected static randomStringFactory: Callable;
+
+    static createRandomStringsUsing(callable: Callable): void {
+        Str.randomStringFactory = callable;
+    }
+
+    static createRandomStringsNormally(): void {
+        Str.randomStringFactory = null;
+    }
 
     static preg_quote(value: string, delimiter: string = ''): string {
         return value.replace(
@@ -15,11 +26,13 @@ export class Str {
         const size = characters.length;
         let string = '';
 
-        for (let i = 0; i < length; i++ ) {
-            string += characters.charAt(Math.random() * size);
-        }
+        return (Str.randomStringFactory ?? function (length: number) {
+            for (let i = 0; i < length; i++ ) {
+                string += characters.charAt(Math.random() * size);
+            }
 
-        return string;
+            return string;
+        })(length);
     }
 
     static substr(value: string, start: number, length: number | null = null): string {

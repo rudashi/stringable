@@ -29,9 +29,6 @@ export type PipeCallback =
     | 'toString'
 ;
 
-export type Closure =
-    Function
-    | string
-    | null
-    | { (callback: Stringable, value: string ): Stringable }
-;
+export type Callable = Function | null;
+
+export type Closure = Callable | string | { (callback: Stringable, value: string ): Stringable };
