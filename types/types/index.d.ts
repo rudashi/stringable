@@ -1,4 +1,7 @@
 import { Stringable } from '../Stringable';
+export declare type AssociativeArray = {
+    [key: string]: string | boolean | number;
+};
 export declare type SnakeDirectory = {
     [key: string]: Record<string, string>;
 };

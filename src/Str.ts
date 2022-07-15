@@ -1,5 +1,5 @@
 import {Stringable} from './Stringable';
-import {Callable} from './types';
+import {AssociativeArray, Callable} from './types';
 import crypto from 'crypto';
 
 export class Str {
@@ -12,6 +12,30 @@ export class Str {
 
     static createRandomStringsNormally(): void {
         Str.randomStringFactory = null;
+    }
+
+    static createRandomStringsUsingSequence(sequence: AssociativeArray, whenMissing: Callable = null): void {
+        let next = 0;
+        let callable: Function = whenMissing ?? function (length: number) {
+            let factoryCache = Str.randomStringFactory;
+
+            Str.randomStringFactory = null;
+
+            let randomString = Str.random(length);
+
+            Str.randomStringFactory = factoryCache;
+
+            next++;
+
+            return randomString;
+        };
+
+        Str.createRandomStringsUsing(function (length: number) {
+            if (sequence.hasOwnProperty(next)) {
+                return sequence[next++];
+            }
+            return callable(length);
+        });
     }
 
     static preg_quote(value: string, delimiter: string = ''): string {
@@ -27,7 +51,7 @@ export class Str {
         let string = '';
 
         return (Str.randomStringFactory ?? function (length: number) {
-            for (let i = 0; i < length; i++ ) {
+            for (let i = 0; i < length; i++) {
                 string += characters.charAt(Math.random() * size);
             }
 

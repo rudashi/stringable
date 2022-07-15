@@ -1,5 +1,9 @@
 import {Stringable} from '../Stringable';
 
+export type AssociativeArray = {
+    [key: string]: string | boolean | number;
+}
+
 export type SnakeDirectory = {
     [key: string]: Record<string, string>
 }

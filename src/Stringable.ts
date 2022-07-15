@@ -64,7 +64,7 @@ export class Stringable {
         return this;
     }
 
-    public basename = (extension: string|null = null): this => {
+    public basename = (extension: string | null = null): this => {
 
         this._value = this._value.split('/').reverse()[0];
 
@@ -130,7 +130,7 @@ export class Stringable {
         return this;
     }
 
-    public contains = (needles: string|Array<string>, ignoreCase: boolean = false): boolean => {
+    public contains = (needles: string | Array<string>, ignoreCase: boolean = false): boolean => {
 
         if (needles === '') {
             return false;
@@ -165,7 +165,7 @@ export class Stringable {
         return this;
     }
 
-    public endsWith = (needles: null|string|number|Array<string>): boolean => {
+    public endsWith = (needles: null | string | number | Array<string>): boolean => {
 
         if (needles === null || needles === '') {
             return false;
@@ -176,7 +176,10 @@ export class Stringable {
         return values.some(needle => this._value.endsWith(String(needle)));
     }
 
-    public excerpt = (phrase: string = '', {radius = 100, omission = '...'}: ExcerptOptions = {radius: 100, omission: '...'}): this => {
+    public excerpt = (phrase: string = '', {radius = 100, omission = '...'}: ExcerptOptions = {
+        radius: 100,
+        omission: '...'
+    }): this => {
 
         if (this._value === phrase) {
             return this;
@@ -184,7 +187,7 @@ export class Stringable {
 
         const matches = phrase === null
             ? ['', '', '', this._value.substring(0, radius)]
-            : this._value.match(new RegExp('^(.*?)('+phrase+')(.*)$', 'iu'));
+            : this._value.match(new RegExp('^(.*?)(' + phrase + ')(.*)$', 'iu'));
 
         if (!matches) {
             this._value = '';
@@ -207,7 +210,7 @@ export class Stringable {
         return this;
     }
 
-    public exactly = (value: Stringable|string): boolean => {
+    public exactly = (value: Stringable | string): boolean => {
 
         if (value instanceof Stringable) {
             value = value.toString();
@@ -222,8 +225,8 @@ export class Stringable {
 
         if (limit !== undefined && array.length >= limit) {
             limit < 0
-               ? array.splice(limit)
-               : array.push(array.splice(limit - 1).join(delimiter));
+                ? array.splice(limit)
+                : array.push(array.splice(limit - 1).join(delimiter));
         }
 
         return array;
@@ -233,7 +236,7 @@ export class Stringable {
 
         const quoted = Str.preg_quote(cap, '/');
 
-        this.replaceMatches('(?:'+quoted+')+$', '').append(cap);
+        this.replaceMatches('(?:' + quoted + ')+$', '').append(cap);
 
         return this;
     }
@@ -252,7 +255,7 @@ export class Stringable {
         return this;
     }
 
-    public is = (pattern: string|Array<string|null>): boolean => {
+    public is = (pattern: string | Array<string | null>): boolean => {
 
         pattern = pattern instanceof Array ? pattern : [pattern];
 
@@ -292,7 +295,7 @@ export class Stringable {
     }
 
     public isNotEmpty = (): boolean => {
-        return ! this.isEmpty();
+        return !this.isEmpty();
     }
 
     public isJson = (): boolean => {
@@ -357,7 +360,7 @@ export class Stringable {
         return this;
     }
 
-    public mask = ($character: string, $index: number, $length: number|null = null): this => {
+    public mask = ($character: string, $index: number, $length: number | null = null): this => {
 
         if ($character === '') {
             return this;
@@ -374,15 +377,15 @@ export class Stringable {
             : $index;
 
         const $start = this._value.substring(0, $startIndex);
-        const $mid   = $character[0].repeat($segment.length);
-        const $end   = this._value.substring($startIndex + $segment.length);
+        const $mid = $character[0].repeat($segment.length);
+        const $end = this._value.substring($startIndex + $segment.length);
 
-        this._value =  $start + $mid + ($mid.length >= $end.length ? '' : $end);
+        this._value = $start + $mid + ($mid.length >= $end.length ? '' : $end);
 
         return this;
     }
 
-    public match = (pattern: RegExp|string): string => {
+    public match = (pattern: RegExp | string): string => {
 
         const matches = this._value.match(new RegExp(pattern));
 
@@ -392,7 +395,7 @@ export class Stringable {
         return '';
     }
 
-    public matchAll = (pattern: RegExp|string): Array<string> => {
+    public matchAll = (pattern: RegExp | string): Array<string> => {
 
         const matches = this._value.matchAll(new RegExp(pattern, 'g'));
         const result = [];
@@ -438,7 +441,7 @@ export class Stringable {
         return this;
     }
 
-    public parseCallback = (method: string | null = null): Array<string|null> => {
+    public parseCallback = (method: string | null = null): Array<string | null> => {
 
         return this.contains('@')
             ? this.explode('@', 2)
@@ -461,7 +464,7 @@ export class Stringable {
         return this;
     }
 
-    public remove = (search: string|Array<string>, caseSensitive: boolean = true): this => {
+    public remove = (search: string | Array<string>, caseSensitive: boolean = true): this => {
 
         search = search instanceof Array ? search : [search];
 
@@ -474,12 +477,12 @@ export class Stringable {
 
     public repeat = (times: number): this => {
 
-        this._value =  this._value.repeat(times)
+        this._value = this._value.repeat(times)
 
         return this;
     }
 
-    public replace = (search: string|Array<string>, replace: string|Array<string>): this => {
+    public replace = (search: string | Array<string>, replace: string | Array<string>): this => {
 
         if (typeof search === 'string' && typeof replace === 'string') {
             return this.replaceMatches(Str.preg_quote(search), replace);
@@ -543,7 +546,7 @@ export class Stringable {
         return this;
     }
 
-    public replaceMatches = (pattern: RegExp|string, replace: string): this => {
+    public replaceMatches = (pattern: RegExp | string, replace: string): this => {
 
         this._value = this._value.replace(new RegExp(pattern, 'g'), replace);
 
@@ -566,7 +569,7 @@ export class Stringable {
         return this;
     }
 
-    public scan = (format: string): Array<string|null> => {
+    public scan = (format: string): Array<string | null> => {
 
         const selectors = format.match(new RegExp(/(%\[.*?]|%[.*]|[^%]+|(%.))/, 'g'));
         const result: Array<string> = [];
@@ -605,7 +608,7 @@ export class Stringable {
         return match;
     }
 
-    public slug = (separator: string = '-', language: string|null = 'en'): this => {
+    public slug = (separator: string = '-', language: string | null = 'en'): this => {
 
         if (language) {
             this.ascii();
@@ -631,8 +634,8 @@ export class Stringable {
         if (!(/^[a-z]+$/).test(this._value)) {
             this._value = this._value
                 .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
-                .replace(new RegExp(/\s+/, 'gu'),'')
-                .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'),'$1'+delimiter)
+                .replace(new RegExp(/\s+/, 'gu'), '')
+                .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'), '$1' + delimiter)
                 .toLocaleLowerCase();
 
         }
@@ -640,13 +643,13 @@ export class Stringable {
         if (typeof Stringable._snakeCache[key] !== 'undefined') {
             Stringable._snakeCache[key][delimiter] = this._value;
         } else {
-            Stringable._snakeCache[key] = { [delimiter]: this._value };
+            Stringable._snakeCache[key] = {[delimiter]: this._value};
         }
 
         return this;
     }
 
-    public split = (pattern: RegExp|number|string): Array<string> => {
+    public split = (pattern: RegExp | number | string): Array<string> => {
 
         if (typeof pattern === 'number') {
             return pattern === 0 ? [] : this.matchAll('.{1,' + pattern + '}');
@@ -654,7 +657,7 @@ export class Stringable {
 
         const segments = this._value.split(new RegExp(pattern));
 
-        return ! (typeof segments === 'undefined' || segments.length < 1) ? segments : [];
+        return !(typeof segments === 'undefined' || segments.length < 1) ? segments : [];
     }
 
     public squish = (): this => {
@@ -673,7 +676,7 @@ export class Stringable {
         return this;
     }
 
-    public startsWith = (needles: null|string|number|Array<string>): boolean => {
+    public startsWith = (needles: null | string | number | Array<string>): boolean => {
 
         if (needles === null || needles === '') {
             return false;
@@ -725,7 +728,7 @@ export class Stringable {
         return this;
     }
 
-    public substr = (start: number, length: number|null = null): this => {
+    public substr = (start: number, length: number | null = null): this => {
 
         this._value = Str.substr(this._value, start, length);
 
@@ -748,11 +751,11 @@ export class Stringable {
         return match ? match.length : 0;
     }
 
-    public substrReplace = (replace: string, offset: number = 0, length: number|null = null): this => {
+    public substrReplace = (replace: string, offset: number = 0, length: number | null = null): this => {
 
         length = length !== null ? length : this.length();
-        offset = offset >=0 ? offset : offset + this.length();
-        length = length >=0 ? length : length + this.length() - offset;
+        offset = offset >= 0 ? offset : offset + this.length();
+        length = length >= 0 ? length : length + this.length() - offset;
 
         this._value = [
             this._value.slice(0, offset),
@@ -781,7 +784,7 @@ export class Stringable {
         return Str.tap(this, callback);
     }
 
-    public test = (pattern: RegExp|string): boolean => {
+    public test = (pattern: RegExp | string): boolean => {
 
         return new RegExp(pattern).test(this._value);
     }
@@ -813,11 +816,11 @@ export class Stringable {
         return this._value.split(/(?=\p{Lu})/u).map(i => i.trim());
     }
 
-    public unless = (value: Function|string|boolean|number, callback: Closure, defaultValue: Closure|string|null = null): this => {
+    public unless = (value: Function | string | boolean | number, callback: Closure, defaultValue: Closure | string | null = null): this => {
 
         value = value instanceof Function ? value(this) : value;
 
-        if (! value) {
+        if (!value) {
             return callback instanceof Function
                 ? callback(this, String(value)) ?? this
                 : Stringable.of(callback);
@@ -837,7 +840,7 @@ export class Stringable {
         return this;
     }
 
-    public when = (value: Function|string|boolean|number, callback: Closure, defaultValue: Closure = null): this => {
+    public when = (value: Function | string | boolean | number, callback: Closure, defaultValue: Closure = null): this => {
 
         value = value instanceof Function ? value(this) : value;
 
@@ -854,7 +857,7 @@ export class Stringable {
         return this;
     }
 
-    public whenContains = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenContains = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.contains(needles), callback, defaultValue);
     }
 
@@ -870,11 +873,11 @@ export class Stringable {
         return this.when(this.isNotEmpty(), callback, defaultValue);
     }
 
-    public whenEndsWith = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenEndsWith = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.endsWith(needles), callback, defaultValue);
     }
 
-    public whenStartsWith = (needles: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenStartsWith = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.startsWith(needles), callback, defaultValue);
     }
 
@@ -882,7 +885,7 @@ export class Stringable {
         return this.when(this.exactly(value), callback, defaultValue);
     }
 
-    public whenIs = (pattern: string|Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenIs = (pattern: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.is(pattern), callback, defaultValue);
     }
 
@@ -894,7 +897,7 @@ export class Stringable {
         return this.when(this.isUuid(), callback, defaultValue);
     }
 
-    public whenTest = (pattern: RegExp|string, callback: Closure, defaultValue: Closure = null): this => {
+    public whenTest = (pattern: RegExp | string, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.test(pattern), callback, defaultValue);
     }
 
@@ -925,7 +928,7 @@ export class Stringable {
         return this;
     }
 
-    public toHtmlString = (): Element|Node|null => {
+    public toHtmlString = (): Element | Node | null => {
 
         const template = document.createElement('template');
 
