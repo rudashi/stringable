@@ -13,6 +13,23 @@ class Str {
     static createRandomStringsNormally() {
         Str.randomStringFactory = null;
     }
+    static createRandomStringsUsingSequence(sequence, whenMissing = null) {
+        let next = 0;
+        let callable = whenMissing !== null && whenMissing !== void 0 ? whenMissing : function (length) {
+            let factoryCache = Str.randomStringFactory;
+            Str.randomStringFactory = null;
+            let randomString = Str.random(length);
+            Str.randomStringFactory = factoryCache;
+            next++;
+            return randomString;
+        };
+        Str.createRandomStringsUsing(function (length) {
+            if (sequence.hasOwnProperty(next)) {
+                return sequence[next++];
+            }
+            return callable(length);
+        });
+    }
     static preg_quote(value, delimiter = '') {
         return value.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + delimiter + '-]', 'g'), '\\$&');
     }

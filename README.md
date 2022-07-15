@@ -20,6 +20,7 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [Str.preg_quote](docs/methods.md#strpreg_quote)
 - [Str.random](docs/methods.md#strrandom)
 - [Str.createRandomStringsUsing](docs/methods.md#strcreaterandomstringsusing)
+- [Str.createRandomStringsUsingSequence](docs/methods.md#strcreaterandomstringsusingsequence)
 - [Str.createRandomStringsNormally](docs/methods.md#strcreaterandomstringsnormally)
 - [Str.substr](docs/methods.md#strsubstr)
 - [Str.uuid](docs/methods.md#struuid)
@@ -28,7 +29,6 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [markdown](docs/methods.md#markdown)
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
-- [Str.createRandomStringsUsingSequence](docs/methods.md#strcreaterandomstringsusingsequence)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
 
 ## Changelog

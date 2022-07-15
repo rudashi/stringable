@@ -176,7 +176,10 @@ class Stringable {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (phrase = '', { radius = 100, omission = '...' } = { radius: 100, omission: '...' }) => {
+            value: (phrase = '', { radius = 100, omission = '...' } = {
+                radius: 100,
+                omission: '...'
+            }) => {
                 if (this._value === phrase) {
                     return this;
                 }
