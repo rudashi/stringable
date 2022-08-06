@@ -360,27 +360,27 @@ export class Stringable {
         return this;
     }
 
-    public mask = ($character: string, $index: number, $length: number | null = null): this => {
+    public mask = (character: string, index: number, length: number | null = null): this => {
 
-        if ($character === '') {
+        if (character === '') {
             return this;
         }
 
-        const $segment = Str.substr(this._value, $index, $length);
+        const segment = Str.substr(this._value, index, length);
 
-        if ($segment === '') {
+        if (segment === '') {
             return this;
         }
 
-        const $startIndex = $index < 0
-            ? $index < -this._value.length ? 0 : this._value.length + $index
-            : $index;
+        const startIndex = index < 0
+            ? index < -this._value.length ? 0 : this._value.length + index
+            : index;
 
-        const $start = this._value.substring(0, $startIndex);
-        const $mid = $character[0].repeat($segment.length);
-        const $end = this._value.substring($startIndex + $segment.length);
+        const start = this._value.substring(0, startIndex);
+        const mid = character[0].repeat(segment.length);
+        const end = this._value.substring(startIndex + segment.length);
 
-        this._value = $start + $mid + ($mid.length >= $end.length ? '' : $end);
+        this._value = start + mid + (mid.length >= end.length ? '' : end);
 
         return this;
     }
@@ -697,9 +697,7 @@ export class Stringable {
         while (true) {
             const before = this._value
 
-            this._value = before.replace(tags, function ($0, $1) {
-                return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : ''
-            })
+            this._value = before.replace(tags, (g1: string, g2: string) => allowedTags.indexOf('<' + g2.toLowerCase() + '>') > -1 ? g1 : '')
 
             if (before === this._value) {
                 break;
