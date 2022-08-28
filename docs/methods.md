@@ -83,6 +83,7 @@
 - [whenStartsWith](#whenstartswith)
 - [whenEndsWith](#whenendswith)
 - [whenExactly](#whenexactly)
+- [whenNotExactly ](#whennotexactly)
 - [whenIs](#whenis)
 - [whenIsAscii](#whenisascii)
 - [whenIsUuid](#whenisuuid)
@@ -859,6 +860,14 @@ The function will receive the fluent string instance:
 Stringable.of('laravel').whenExactly('laravel', (str) => str.title());
 
 // 'Laravel'
+```
+### whenNotExactly()
+The `whenNotExactly` method invokes the given closure if the string does not exactly match the given string. 
+The closure will receive the fluent string instance:
+```js
+Stringable.of('framework').whenNotExactly('laravel', (str) => str.title());
+
+// 'Framework'
 ```
 ### whenIs()
 The `whenIs` method invokes the given function if the string matches a given pattern. Asterisks may be used as wildcard values.

@@ -883,6 +883,10 @@ export class Stringable {
         return this.when(this.exactly(value), callback, defaultValue);
     }
 
+    public whenNotExactly = (value: string, callback: Closure, defaultValue: Closure = null): this => {
+        return this.when(! this.exactly(value), callback, defaultValue);
+    }
+
     public whenIs = (pattern: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.is(pattern), callback, defaultValue);
     }
