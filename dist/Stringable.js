@@ -386,21 +386,21 @@ class Stringable {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ($character, $index, $length = null) => {
-                if ($character === '') {
+            value: (character, index, length = null) => {
+                if (character === '') {
                     return this;
                 }
-                const $segment = Str_1.Str.substr(this._value, $index, $length);
-                if ($segment === '') {
+                const segment = Str_1.Str.substr(this._value, index, length);
+                if (segment === '') {
                     return this;
                 }
-                const $startIndex = $index < 0
-                    ? $index < -this._value.length ? 0 : this._value.length + $index
-                    : $index;
-                const $start = this._value.substring(0, $startIndex);
-                const $mid = $character[0].repeat($segment.length);
-                const $end = this._value.substring($startIndex + $segment.length);
-                this._value = $start + $mid + ($mid.length >= $end.length ? '' : $end);
+                const startIndex = index < 0
+                    ? index < -this._value.length ? 0 : this._value.length + index
+                    : index;
+                const start = this._value.substring(0, startIndex);
+                const mid = character[0].repeat(segment.length);
+                const end = this._value.substring(startIndex + segment.length);
+                this._value = start + mid + (mid.length >= end.length ? '' : end);
                 return this;
             }
         });
@@ -747,9 +747,7 @@ class Stringable {
                 this.replaceMatches(commentsAndPhpTags, '');
                 while (true) {
                     const before = this._value;
-                    this._value = before.replace(tags, function ($0, $1) {
-                        return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-                    });
+                    this._value = before.replace(tags, (g1, g2) => allowedTags.indexOf('<' + g2.toLowerCase() + '>') > -1 ? g1 : '');
                     if (before === this._value) {
                         break;
                     }
@@ -986,6 +984,14 @@ class Stringable {
             writable: true,
             value: (value, callback, defaultValue = null) => {
                 return this.when(this.exactly(value), callback, defaultValue);
+            }
+        });
+        Object.defineProperty(this, "whenNotExactly", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (value, callback, defaultValue = null) => {
+                return this.when(!this.exactly(value), callback, defaultValue);
             }
         });
         Object.defineProperty(this, "whenIs", {

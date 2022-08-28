@@ -38,7 +38,7 @@ export declare class Stringable {
     limit: (limit?: number, end?: string) => this;
     lower: () => this;
     ltrim: (characters?: string) => this;
-    mask: ($character: string, $index: number, $length?: number | null) => this;
+    mask: (character: string, index: number, length?: number | null) => this;
     match: (pattern: RegExp | string) => string;
     matchAll: (pattern: RegExp | string) => Array<string>;
     newLine: (count?: number) => this;
@@ -86,6 +86,7 @@ export declare class Stringable {
     whenEndsWith: (needles: string | Array<string>, callback: Closure, defaultValue?: Closure) => this;
     whenStartsWith: (needles: string | Array<string>, callback: Closure, defaultValue?: Closure) => this;
     whenExactly: (value: string, callback: Closure, defaultValue?: Closure) => this;
+    whenNotExactly: (value: string, callback: Closure, defaultValue?: Closure) => this;
     whenIs: (pattern: string | Array<string>, callback: Closure, defaultValue?: Closure) => this;
     whenIsAscii: (callback: Closure, defaultValue?: Closure) => this;
     whenIsUuid: (callback: Closure, defaultValue?: Closure) => this;
