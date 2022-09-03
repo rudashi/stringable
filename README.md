@@ -9,6 +9,26 @@ Javascript version's of Laravel's `Illuminate\Support\Str`
 
 Based on great [Laravel](https://laravel.com/docs/master/helpers#fluent-strings-method-list) string helper
 
+## Installation
+
+### NPM
+
+```bash
+npm install --save-dev stringable-laravel
+```
+
+### Yarn
+
+```bash
+yarn add stringable-laravel --save
+```
+
+### CDN
+
+```html
+<script src='https://unpkg.com/stringable-laravel@latest/dist/Stringable.js'></script>
+```
+
 ## Introduction
 Fluent strings provide a more fluent, object-oriented interface for working with string values, allowing you to 
 chain multiple string operations together using a more readable syntax compared to traditional string operations.
