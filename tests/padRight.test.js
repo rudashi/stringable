@@ -19,4 +19,7 @@ it('returns the string with padded right side of a string', () => {
     expect(Stringable.of('❤MultiByte☆').padRight(16).toString())
         .toBe('❤MultiByte☆     ');
 
+    expect(Stringable.of('❤MultiByte☆').padRight(16, '❤☆').toString())
+        .toBe('❤MultiByte☆❤☆❤☆❤');
+
 });
