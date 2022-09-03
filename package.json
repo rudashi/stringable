@@ -1,6 +1,6 @@
 {
     "name": "stringable-laravel",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Javascript Version's of Laravel's Illuminate\\Support\\Str",
     "main": "dist/Stringable.js",
     "files": [
@@ -10,9 +10,18 @@
     ],
     "keywords": [
         "string",
-        "laravel",
+        "strings",
+        "string-package",
+        "javascript strings",
+        "fluent strings",
         "str",
         "stringable",
+        "js",
+        "js stringable",
+        "laravel",
+        "laravel strings",
+        "laravel js",
+        "laraveljs",
         "helper",
         "util"
     ],
@@ -24,7 +33,9 @@
     "license": "ISC",
     "homepage": "https://github.com/rudashi/stringable#readme",
     "dependencies": {
-        "typescript": "^4.7.2"
+        "typescript": "^4.8.2",
+        "ts-loader": "^9.3.1",
+        "marked": "^4.1.0"
     },
     "devDependencies": {
         "jest": "^28.1.0",

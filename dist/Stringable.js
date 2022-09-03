@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Stringable = void 0;
 const Str_1 = require("./Str");
+const marked_1 = require("marked");
+const types_1 = require("./types");
 class Stringable {
     constructor(string) {
         Object.defineProperty(this, "_value", {
@@ -380,6 +382,18 @@ class Stringable {
                     ? this.replaceFirst(characters, '').toString()
                     : this._value.trimStart();
                 return this;
+            }
+        });
+        Object.defineProperty(this, "markdown", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (options = types_1.defaultConfiguration) => {
+                options = Object.assign(Object.assign({}, types_1.defaultConfiguration), options);
+                if (options.html_input === 'STRIP') {
+                    this.stripTags();
+                }
+                return marked_1.marked.parse(this._value, options).trimEnd();
             }
         });
         Object.defineProperty(this, "mask", {

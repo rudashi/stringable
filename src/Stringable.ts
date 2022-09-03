@@ -1,12 +1,16 @@
 import {Str} from './Str';
+import {marked} from 'marked';
 import {
     CamelDirectory,
-    Closure,
     ExcerptOptions,
     PipeCallback,
     SnakeDirectory,
-    StudlyDirectory
+    StudlyDirectory,
+    MarkdownConfiguration,
+    defaultConfiguration, Callable,
 } from './types';
+
+type Closure = Callable | string | { (callback: Stringable, value: string ): Stringable };
 
 export class Stringable {
 
@@ -358,6 +362,17 @@ export class Stringable {
             : this._value.trimStart();
 
         return this;
+    }
+
+    public markdown = (options: MarkdownConfiguration = defaultConfiguration): string => {
+
+        options = {...defaultConfiguration, ...options};
+
+        if (options.html_input === 'STRIP') {
+            this.stripTags();
+        }
+
+        return marked.parse(this._value, options).trimEnd();
     }
 
     public mask = (character: string, index: number, length: number | null = null): this => {
