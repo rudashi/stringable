@@ -1,4 +1,7 @@
-import { Closure, ExcerptOptions, PipeCallback } from './types';
+import { ExcerptOptions, PipeCallback, MarkdownConfiguration, Callable } from './types';
+declare type Closure = Callable | string | {
+    (callback: Stringable, value: string): Stringable;
+};
 export declare class Stringable {
     private _value;
     private static _camelCache;
@@ -38,6 +41,7 @@ export declare class Stringable {
     limit: (limit?: number, end?: string) => this;
     lower: () => this;
     ltrim: (characters?: string) => this;
+    markdown: (options?: MarkdownConfiguration) => string;
     mask: (character: string, index: number, length?: number | null) => this;
     match: (pattern: RegExp | string) => string;
     matchAll: (pattern: RegExp | string) => Array<string>;
@@ -100,3 +104,4 @@ export declare class Stringable {
     toString: () => string;
     value: () => string;
 }
+export {};

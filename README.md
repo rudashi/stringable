@@ -26,9 +26,9 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [Str.uuid](docs/methods.md#struuid)
 
 ## TO DO
-- [markdown](docs/methods.md#markdown)
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
+- [inlineMarkdown](docs/methods.md#inlinemarkdown)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
 
 ## Changelog
