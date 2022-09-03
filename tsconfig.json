@@ -2,13 +2,13 @@
     "compilerOptions": {
         "baseUrl": "./",
         "outDir": "./dist/",
-        "target": "es6",
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "Node",
         "strict": true,
 
         "useDefineForClassFields": true,
-        "lib": ["es7", "es2015", "DOM"],
+        "lib": ["es2020", "es2017", "es2015", "dom"],
 
         "sourceMap": true,
         "resolveJsonModule": true,
