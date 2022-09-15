@@ -396,6 +396,18 @@ class Stringable {
                 return marked_1.marked.parse(this._value, options).trimEnd();
             }
         });
+        Object.defineProperty(this, "inlineMarkdown", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (options = types_1.defaultConfiguration) => {
+                options = Object.assign(Object.assign({}, types_1.defaultConfiguration), options);
+                if (options.html_input === 'STRIP') {
+                    this.stripTags();
+                }
+                return marked_1.marked.parseInline(this._value, options);
+            }
+        });
         Object.defineProperty(this, "mask", {
             enumerable: true,
             configurable: true,

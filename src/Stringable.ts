@@ -375,6 +375,17 @@ export class Stringable {
         return marked.parse(this._value, options).trimEnd();
     }
 
+    public inlineMarkdown = (options: MarkdownConfiguration = defaultConfiguration): string => {
+
+        options = {...defaultConfiguration, ...options};
+
+        if (options.html_input === 'STRIP') {
+            this.stripTags();
+        }
+
+        return marked.parseInline(this._value, options);
+    }
+
     public mask = (character: string, index: number, length: number | null = null): this => {
 
         if (character === '') {

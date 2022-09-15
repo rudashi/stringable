@@ -422,7 +422,7 @@ Stringable.of('/Laravel/').ltrim('/');
 // 'Laravel/'
 ```
 ### markdown()
-The `markdown` method converts GitHub flavored Index into HTML:
+The `markdown` method converts GitHub flavored Markdown into HTML:
 ```js
 Stringable.of('# Laravel').markdown();
 
@@ -433,7 +433,13 @@ Stringable.of('# Taylor <b>Otwell</b>').markdown({'html_input': 'strip'});
 // <h1>Taylor Otwell</h1>
 ```
 ### inlineMarkdown()
-Not implemented.
+The `inlineMarkdown` method converts GitHub flavored Markdown into inline HTML. 
+However, unlike the markdown method, it does not wrap all generated HTML in a block-level element:
+```js
+Stringable.of('**Laravel**').inlineMarkdown();
+
+// <strong>Laravel</strong>
+```
 ### mask()
 The `mask` method masks a portion of a string with a repeated character, and may be used to obfuscate
 segments of strings such as email addresses and phone numbers:
