@@ -48,7 +48,6 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 ## TO DO
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
-- [inlineMarkdown](docs/methods.md#inlinemarkdown)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
 
 ## Changelog

@@ -42,6 +42,7 @@ export declare class Stringable {
     lower: () => this;
     ltrim: (characters?: string) => this;
     markdown: (options?: MarkdownConfiguration) => string;
+    inlineMarkdown: (options?: MarkdownConfiguration) => string;
     mask: (character: string, index: number, length?: number | null) => this;
     match: (pattern: RegExp | string) => string;
     matchAll: (pattern: RegExp | string) => Array<string>;
