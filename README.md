@@ -49,6 +49,8 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
+- [Str.ulid](docs/methods.md#ulid)
+- [Str.isUlid](docs/methods.md#isulid)
 
 ## Changelog
 

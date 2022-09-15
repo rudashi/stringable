@@ -1,3 +1,8 @@
+## [1.2.4](https://github.com/rudashi/stringable/compare/v1.2.3...v1.2.4) (2022-09-15)
+
+### Refactor
+* Add `inlineMarkdown` method
+
 ## [1.2.3](https://github.com/rudashi/stringable/compare/v1.2.2...v1.2.3) (2022-09-03)
 
 ### Refactor

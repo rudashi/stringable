@@ -970,7 +970,17 @@ Str.random(7);
 // 'xyz:7'
 ```
 ### Str.createRandomStringsUsingSequence()
-Not implemented
+The `Str.createRandomStringsUsingSequence` method allows to set a sequence that will be used to generate random strings.
+```js
+Str.createRandomStringsUsingSequence({0: 'x', 2: 'y', 3: 'z'});
+
+Str.random();
+// 'x'
+Str.random();
+// random String
+Str.random();
+// 'y'
+```
 ### Str.createRandomStringsNormally()
 The `Str.createRandomStringsNormally` method resets to default random string generator.
 ```js
@@ -994,3 +1004,7 @@ Str.uuid();
 
 // Stringable object
 ```
+### Str.ulid()
+Not implemented
+### Str.isUlid()
+Not implemented
