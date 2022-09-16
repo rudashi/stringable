@@ -1,5 +1,5 @@
-export * from '../../src/types/interfaces';
-export * from '../../src/types/markdown';
+export * from './interfaces';
+export * from './markdown';
 
 export type PipeCallback =
     Function

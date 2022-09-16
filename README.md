@@ -26,7 +26,23 @@ yarn add stringable-laravel --save
 ### CDN
 
 ```html
-<script src='https://unpkg.com/stringable-laravel@latest/dist/Stringable.js'></script>
+<script src='https://unpkg.com/stringable-laravel@latest/dist/index.js'></script>
+```
+
+## Usage
+
+```js
+const {Str, Stringable} = require('stringable-laravel');
+
+const message = 'hello world';
+
+console.log(Stringable.of(message).upper().toString());
+
+// HELLO WORLD
+
+console.log(Str.uuid().toString());
+
+// 3b097562-88aa-4f50-b28a-d6bce77c8329
 ```
 
 ## Introduction

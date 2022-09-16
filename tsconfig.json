@@ -2,8 +2,8 @@
     "compilerOptions": {
         "baseUrl": "./",
         "outDir": "./dist/",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "ES2016",
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "strict": true,
 
