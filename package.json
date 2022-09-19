@@ -1,12 +1,13 @@
 {
     "name": "stringable-laravel",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "description": "Javascript Version's of Laravel's Illuminate\\Support\\Str",
     "main": "dist/index.js",
     "types": "types/index.d.ts",
     "files": [
         "src",
         "dist/*.js",
+        "dist/types/*.js",
         "types/*.d.ts"
     ],
     "keywords": [
@@ -43,7 +44,10 @@
         "@types/marked": "^4.0.6",
         "ts-loader": "^9.3.1",
         "ts-jest": "^28.0.3",
-        "@types/jest": "^27.5.1"
+        "@types/jest": "^27.0.1"
+    },
+    "browser": {
+        "crypto": false
     },
     "directories": {
         "test": "tests"
