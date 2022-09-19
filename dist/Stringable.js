@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Stringable = void 0;
 const Str_1 = require("./Str");
 const marked_1 = require("marked");
-const types_1 = require("./types");
+const markdown_1 = require("./types/markdown");
 class Stringable {
     constructor(string) {
         Object.defineProperty(this, "_value", {
@@ -388,8 +388,8 @@ class Stringable {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (options = types_1.defaultConfiguration) => {
-                options = Object.assign(Object.assign({}, types_1.defaultConfiguration), options);
+            value: (options = markdown_1.defaultConfiguration) => {
+                options = Object.assign(Object.assign({}, markdown_1.defaultConfiguration), options);
                 if (options.html_input === 'STRIP') {
                     this.stripTags();
                 }
@@ -400,8 +400,8 @@ class Stringable {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (options = types_1.defaultConfiguration) => {
-                options = Object.assign(Object.assign({}, types_1.defaultConfiguration), options);
+            value: (options = markdown_1.defaultConfiguration) => {
+                options = Object.assign(Object.assign({}, markdown_1.defaultConfiguration), options);
                 if (options.html_input === 'STRIP') {
                     this.stripTags();
                 }
@@ -1158,4 +1158,5 @@ Object.defineProperty(Stringable, "_studlyCache", {
     writable: true,
     value: {}
 });
+exports.default = Stringable;
 //# sourceMappingURL=Stringable.js.map

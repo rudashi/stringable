@@ -1,6 +1,11 @@
 import {Stringable} from './Stringable';
-import {AssociativeArray, Callable} from './types';
 import crypto from 'crypto';
+
+type AssociativeArray = {
+    [key: string]: string | boolean | number;
+};
+
+type Callable = Function | null;
 
 export class Str {
 
@@ -92,3 +97,5 @@ export class Str {
     }
 
 }
+
+export default Str;

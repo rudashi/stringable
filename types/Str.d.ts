@@ -1,5 +1,8 @@
 import { Stringable } from './Stringable';
-import { AssociativeArray, Callable } from './types';
+declare type AssociativeArray = {
+    [key: string]: string | boolean | number;
+};
+declare type Callable = Function | null;
 export declare class Str {
     protected static randomStringFactory: Callable;
     static createRandomStringsUsing(callable: Callable): void;
@@ -11,3 +14,4 @@ export declare class Str {
     static tap(value: Stringable, callback: Function): Stringable;
     static uuid(): Stringable;
 }
+export default Str;

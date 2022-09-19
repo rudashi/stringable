@@ -74,4 +74,5 @@ class Str {
     }
 }
 exports.Str = Str;
+exports.default = Str;
 //# sourceMappingURL=Str.js.map

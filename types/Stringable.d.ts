@@ -1,7 +1,13 @@
-import { ExcerptOptions, PipeCallback, MarkdownConfiguration, Callable } from './types';
+import { MarkdownConfiguration } from './types/markdown';
 declare type Closure = Callable | string | {
     (callback: Stringable, value: string): Stringable;
 };
+declare type ExcerptOptions = {
+    radius?: number;
+    omission?: string;
+};
+declare type PipeCallback = Function | 'toLocaleUpperCase' | 'toLocaleLowerCase' | 'toUpperCase' | 'toLowerCase' | 'trim' | 'trimStart' | 'trimEnd' | 'toString';
+declare type Callable = Function | null;
 export declare class Stringable {
     private _value;
     private static _camelCache;
@@ -105,4 +111,4 @@ export declare class Stringable {
     toString: () => string;
     value: () => string;
 }
-export {};
+export default Stringable;

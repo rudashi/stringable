@@ -31,6 +31,18 @@ yarn add stringable-laravel --save
 
 ## Usage
 
+Import package:
+
+```js
+const {Str, Stringable} = require('stringable-laravel');
+
+//or
+
+import {Str, Stringable} from 'stringable-laravel';
+```
+
+Typical usage:
+
 ```js
 const {Str, Stringable} = require('stringable-laravel');
 
@@ -65,8 +77,8 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
-- [Str.ulid](docs/methods.md#ulid)
-- [Str.isUlid](docs/methods.md#isulid)
+- [Str.ulid](docs/methods.md#strulid)
+- [Str.isUlid](docs/methods.md#strisulid)
 
 ## Changelog
 

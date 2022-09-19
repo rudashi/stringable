@@ -1,3 +1,8 @@
+## [1.2.6](https://github.com/rudashi/stringable/compare/v1.2.5...v1.2.6) (2022-09-19)
+
+### Refactor
+* Modify dist package
+
 ## [1.2.5](https://github.com/rudashi/stringable/compare/v1.2.4...v1.2.5) (2022-09-16)
 
 ### Documentation

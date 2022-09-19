@@ -1,16 +1,39 @@
 import {Str} from './Str';
 import {marked} from 'marked';
-import {
-    CamelDirectory,
-    ExcerptOptions,
-    PipeCallback,
-    SnakeDirectory,
-    StudlyDirectory,
-    MarkdownConfiguration,
-    defaultConfiguration, Callable,
-} from './types';
+import {MarkdownConfiguration, defaultConfiguration} from './types/markdown';
 
 type Closure = Callable | string | { (callback: Stringable, value: string ): Stringable };
+
+type SnakeDirectory = {
+    [key: string]: Record<string, string>,
+};
+
+type StudlyDirectory = {
+    [key: string]: string,
+};
+
+type CamelDirectory = {
+    [key: string]: string,
+};
+
+type ExcerptOptions = {
+    radius?: number,
+    omission?: string,
+};
+
+type PipeCallback =
+    Function
+    | 'toLocaleUpperCase'
+    | 'toLocaleLowerCase'
+    | 'toUpperCase'
+    | 'toLowerCase'
+    | 'trim'
+    | 'trimStart'
+    | 'trimEnd'
+    | 'toString'
+;
+
+type Callable = Function | null;
 
 export class Stringable {
 
@@ -986,3 +1009,5 @@ export class Stringable {
     }
 
 }
+
+export default Stringable;
