@@ -340,6 +340,18 @@ export class Stringable {
         return true;
     }
 
+    public isUlid = (): boolean => {
+        if (this._value.length !== 26) {
+            return false;
+        }
+
+        if (!new RegExp(/^[a-zA-Z0-9]*$/i).test(this._value)) {
+            return false;
+        }
+
+        return this._value[0] <= '7';
+    }
+
     public isUuid = (): boolean => {
         return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this._value);
     }
