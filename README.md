@@ -71,14 +71,13 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 - [Str.createRandomStringsUsingSequence](docs/methods.md#strcreaterandomstringsusingsequence)
 - [Str.createRandomStringsNormally](docs/methods.md#strcreaterandomstringsnormally)
 - [Str.substr](docs/methods.md#strsubstr)
+- [Str.ulid](docs/methods.md#strulid)
 - [Str.uuid](docs/methods.md#struuid)
 
 ## TO DO
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
 - [Str.orderedUuid](docs/methods.md#strordereduuid)
-- [Str.ulid](docs/methods.md#strulid)
-- [Str.isUlid](docs/methods.md#strisulid)
 
 ## Changelog
 

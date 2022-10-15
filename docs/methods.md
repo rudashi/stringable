@@ -27,6 +27,7 @@
 - [isEmpty](#isempty)
 - [isNotEmpty](#isnotempty)
 - [isJson](#isjson)
+- [isUlid](#isulid)
 - [isUuid](#isuuid)
 - [kebab](#kebab)
 - [lcfirst](#lcfirst)
@@ -354,6 +355,17 @@ Stringable.of('{"first": "John", "last": "Doe"}').isJson();
 // true
 
 Stringable.of('{first: "John", last: "Doe"}').isJson();
+
+// false
+```
+### isUlid()
+The `isUlid` method determines if a given string is a valid ULID:
+```js
+Stringable.of('01ARZ3NDEKTSV4RRFFQ69G5FAV').isUlid();
+
+// true
+
+Stringable.of('Taylor').isUlid();
 
 // false
 ```
@@ -998,13 +1010,16 @@ Str.substr('The Laravel Framework', 4, 7);
 // 'Laravel'
 ```
 ### Str.uuid()
-The Str::uuid method generates a UUID (version 4):
+The `Str.uuid` method generates a UUID (version 4):
 ```js
 Str.uuid();
 
 // Stringable object
 ```
 ### Str.ulid()
-Not implemented
-### Str.isUlid()
-Not implemented
+The `Str.ulid` method generates a ULID:
+```js
+Str.ulid();
+
+// Stringable object
+```

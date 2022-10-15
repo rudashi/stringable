@@ -1,4 +1,9 @@
-## [1.2.6](https://github.com/rudashi/stringable/compare/v1.2.5...v1.2.6) (2022-09-19)
+## [1.2.8](https://github.com/rudashi/stringable/compare/v1.2.7...v1.2.8) (2022-10-15)
+
+### Feature
+* Add `ulid` and `isUlid` methods
+
+## [1.2.7](https://github.com/rudashi/stringable/compare/v1.2.5...v1.2.7) (2022-09-19)
 
 ### Refactor
 * Modify dist package
