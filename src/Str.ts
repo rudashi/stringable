@@ -1,5 +1,6 @@
 import {Stringable} from './Stringable';
 import crypto from 'crypto';
+import { ulid } from 'ulid'
 
 type AssociativeArray = {
     [key: string]: string | boolean | number;
@@ -90,6 +91,10 @@ export class Str {
         callback(Stringable.of(value));
 
         return value;
+    }
+
+    static ulid(): Stringable {
+        return Stringable.of(ulid());
     }
 
     static uuid(): Stringable {
