@@ -319,6 +319,20 @@ class Stringable {
                 return true;
             }
         });
+        Object.defineProperty(this, "isUlid", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                if (this._value.length !== 26) {
+                    return false;
+                }
+                if (!new RegExp(/^[a-zA-Z0-9]*$/i).test(this._value)) {
+                    return false;
+                }
+                return this._value[0] <= '7';
+            }
+        });
         Object.defineProperty(this, "isUuid", {
             enumerable: true,
             configurable: true,
@@ -1118,6 +1132,61 @@ class Stringable {
             writable: true,
             value: () => {
                 return this._value;
+            }
+        });
+        Object.defineProperty(this, "toInteger", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                if (this._value === 'nan') {
+                    return 0;
+                }
+                return parseInt(this._value);
+            }
+        });
+        Object.defineProperty(this, "toFloat", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                if (this._value === 'nan') {
+                    return 0;
+                }
+                return parseFloat(this._value);
+            }
+        });
+        Object.defineProperty(this, "toBoolean", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                switch (this.lower().trim().toString()) {
+                    case 'true':
+                    case 'yes':
+                    case 'on':
+                    case '1':
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        Object.defineProperty(this, "toDate", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                if (this.test(/^\d+\.?\d+$/)) {
+                    return new Date(this.toInteger() * 1000);
+                }
+                if (this.test(/^\d{2}:\d{2}:\d{2}$/)) {
+                    const date = new Date();
+                    const matches = this.split(':');
+                    date.setHours(parseInt(matches[0]), parseInt(matches[1]), parseInt(matches[2]));
+                    return date;
+                }
+                return new Date(this._value);
             }
         });
         Object.defineProperty(this, "value", {

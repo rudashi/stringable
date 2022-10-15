@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Str = void 0;
 const Stringable_1 = require("./Stringable");
 const crypto_1 = __importDefault(require("crypto"));
+const ulid_1 = require("ulid");
 class Str {
     static createRandomStringsUsing(callable) {
         Str.randomStringFactory = callable;
@@ -68,6 +69,9 @@ class Str {
     static tap(value, callback) {
         callback(Stringable_1.Stringable.of(value));
         return value;
+    }
+    static ulid() {
+        return Stringable_1.Stringable.of((0, ulid_1.ulid)());
     }
     static uuid() {
         return Stringable_1.Stringable.of(crypto_1.default.randomUUID());

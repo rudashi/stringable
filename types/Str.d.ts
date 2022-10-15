@@ -12,6 +12,7 @@ export declare class Str {
     static random(length?: number): string;
     static substr(value: string, start: number, length?: number | null): string;
     static tap(value: Stringable, callback: Function): Stringable;
+    static ulid(): Stringable;
     static uuid(): Stringable;
 }
 export default Str;

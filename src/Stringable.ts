@@ -1016,6 +1016,46 @@ export class Stringable {
         return this._value;
     }
 
+    public toInteger = (): number => {
+        if (this._value === 'nan') {
+            return 0;
+        }
+        return parseInt(this._value);
+    }
+
+    public toFloat = (): number => {
+        if (this._value === 'nan') {
+            return 0;
+        }
+        return parseFloat(this._value);
+    }
+
+    public toBoolean = (): boolean => {
+        switch(this.lower().trim().toString()){
+            case 'true':
+            case 'yes':
+            case 'on':
+            case '1':
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public toDate = (): Date => {
+        if (this.test(/^\d+\.?\d+$/)) {
+            return new Date(this.toInteger() * 1000);
+        }
+        if (this.test(/^\d{2}:\d{2}:\d{2}$/)) {
+            const date = new Date();
+            const matches = this.split(':');
+            date.setHours(parseInt(matches[0]), parseInt(matches[1]), parseInt(matches[2]));
+
+            return date;
+        }
+        return new Date(this._value);
+    }
+
     public value = (): string => {
         return this.toString();
     }
