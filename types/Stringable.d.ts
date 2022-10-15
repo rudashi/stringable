@@ -40,6 +40,7 @@ export declare class Stringable {
     isEmpty: () => boolean;
     isNotEmpty: () => boolean;
     isJson: () => boolean;
+    isUlid: () => boolean;
     isUuid: () => boolean;
     kebab: () => this;
     lcfirst: () => this;
@@ -109,6 +110,10 @@ export declare class Stringable {
     dump: () => this;
     dd: () => never;
     toString: () => string;
+    toInteger: () => number;
+    toFloat: () => number;
+    toBoolean: () => boolean;
+    toDate: () => Date;
     value: () => string;
 }
 export default Stringable;

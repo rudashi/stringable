@@ -784,6 +784,34 @@ Stringable.of('foo').toString();
 
 // 'foo'
 ```
+### toInteger()
+The `toInteger` method returns string value as an integer.
+```js
+Stringable.of('123').toInteger();
+
+// 123
+```
+### toFloat()
+The `toFloat` method returns string value as a float.
+```js
+Stringable.of('1').toFloat();
+
+// 1.0'
+```
+### toBoolean()
+The `toBoolean` method returns string value as a boolean.
+```js
+Stringable.of('yes').toBoolean();
+
+// true
+```
+### toDate()
+The `toDate` method returns string value as a Date.
+```js
+Stringable.of('2020-01-01 16:30:25').toDate();
+
+// Date(2020-01-01 16:30:25)
+```
 ### trim()
 The `trim` method trims the given string:
 ```js
