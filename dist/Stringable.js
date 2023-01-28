@@ -1050,6 +1050,14 @@ class Stringable {
                 return this.when(this.isAscii(), callback, defaultValue);
             }
         });
+        Object.defineProperty(this, "whenIsUlid", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (callback, defaultValue = null) => {
+                return this.when(this.isUlid(), callback, defaultValue);
+            }
+        });
         Object.defineProperty(this, "whenIsUuid", {
             enumerable: true,
             configurable: true,

@@ -101,6 +101,7 @@ export declare class Stringable {
     whenNotExactly: (value: string, callback: Closure, defaultValue?: Closure) => this;
     whenIs: (pattern: string | Array<string>, callback: Closure, defaultValue?: Closure) => this;
     whenIsAscii: (callback: Closure, defaultValue?: Closure) => this;
+    whenIsUlid: (callback: Closure, defaultValue?: Closure) => this;
     whenIsUuid: (callback: Closure, defaultValue?: Closure) => this;
     whenTest: (pattern: RegExp | string, callback: Closure, defaultValue?: Closure) => this;
     wordCount: () => number;

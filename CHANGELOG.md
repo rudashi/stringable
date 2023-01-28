@@ -1,3 +1,8 @@
+## [1.3.0](https://github.com/rudashi/stringable/compare/v1.2.9...v1.3.0) (2023-01-28)
+
+### Feature
+* Add `whenIsUlid` method
+
 ## [1.2.9](https://github.com/rudashi/stringable/compare/v1.2.8...v1.2.9) (2022-10-15)
 
 ### Feature
