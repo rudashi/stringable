@@ -2,7 +2,7 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/rudashi/stringable)
 ![GitHub repo size](https://img.shields.io/github/repo-size/rudashi/stringable)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rudashi/stringable/Node.js%20CI)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rudashi/stringable/node.js.yml)
 ![Twitter Follow](https://img.shields.io/twitter/follow/BorysZmuda?style=social)
 
 Javascript version's of Laravel's `Illuminate\Support\Str`
@@ -65,7 +65,7 @@ chain multiple string operations together using a more readable syntax compared 
 List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 
 ## Strings methods
-- [Str.preg_quote](docs/methods.md#strpreg_quote)
+- [Str.preg_quote](docs/methods.md#strpregquote)
 - [Str.random](docs/methods.md#strrandom)
 - [Str.createRandomStringsUsing](docs/methods.md#strcreaterandomstringsusing)
 - [Str.createRandomStringsUsingSequence](docs/methods.md#strcreaterandomstringsusingsequence)
