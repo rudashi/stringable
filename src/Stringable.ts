@@ -956,6 +956,10 @@ export class Stringable {
         return this.when(this.isAscii(), callback, defaultValue);
     }
 
+    public whenIsUlid = (callback: Closure, defaultValue: Closure = null): this => {
+        return this.when(this.isUlid(), callback, defaultValue);
+    }
+
     public whenIsUuid = (callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.isUuid(), callback, defaultValue);
     }

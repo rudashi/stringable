@@ -87,6 +87,7 @@
 - [whenNotExactly ](#whennotexactly)
 - [whenIs](#whenis)
 - [whenIsAscii](#whenisascii)
+- [whenIsUlid](#whenisulid--)
 - [whenIsUuid](#whenisuuid)
 - [whenTest](#whentest)
 - [wordCount](#wordcount)
@@ -941,6 +942,14 @@ The function will receive the fluent string instance:
 Stringable.of('A').whenIsAscii((str) => str.prepend('Ascii:'));
 
 // 'Ascii: A'
+```
+### whenIsUlid()
+The `whenIsUlid` method invokes the given function if the string is a valid ULID.
+The function will receive the fluent string instance:
+```js
+Stringable.of('01gd6r360bp37zj17nxb55yv40').whenIsUlid((str) => str.substr(0, 8));
+
+// '01gd6r36'
 ```
 ### whenIsUuid()
 The `whenIsUuid` method invokes the given function if the string is a valid UUID.
