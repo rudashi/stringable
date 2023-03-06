@@ -669,15 +669,22 @@ export class Stringable {
         return match;
     }
 
-    public slug = (separator: string = '-', language: string | null = 'en'): this => {
+    public slug = (separator: string = '-', language: string | null = 'en', dictionary: Record<string, string> = {'@': 'at'}): this => {
 
         if (language) {
             this.ascii();
         }
 
-        this.replace(['-', '_'], separator)
-            .replace('@', separator + 'at' + separator)
-            .snake(separator).trim();
+        this.replace(['-', '_'], separator);
+
+        Object.keys(dictionary).map((key: string) => {
+            dictionary[key] = separator + dictionary[key] + separator;
+        });
+
+        this.replace(Object.keys(dictionary), Object.values(dictionary))
+            .lower()
+            .replaceMatches(/\s/, separator)
+            .replaceMatches('('+separator+')(?=\\1)', '');
 
         return this;
     }
