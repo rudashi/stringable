@@ -697,13 +697,18 @@ class Stringable {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (separator = '-', language = 'en') => {
+            value: (separator = '-', language = 'en', dictionary = { '@': 'at' }) => {
                 if (language) {
                     this.ascii();
                 }
-                this.replace(['-', '_'], separator)
-                    .replace('@', separator + 'at' + separator)
-                    .snake(separator).trim();
+                this.replace(['-', '_'], separator);
+                Object.keys(dictionary).map((key) => {
+                    dictionary[key] = separator + dictionary[key] + separator;
+                });
+                this.replace(Object.keys(dictionary), Object.values(dictionary))
+                    .lower()
+                    .replaceMatches(/\s/, separator)
+                    .replaceMatches('(' + separator + ')(?=\\1)', '');
                 return this;
             }
         });

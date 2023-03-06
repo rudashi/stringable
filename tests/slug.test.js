@@ -34,4 +34,19 @@ it('returns the string as a URL friendly', () => {
     expect(Stringable.of('').slug().toString())
         .toBe('');
 
+    expect(Stringable.of('500$ bill').slug('-', 'en', {'$': 'dollar'}).toString())
+        .toBe('500-dollar-bill');
+
+    expect(Stringable.of('500--$----bill').slug('-', 'en', {'$': 'dollar'}).toString())
+        .toBe('500-dollar-bill');
+
+    expect(Stringable.of('500-$-bill').slug('-', 'en', {'$': 'dollar'}).toString())
+        .toBe('500-dollar-bill');
+
+    expect(Stringable.of('500$--bill').slug('-', 'en', {'$': 'dollar'}).toString())
+        .toBe('500-dollar-bill');
+
+    expect(Stringable.of('500-$--bill').slug('-', 'en', {'$': 'dollar'}).toString())
+        .toBe('500-dollar-bill');
+
 });
