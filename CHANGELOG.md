@@ -1,3 +1,8 @@
+## [1.3.1](https://github.com/rudashi/stringable/compare/v1.3.0...v1.3.1) (2023-03-06)
+
+### Feature
+* Add dictionary to `slug` method
+
 ## [1.3.0](https://github.com/rudashi/stringable/compare/v1.2.9...v1.3.0) (2023-01-28)
 
 ### Feature
