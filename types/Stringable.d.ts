@@ -70,7 +70,7 @@ export declare class Stringable {
     reverse: () => this;
     rtrim: (characters?: string) => this;
     scan: (format: string) => Array<string | null>;
-    slug: (separator?: string, language?: string | null) => this;
+    slug: (separator?: string, language?: string | null, dictionary?: Record<string, string>) => this;
     snake: (delimiter?: string) => this;
     split: (pattern: RegExp | number | string) => Array<string>;
     squish: () => this;
