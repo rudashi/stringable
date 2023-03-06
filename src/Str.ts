@@ -1,6 +1,6 @@
 import {Stringable} from './Stringable';
 import crypto from 'crypto';
-import { ulid } from 'ulid'
+import {ulid} from 'ulid'
 
 type AssociativeArray = {
     [key: string]: string | boolean | number;
@@ -11,6 +11,10 @@ type Callable = Function | null;
 export class Str {
 
     protected static randomStringFactory: Callable;
+
+    public static of(string: string): Stringable {
+        return Stringable.of(string);
+    }
 
     static createRandomStringsUsing(callable: Callable): void {
         Str.randomStringFactory = callable;
