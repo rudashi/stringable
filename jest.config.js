@@ -1,7 +1,5 @@
-const config = {
+module.exports = {
     verbose: true,
     preset: "ts-jest",
     testEnvironment: "node",
 };
-
-module.exports = config;
