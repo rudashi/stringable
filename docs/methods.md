@@ -9,6 +9,7 @@
 - [beforeLast](#beforelast)
 - [between](#between)
 - [betweenFirst](#betweenfirst)
+- [charAt](#charat)
 - [camel](#camel)
 - [contains](#contains)
 - [containsAll](#containsall)
@@ -29,6 +30,7 @@
 - [isJson](#isjson)
 - [isUlid](#isulid)
 - [isUuid](#isuuid)
+- [isMatch](#ismatch)
 - [kebab](#kebab)
 - [lcfirst](#lcfirst)
 - [length](#length)
@@ -167,6 +169,8 @@ Stringable.of('[a] bc [d]').betweenFirst('[', ']');
 
 // 'a'
 ```
+### charAt
+Not implemented
 ### camel
 The `camel` method converts the given string to `camelCase`:
 ```js
@@ -381,6 +385,8 @@ Stringable.of('Taylor').isUuid();
 
 // false
 ```
+### isMatch
+Not Implemented
 ### kebab
 The `kebab` method converts the given string to `kebab-case`:
 ```js
@@ -994,69 +1000,4 @@ The `value` method returns the underlying string value.
 Stringable.of('foo').value();
 
 // 'foo'
-```
-## Strings
-### Str.orderedUuid
-Not implemented
-### Str.preg_quote
-The `Str.preg_quote` method quote regular expression characters:
-```js
-Str.preg_quote('*RRRING* Hello?');
-
-// '\*RRRING\* Hello\?'
-```
-### Str.random
-The `Str.random` method generates a random string of the specified length:
-```js
-Str.random(40);
-```
-### Str.createRandomStringsUsing
-The `Str.createRandomStringsUsing` method allows to intercept and control the random string generation.
-```js
-Str.createRandomStringsUsing((length) => `xyz|${length}`);
-Str.random(7);
-
-// 'xyz:7'
-```
-### Str.createRandomStringsUsingSequence
-The `Str.createRandomStringsUsingSequence` method allows to set a sequence that will be used to generate random strings.
-```js
-Str.createRandomStringsUsingSequence({0: 'x', 2: 'y', 3: 'z'});
-
-Str.random();
-// 'x'
-Str.random();
-// random String
-Str.random();
-// 'y'
-```
-### Str.createRandomStringsNormally
-The `Str.createRandomStringsNormally` method resets to default random string generator.
-```js
-Str.createRandomStringsUsing((length) => `xyz|${length}`);
-Str.createRandomStringsNormally();
-Str.random(7);
-
-// random 7 characters
-```
-### Str.substr
-The `Str.substr` method returns the portion of string specified by the start and length parameters:
-```js
-Str.substr('The Laravel Framework', 4, 7);
-
-// 'Laravel'
-```
-### Str.uuid
-The `Str.uuid` method generates a UUID (version 4):
-```js
-Str.uuid();
-
-// Stringable object
-```
-### Str.ulid
-The `Str.ulid` method generates a ULID:
-```js
-Str.ulid();
-
-// Stringable object
 ```

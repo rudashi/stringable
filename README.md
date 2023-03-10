@@ -65,19 +65,19 @@ chain multiple string operations together using a more readable syntax compared 
 List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 
 ## Strings methods
-- [Str.preg_quote](docs/methods.md#strpregquote)
-- [Str.random](docs/methods.md#strrandom)
-- [Str.createRandomStringsUsing](docs/methods.md#strcreaterandomstringsusing)
-- [Str.createRandomStringsUsingSequence](docs/methods.md#strcreaterandomstringsusingsequence)
-- [Str.createRandomStringsNormally](docs/methods.md#strcreaterandomstringsnormally)
-- [Str.substr](docs/methods.md#strsubstr)
-- [Str.ulid](docs/methods.md#strulid)
-- [Str.uuid](docs/methods.md#struuid)
+List of all static methods you can find [here](docs/statics.md#strings).
 
 ## TO DO
+- [charAt](docs/methods.md#charat)
+- [isMatch](docs/methods.md#ismatch)
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
-- [Str.orderedUuid](docs/methods.md#strordereduuid)
+
+and for `Str`
+- [charAt](docs/statics.md#charat)
+- [isMatch](docs/statics.md#ismatch)
+- [password](docs/statics.md#password)
+- [orderedUuid](docs/statics.md#ordereduuid)
 
 ## Changelog
 
