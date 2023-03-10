@@ -18,5 +18,6 @@ exports.Stringable = void 0;
 const Stringable_1 = require("./Stringable");
 Object.defineProperty(exports, "Stringable", { enumerable: true, get: function () { return Stringable_1.Stringable; } });
 __exportStar(require("./Str"), exports);
+__exportStar(require("./methods"), exports);
 exports.default = Stringable_1.Stringable;
 //# sourceMappingURL=index.js.map

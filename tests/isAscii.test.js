@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {isAscii} = require('../src/methods');
 
 it('determines if a string is a 7 bit ASCII', () => {
-
     expect(Stringable.of('Taylor').isAscii())
         .toBe(true);
 
@@ -25,4 +26,9 @@ it('determines if a string is a 7 bit ASCII', () => {
     expect(Stringable.of('').isAscii())
         .toBe(true);
 
+    expect(Str.isAscii('Taylor'))
+        .toBe(true);
+
+    expect(isAscii('Taylor'))
+        .toBe(true);
 });

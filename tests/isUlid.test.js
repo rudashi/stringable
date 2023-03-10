@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {isUlid} = require('../src/methods');
 
 test.each([
     ['5ace9ab9-e9cf-4ec6-a19d-5881212a452c', false],
@@ -21,7 +23,12 @@ test.each([
     [' 01BX5ZZKBKZZZZZZZZZZZZZZZZ', false],
     ['01BX5ZZKBKZZZZZZZZZZZZZZZą', false],
 ])('determines if string %p is a valid ULID', (string, expected) => {
-
     expect(Stringable.of(string).isUlid())
+        .toBe(expected);
+
+    expect(Str.isUlid(string))
+        .toBe(expected);
+
+    expect(isUlid(string))
         .toBe(expected);
 });

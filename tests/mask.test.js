@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {mask} = require('../src/methods');
 
 it('returns a masked portion of a string with a repeated character', () => {
-
     expect(Stringable.of('taylor@example.com').mask('*', 3).toString())
         .toBe('tay***************');
     expect(Stringable.of('taylor@example.com').mask('*', -15, 3).toString())
@@ -59,4 +60,10 @@ it('returns a masked portion of a string with a repeated character', () => {
         .toBe('***************');
     expect(Stringable.of('maria@email.com').mask('*', 0).toString())
         .toBe('***************');
+
+    expect(Str.mask('taylor@example.com', '*', 3).toString())
+        .toBe('tay***************');
+
+    expect(mask('taylor@example.com', '*', 3).toString())
+        .toBe('tay***************');
 });

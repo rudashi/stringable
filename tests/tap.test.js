@@ -3,8 +3,7 @@
 const {Stringable} = require('../src/Stringable');
 
 it('allowing you to examine and interact with the string while not affecting the string itself', () => {
-
-    const logSpy = jest.spyOn(console, 'log');
+    const logSpy = jest.spyOn(console, 'log', jest.GetAccessor);
 
     expect(
         Stringable.of('Laravel')
@@ -15,11 +14,9 @@ it('allowing you to examine and interact with the string while not affecting the
     ).toBe('LARAVEL FRAMEWORK');
 
     expect(logSpy).toHaveBeenCalledWith('String after append: Laravel Framework');
-
 });
 
 it('returns always original string', function () {
-
     let stringable = Stringable.of('foobarbaz');
 
     let fromTheTap = '';
@@ -30,5 +27,4 @@ it('returns always original string', function () {
 
     expect(fromTheTap.toString()).toBe('foo');
     expect(stringable.toString()).toBe('foobarbaz');
-
 });

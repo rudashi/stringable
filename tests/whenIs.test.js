@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string matches a given pattern', () => {
-
     expect(Stringable.of('foo/bar')
         .whenIs('foo/*', stringable => stringable.append('/baz'))
         .toString()
@@ -36,5 +35,4 @@ it('returns a passed closure if the string matches a given pattern', () => {
         .whenIs('foo/*', stringable => stringable.prepend('Winner: '))
         .toString()
     ).toBe('Winner: foo/bar/baz');
-
 });

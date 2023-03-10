@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {substrCount} = require('../src/methods');
 
 it('returns the number of occurrences of a given value in the given string', () => {
-
     expect(Stringable.of('If you like ice cream, you will like snow cones.').substrCount('like'))
         .toBe(2);
 
@@ -34,4 +35,9 @@ it('returns the number of occurrences of a given value in the given string', () 
     expect(Stringable.of('laravelPHPFramework').substrCount('a', -10, -3))
         .toBe(1);
 
+    expect(Str.substrCount('If you like ice cream, you will like snow cones.', 'like'))
+        .toBe(2);
+
+    expect(substrCount('If you like ice cream, you will like snow cones.', 'like'))
+        .toBe(2);
 });

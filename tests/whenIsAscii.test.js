@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string is a 7 bit ASCII', () => {
-
     expect(Stringable.of('A')
         .whenIsAscii(
             stringable => stringable.prepend('Ascii: '),
@@ -24,5 +23,4 @@ it('returns a passed closure if the string is a 7 bit ASCII', () => {
         )
         .toString()
     ).toBe('Not Ascii: ù');
-
 });

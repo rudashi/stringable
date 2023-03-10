@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {isUuid} = require('../src/methods');
 
 test.each([
     ['5ace9ab9-e9cf-4ec6-a19d-5881212a452c', true],
@@ -26,7 +28,12 @@ test.each([
     ['af6f8cb0c57d11e19b210800200c9a66', false],
     ['ff6f8cb0-c57da-51e1-9b21-0800200c9a66', false],
 ])('determines if string %p is a UUID', (string, expected) => {
-
     expect(Stringable.of(string).isUuid())
+        .toBe(expected);
+
+    expect(Str.isUuid(string))
+        .toBe(expected);
+
+    expect(isUuid(string))
         .toBe(expected);
 });

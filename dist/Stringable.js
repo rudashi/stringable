@@ -1,9 +1,18 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Stringable = void 0;
-const Str_1 = require("./Str");
-const marked_1 = require("marked");
+exports.Stringable = exports.str = void 0;
+const Str_1 = __importDefault(require("./Str"));
 const markdown_1 = require("./types/markdown");
+const str = (string) => {
+    if (string) {
+        return Stringable.of(string);
+    }
+    return Str_1.default;
+};
+exports.str = str;
 class Stringable {
     constructor(string) {
         Object.defineProperty(this, "_value", {
@@ -17,9 +26,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search = '') => {
-                if (search !== '' && this._value.indexOf(search) >= 0) {
-                    this._value = this._value.substring(this._value.indexOf(search) + search.length);
-                }
+                this._value = Str_1.default.after(this._value, search);
                 return this;
             }
         });
@@ -28,9 +35,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search = '') => {
-                if (search !== '' && this._value.indexOf(search) >= 0) {
-                    this._value = this._value.substring(this._value.lastIndexOf(search) + search.length);
-                }
+                this._value = Str_1.default.afterLast(this._value, search);
                 return this;
             }
         });
@@ -48,7 +53,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                this._value = Str_1.default.ascii(this._value);
                 return this;
             }
         });
@@ -69,9 +74,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search = '') => {
-                if (search !== '' && this._value.indexOf(search) >= 0) {
-                    this._value = this._value.substring(0, this._value.indexOf(search));
-                }
+                this._value = Str_1.default.before(this._value, search);
                 return this;
             }
         });
@@ -80,9 +83,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search = '') => {
-                if (search !== '' && this._value.indexOf(search) >= 0) {
-                    this._value = this._value.substring(0, this._value.lastIndexOf(search));
-                }
+                this._value = Str_1.default.beforeLast(this._value, search);
                 return this;
             }
         });
@@ -91,10 +92,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (from = '', to = '') => {
-                if (from === '' || to === '') {
-                    return this;
-                }
-                this._value = new Stringable(this._value).after(from).beforeLast(to).toString();
+                this._value = Str_1.default.between(this._value, from, to);
                 return this;
             }
         });
@@ -103,10 +101,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (from = '', to = '') => {
-                if (from === '' || to === '') {
-                    return this;
-                }
-                this._value = new Stringable(this._value).after(from).before(to).toString();
+                this._value = Str_1.default.betweenFirst(this._value, from, to);
                 return this;
             }
         });
@@ -115,12 +110,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                const key = this._value;
-                if (typeof Stringable._camelCache[key] !== 'undefined') {
-                    this._value = Stringable._camelCache[key];
-                    return this;
-                }
-                this._value = Stringable._camelCache[key] = this.studly().lcfirst().toString();
+                this._value = Str_1.default.camel(this._value);
                 return this;
             }
         });
@@ -129,15 +119,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (needles, ignoreCase = false) => {
-                if (needles === '') {
-                    return false;
-                }
-                let values = Array.isArray(needles) ? needles : [needles];
-                if (ignoreCase) {
-                    values = values.map(needle => needle.toLowerCase());
-                    this.lower();
-                }
-                return values.some(needle => this._value.includes(String(needle)));
+                return Str_1.default.contains(this._value, needles, ignoreCase);
             }
         });
         Object.defineProperty(this, "containsAll", {
@@ -145,11 +127,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (needles, ignoreCase = false) => {
-                if (ignoreCase) {
-                    needles = needles.map(needle => needle.toLowerCase());
-                    this.lower();
-                }
-                return needles.every(needle => this._value.includes(needle));
+                return Str_1.default.containsAll(this._value, needles, ignoreCase);
             }
         });
         Object.defineProperty(this, "dirname", {
@@ -167,40 +145,15 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (needles) => {
-                if (needles === null || needles === '') {
-                    return false;
-                }
-                let values = Array.isArray(needles) ? needles : [needles];
-                return values.some(needle => this._value.endsWith(String(needle)));
+                return Str_1.default.endsWith(this._value, needles);
             }
         });
         Object.defineProperty(this, "excerpt", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (phrase = '', { radius = 100, omission = '...' } = {
-                radius: 100,
-                omission: '...'
-            }) => {
-                if (this._value === phrase) {
-                    return this;
-                }
-                const matches = phrase === null
-                    ? ['', '', '', this._value.substring(0, radius)]
-                    : this._value.match(new RegExp('^(.*?)(' + phrase + ')(.*)$', 'iu'));
-                if (!matches) {
-                    this._value = '';
-                    return this;
-                }
-                let start = matches[1].trimStart();
-                let end = matches[3].trimEnd();
-                if (radius < start.length) {
-                    start = omission + start.substring(start.length - radius, start.length);
-                }
-                if (radius < end.length) {
-                    end = end.substring(0, radius) + omission;
-                }
-                this._value = start + matches[2] + end;
+            value: (phrase = '', { radius, omission } = { radius: 100, omission: '...' }) => {
+                this._value = Str_1.default.excerpt(this._value, phrase, { radius, omission });
                 return this;
             }
         });
@@ -220,13 +173,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (delimiter, limit) => {
-                const array = this._value.split(delimiter);
-                if (limit !== undefined && array.length >= limit) {
-                    limit < 0
-                        ? array.splice(limit)
-                        : array.push(array.splice(limit - 1).join(delimiter));
-                }
-                return array;
+                return Str_1.default.explode(this._value, delimiter, limit);
             }
         });
         Object.defineProperty(this, "finish", {
@@ -234,8 +181,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (cap) => {
-                const quoted = Str_1.Str.preg_quote(cap, '/');
-                this.replaceMatches('(?:' + quoted + ')+$', '').append(cap);
+                this._value = Str_1.default.finish(this._value, cap);
                 return this;
             }
         });
@@ -244,11 +190,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                let parts = this._value.split(/\s|_/gu);
-                if (parts.length === 1) {
-                    parts = parts[0].split(/(?=\p{Lu})/u).map(i => i.trim());
-                }
-                this._value = parts.join('_').split(/[-_]/g).map(p => p.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase())).filter(Boolean).join(' ');
+                this._value = Str_1.default.headline(this._value);
                 return this;
             }
         });
@@ -257,22 +199,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (pattern) => {
-                pattern = pattern instanceof Array ? pattern : [pattern];
-                if (pattern.length === 0) {
-                    return false;
-                }
-                return pattern.some(p => {
-                    if (p === this._value) {
-                        return true;
-                    }
-                    if (p === '' || p === null) {
-                        return false;
-                    }
-                    if (p.includes('*')) {
-                        return (new RegExp(p.replace(/\*/g, '.*'))).test(this._value);
-                    }
-                    return (new RegExp(p, 'u').test(this._value));
-                });
+                return Str_1.default.is(pattern, this._value);
             }
         });
         Object.defineProperty(this, "isAscii", {
@@ -280,10 +207,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                if (this._value === '') {
-                    return true;
-                }
-                return !(/[^\x09\x10\x13\x0A\x0D\x20-\x7E]/).test(this._value);
+                return Str_1.default.isAscii(this._value);
             }
         });
         Object.defineProperty(this, "isEmpty", {
@@ -307,16 +231,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                if (this.isEmpty()) {
-                    return false;
-                }
-                try {
-                    JSON.parse(this._value);
-                }
-                catch (e) {
-                    return false;
-                }
-                return true;
+                return Str_1.default.isJson(this._value);
             }
         });
         Object.defineProperty(this, "isUlid", {
@@ -324,13 +239,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                if (this._value.length !== 26) {
-                    return false;
-                }
-                if (!new RegExp(/^[a-zA-Z0-9]*$/i).test(this._value)) {
-                    return false;
-                }
-                return this._value[0] <= '7';
+                return Str_1.default.isUlid(this._value);
             }
         });
         Object.defineProperty(this, "isUuid", {
@@ -338,7 +247,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(this._value);
+                return Str_1.default.isUuid(this._value);
             }
         });
         Object.defineProperty(this, "kebab", {
@@ -346,7 +255,8 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                return this.snake('-');
+                this._value = Str_1.default.kebab(this._value);
+                return this;
             }
         });
         Object.defineProperty(this, "lcfirst", {
@@ -354,7 +264,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value[0].toLocaleLowerCase() + this._value.slice(1);
+                this._value = Str_1.default.lcfirst(this._value);
                 return this;
             }
         });
@@ -371,10 +281,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (limit = 100, end = '...') => {
-                if (limit >= this.length()) {
-                    return this;
-                }
-                this._value = this._value.slice(0, limit).trimEnd() + end;
+                this._value = Str_1.default.limit(this._value, limit, end);
                 return this;
             }
         });
@@ -383,7 +290,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value.toLocaleLowerCase();
+                this._value = Str_1.default.lower(this._value);
                 return this;
             }
         });
@@ -392,9 +299,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (characters) => {
-                this._value = characters
-                    ? this.replaceFirst(characters, '').toString()
-                    : this._value.trimStart();
+                this._value = Str_1.default.ltrim(this._value, characters);
                 return this;
             }
         });
@@ -403,11 +308,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (options = markdown_1.defaultConfiguration) => {
-                options = Object.assign(Object.assign({}, markdown_1.defaultConfiguration), options);
-                if (options.html_input === 'STRIP') {
-                    this.stripTags();
-                }
-                return marked_1.marked.parse(this._value, options).trimEnd();
+                return Str_1.default.markdown(this._value, options);
             }
         });
         Object.defineProperty(this, "inlineMarkdown", {
@@ -415,11 +316,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (options = markdown_1.defaultConfiguration) => {
-                options = Object.assign(Object.assign({}, markdown_1.defaultConfiguration), options);
-                if (options.html_input === 'STRIP') {
-                    this.stripTags();
-                }
-                return marked_1.marked.parseInline(this._value, options);
+                return Str_1.default.inlineMarkdown(this._value, options);
             }
         });
         Object.defineProperty(this, "mask", {
@@ -427,20 +324,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (character, index, length = null) => {
-                if (character === '') {
-                    return this;
-                }
-                const segment = Str_1.Str.substr(this._value, index, length);
-                if (segment === '') {
-                    return this;
-                }
-                const startIndex = index < 0
-                    ? index < -this._value.length ? 0 : this._value.length + index
-                    : index;
-                const start = this._value.substring(0, startIndex);
-                const mid = character[0].repeat(segment.length);
-                const end = this._value.substring(startIndex + segment.length);
-                this._value = start + mid + (mid.length >= end.length ? '' : end);
+                this._value = Str_1.default.mask(this._value, character, index, length);
                 return this;
             }
         });
@@ -449,12 +333,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (pattern) => {
-                var _a;
-                const matches = this._value.match(new RegExp(pattern));
-                if (matches) {
-                    return (_a = matches[1]) !== null && _a !== void 0 ? _a : matches[0];
-                }
-                return '';
+                return Str_1.default.match(pattern, this._value);
             }
         });
         Object.defineProperty(this, "matchAll", {
@@ -462,13 +341,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (pattern) => {
-                var _a;
-                const matches = this._value.matchAll(new RegExp(pattern, 'g'));
-                const result = [];
-                for (const match of matches) {
-                    result.push((_a = match[1]) !== null && _a !== void 0 ? _a : match[0]);
-                }
-                return result;
+                return Str_1.default.matchAll(pattern, this._value);
             }
         });
         Object.defineProperty(this, "newLine", {
@@ -485,8 +358,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (length = 0, pad = ' ') => {
-                const half = Math.ceil((length - this.length()) / 2) + this.length();
-                this.padRight(half, pad).padLeft(length, pad);
+                this._value = Str_1.default.padBoth(this._value, length, pad);
                 return this;
             }
         });
@@ -495,9 +367,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (length = 0, pad = ' ') => {
-                if (length > this.length()) {
-                    this._value = this._value.padStart(length, pad);
-                }
+                this._value = Str_1.default.padLeft(this._value, length, pad);
                 return this;
             }
         });
@@ -506,9 +376,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (length = 0, pad = ' ') => {
-                if (length > this.length()) {
-                    this._value = this._value.padEnd(length, pad);
-                }
+                this._value = Str_1.default.padRight(this._value, length, pad);
                 return this;
             }
         });
@@ -517,9 +385,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (method = null) => {
-                return this.contains('@')
-                    ? this.explode('@', 2)
-                    : [this._value, method];
+                return Str_1.default.parseCallback(this._value, method);
             }
         });
         Object.defineProperty(this, "pipe", {
@@ -547,10 +413,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search, caseSensitive = true) => {
-                search = search instanceof Array ? search : [search];
-                search.map(e => {
-                    this._value = this._value.replace(new RegExp(e, caseSensitive ? 'g' : 'gi'), '');
-                });
+                this._value = Str_1.default.remove(search, this._value, caseSensitive);
                 return this;
             }
         });
@@ -559,7 +422,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (times) => {
-                this._value = this._value.repeat(times);
+                this._value = Str_1.default.repeat(this._value, times);
                 return this;
             }
         });
@@ -568,17 +431,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search, replace) => {
-                if (typeof search === 'string' && typeof replace === 'string') {
-                    return this.replaceMatches(Str_1.Str.preg_quote(search), replace);
-                }
-                let searchArray = search instanceof Array ? search : [search];
-                let replaceArray = replace instanceof Array ? replace : new Array(searchArray.length).fill(replace);
-                if (replaceArray.length < searchArray.length) {
-                    replaceArray.push(...new Array(searchArray.length - replaceArray.length).fill(''));
-                }
-                for (const index of searchArray.keys()) {
-                    this._value = this._value.replace(searchArray[index], replaceArray[index]);
-                }
+                this._value = Str_1.default.replace(search, replace, this._value);
                 return this;
             }
         });
@@ -587,14 +440,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search, replace) => {
-                var _a;
-                if (typeof replace === 'object') {
-                    replace = Object.values(replace);
-                }
-                let segments = this._value.split(search);
-                let results = (_a = segments.shift()) !== null && _a !== void 0 ? _a : '';
-                segments.map(segment => { var _a; return results += ((_a = replace.shift()) !== null && _a !== void 0 ? _a : search) + segment; });
-                this._value = results;
+                this._value = Str_1.default.replaceArray(search, replace, this._value);
                 return this;
             }
         });
@@ -603,10 +449,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search, replace) => {
-                if (search === '') {
-                    return this;
-                }
-                this._value = this._value.replace(search, replace);
+                this._value = Str_1.default.replaceFirst(search, replace, this._value);
                 return this;
             }
         });
@@ -615,15 +458,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (search, replace) => {
-                if (search === '') {
-                    return this;
-                }
-                const position = this._value.lastIndexOf(search);
-                if (position >= 0) {
-                    this._value = this._value.substring(0, position)
-                        + replace
-                        + this._value.substring(position + search.length, this.length());
-                }
+                this._value = Str_1.default.replaceLast(search, replace, this._value);
                 return this;
             }
         });
@@ -641,7 +476,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = [...this._value].reverse().join('');
+                this._value = Str_1.default.reverse(this._value);
                 return this;
             }
         });
@@ -650,9 +485,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (characters) => {
-                this._value = characters
-                    ? this.replaceLast(characters, '').toString()
-                    : this._value.trimEnd();
+                this._value = Str_1.default.rtrim(this._value, characters);
                 return this;
             }
         });
@@ -682,7 +515,7 @@ class Stringable {
                         })());
                     }
                     else {
-                        result.push(Str_1.Str.preg_quote(val, '/'));
+                        result.push(Str_1.default.preg_quote(val, '/'));
                     }
                 });
                 const match = this._value.match(new RegExp(result.join(''), 'u'));
@@ -698,17 +531,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (separator = '-', language = 'en', dictionary = { '@': 'at' }) => {
-                if (language) {
-                    this.ascii();
-                }
-                this.replace(['-', '_'], separator);
-                Object.keys(dictionary).map((key) => {
-                    dictionary[key] = separator + dictionary[key] + separator;
-                });
-                this.replace(Object.keys(dictionary), Object.values(dictionary))
-                    .lower()
-                    .replaceMatches(/\s/, separator)
-                    .replaceMatches('(' + separator + ')(?=\\1)', '');
+                this._value = Str_1.default.slug(this._value, separator, language, dictionary);
                 return this;
             }
         });
@@ -717,24 +540,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (delimiter = '_') => {
-                const key = this._value;
-                if (typeof Stringable._snakeCache[key] !== 'undefined' && typeof Stringable._snakeCache[key][delimiter] !== 'undefined') {
-                    this._value = Stringable._snakeCache[key][delimiter];
-                    return this;
-                }
-                if (!(/^[a-z]+$/).test(this._value)) {
-                    this._value = this._value
-                        .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
-                        .replace(new RegExp(/\s+/, 'gu'), '')
-                        .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'), '$1' + delimiter)
-                        .toLocaleLowerCase();
-                }
-                if (typeof Stringable._snakeCache[key] !== 'undefined') {
-                    Stringable._snakeCache[key][delimiter] = this._value;
-                }
-                else {
-                    Stringable._snakeCache[key] = { [delimiter]: this._value };
-                }
+                this._value = Str_1.default.snake(this._value, delimiter);
                 return this;
             }
         });
@@ -755,7 +561,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this.trim().replaceMatches(/\s+|\u3164+/, ' ');
+                this._value = Str_1.default.squish(this._value);
                 return this;
             }
         });
@@ -764,9 +570,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (prefix) => {
-                if (!new Stringable(this._value).startsWith(prefix)) {
-                    this._value = `${prefix}${this._value}`;
-                }
+                this._value = Str_1.default.start(this._value, prefix);
                 return this;
             }
         });
@@ -775,11 +579,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (needles) => {
-                if (needles === null || needles === '') {
-                    return false;
-                }
-                const values = Array.isArray(needles) ? needles : [needles];
-                return values.some(needle => this._value.startsWith(String(needle)));
+                return Str_1.default.startsWith(this._value, needles);
             }
         });
         Object.defineProperty(this, "stripTags", {
@@ -787,16 +587,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (allowedTags = '') => {
-                const tags = /<\/?([a-z\d]*)\b[^>]*>?/gi;
-                const commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
-                this.replaceMatches(commentsAndPhpTags, '');
-                while (true) {
-                    const before = this._value;
-                    this._value = before.replace(tags, (g1, g2) => allowedTags.indexOf('<' + g2.toLowerCase() + '>') > -1 ? g1 : '');
-                    if (before === this._value) {
-                        break;
-                    }
-                }
+                this._value = Str_1.default.stripTags(this._value, allowedTags);
                 return this;
             }
         });
@@ -805,16 +596,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                const key = this._value;
-                if (typeof Stringable._studlyCache[key] !== 'undefined') {
-                    this._value = Stringable._studlyCache[key];
-                    return this;
-                }
-                this._value = Stringable._studlyCache[key] = this._value.trim()
-                    .replace(/[_\-]/g, ' ')
-                    .replace(/\s+|\u3164+/g, ' ')
-                    .split(' ')
-                    .reduce((str, w) => str + w[0].toLocaleUpperCase() + w.slice(1), '');
+                this._value = Str_1.default.studly(this._value);
                 return this;
             }
         });
@@ -823,7 +605,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (start, length = null) => {
-                this._value = Str_1.Str.substr(this._value, start, length);
+                this._value = Str_1.default.substr(this._value, start, length);
                 return this;
             }
         });
@@ -832,14 +614,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (needle, offset = 0, length = 0) => {
-                if (this.length() === 0 || needle.length === 0 || this._value.indexOf(needle) === -1) {
-                    return 0;
-                }
-                let word = this._value;
-                word = word.substring(offset >= 0 ? offset : word.length + offset);
-                word = word.substring(0, length > 0 ? length : word.length + length);
-                let match = word.match(new RegExp(needle, 'g'));
-                return match ? match.length : 0;
+                return Str_1.default.substrCount(this._value, needle, offset, length);
             }
         });
         Object.defineProperty(this, "substrReplace", {
@@ -847,15 +622,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (replace, offset = 0, length = null) => {
-                length = length !== null ? length : this.length();
-                offset = offset >= 0 ? offset : offset + this.length();
-                length = length >= 0 ? length : length + this.length() - offset;
-                this._value = [
-                    this._value.slice(0, offset),
-                    replace.substring(0, length),
-                    replace.slice(length),
-                    this._value.slice(offset + length)
-                ].join('');
+                this._value = Str_1.default.substrReplace(this._value, replace, offset, length);
                 return this;
             }
         });
@@ -864,12 +631,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (map) => {
-                const keys = Object.keys(map)
-                    .map((key) => key.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&'));
-                this._value = this._value
-                    .split(RegExp(`(${keys.join('|')})`))
-                    .map((key) => map[key] || key)
-                    .join('');
+                this._value = Str_1.default.swap(map, this._value);
                 return this;
             }
         });
@@ -878,7 +640,8 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (callback) => {
-                return Str_1.Str.tap(this, callback);
+                callback(Stringable.of(this._value));
+                return this;
             }
         });
         Object.defineProperty(this, "test", {
@@ -894,7 +657,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value.toLocaleLowerCase().replace(/(^|\s)\S/g, t => t.toLocaleUpperCase());
+                this._value = Str_1.default.title(this._value);
                 return this;
             }
         });
@@ -903,9 +666,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (characters) => {
-                this._value = characters
-                    ? this.ltrim(characters).rtrim(characters).toString()
-                    : this._value.trim();
+                this._value = Str_1.default.trim(this._value, characters);
                 return this;
             }
         });
@@ -914,7 +675,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value[0].toLocaleUpperCase() + this._value.slice(1);
+                this._value = Str_1.default.ucfirst(this._value);
                 return this;
             }
         });
@@ -923,7 +684,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                return this._value.split(/(?=\p{Lu})/u).map(i => i.trim());
+                return Str_1.default.ucsplit(this._value);
             }
         });
         Object.defineProperty(this, "unless", {
@@ -951,7 +712,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                this._value = this._value.toLocaleUpperCase();
+                this._value = Str_1.default.upper(this._value);
                 return this;
             }
         });
@@ -1084,7 +845,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: () => {
-                return this._value.trim().split(/\s+/).length;
+                return Str_1.default.wordCount(this._value);
             }
         });
         Object.defineProperty(this, "words", {
@@ -1092,13 +853,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (words = 100, end = '...') => {
-                if (this.wordCount() <= words) {
-                    return this;
-                }
-                const match = this._value.match(new RegExp(`^\\s*(?:\\S+\\s*){1,${words}}`, 'u'));
-                if (match) {
-                    this._value = match[0].trimEnd() + end;
-                }
+                this._value = Str_1.default.words(this._value, words, end);
                 return this;
             }
         });
@@ -1107,7 +862,7 @@ class Stringable {
             configurable: true,
             writable: true,
             value: (before, after) => {
-                this.prepend(before).append(after !== null && after !== void 0 ? after : before);
+                this._value = Str_1.default.wrap(this._value, before, after);
                 return this;
             }
         });
@@ -1216,29 +971,9 @@ class Stringable {
         return new Stringable(string instanceof Stringable ? string.toString() : string);
     }
     static flushCache() {
-        Stringable._camelCache = {};
-        Stringable._snakeCache = {};
-        Stringable._studlyCache = {};
+        Str_1.default.flushCache();
     }
 }
 exports.Stringable = Stringable;
-Object.defineProperty(Stringable, "_camelCache", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: {}
-});
-Object.defineProperty(Stringable, "_snakeCache", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: {}
-});
-Object.defineProperty(Stringable, "_studlyCache", {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value: {}
-});
 exports.default = Stringable;
 //# sourceMappingURL=Stringable.js.map

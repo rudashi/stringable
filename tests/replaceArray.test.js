@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {replaceArray} = require('../src/methods');
 
 test.each([
     ['The event will take place between ? and ?', '?', ['8:30', '9:00'], 'The event will take place between 8:30 and 9:00'],
@@ -18,7 +20,12 @@ test.each([
  * @param {string} expected
  */
 (string, search, replace, expected) => {
-
     expect(Stringable.of(string).replaceArray(search, replace).toString())
+        .toBe(expected);
+
+    expect(Str.replaceArray(search, replace, string))
+        .toBe(expected);
+
+    expect(replaceArray(search, replace, string))
         .toBe(expected);
 });

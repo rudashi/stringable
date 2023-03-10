@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {upper} = require('../src/methods');
 
 test.each([
     ['laravel', 'LARAVEL'],
@@ -8,7 +10,12 @@ test.each([
     ['foO bAr BaZ', 'FOO BAR BAZ'],
     ['ąęó żźć śńł', 'ĄĘÓ ŻŹĆ ŚŃŁ'],
 ])('.upper from %p returns %p', (string, expected) => {
-
     expect(Stringable.of(string).upper().toString())
+        .toBe(expected);
+
+    expect(Str.upper(string))
+        .toBe(expected);
+
+    expect(upper(string))
         .toBe(expected);
 });

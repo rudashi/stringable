@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string exactly matches the given value', () => {
-
     expect(Stringable.of('laravel')
         .whenExactly('laravel', stringable => stringable.title())
         .toString()
@@ -31,5 +30,4 @@ it('returns a passed closure if the string exactly matches the given value', () 
         .whenExactly('Iron Man', () => 'Nailed it...!')
         .toString()
     ).toBe('Tony Stark');
-
 });

@@ -3,7 +3,6 @@
 const {Str} = require('../../src/Str');
 
 it('can set the sequence that will be used to generate random strings', () => {
-
     Str.createRandomStringsUsingSequence({
         0: 'x',
         // 1: generate a random here...
@@ -23,7 +22,6 @@ it('can set the sequence that will be used to generate random strings', () => {
 });
 
 it('can specify a fallback for a random string sequence', () => {
-
     Str.createRandomStringsUsingSequence(
         {0: Str.random(), 1: Str.random()},
         function() {

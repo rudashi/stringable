@@ -7,7 +7,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('converts the string instance to an instance of Element or Node', () => {
-
     expect(Stringable.of('Nuno Maduro').toHtmlString())
         .toBeInstanceOf(Node);
 
@@ -22,5 +21,4 @@ it('converts the string instance to an instance of Element or Node', () => {
 
     expect(Stringable.of('<div>Test String</div>').toHtmlString())
         .toBeInstanceOf(Node);
-
 });

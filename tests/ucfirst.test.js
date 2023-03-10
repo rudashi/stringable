@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {ucfirst} = require('../src/methods');
 
 it('returns a string with first character uppercase', () => {
-
     expect(Stringable.of('foo bar').ucfirst().toString())
         .toBe('Foo bar');
 
@@ -19,4 +20,9 @@ it('returns a string with first character uppercase', () => {
     expect(Stringable.of('мама мыла раму').ucfirst().toString())
         .toBe('Мама мыла раму');
 
+    expect(Str.ucfirst('foo bar'))
+        .toBe('Foo bar');
+
+    expect(ucfirst('foo bar'))
+        .toBe('Foo bar');
 });

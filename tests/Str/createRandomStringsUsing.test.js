@@ -3,7 +3,6 @@
 const {Str} = require('../../src/Str');
 
 it('can generate random string using predefined sequence', () => {
-
     Str.createRandomStringsUsing((length) => `length:${length}`);
 
     expect(Str.random(7)).toBe('length:7');
@@ -12,5 +11,4 @@ it('can generate random string using predefined sequence', () => {
     Str.createRandomStringsNormally();
 
     expect(Str.random()).not.toBe('length:7');
-
 });

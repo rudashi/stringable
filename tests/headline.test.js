@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {headline} = require('../src/methods');
 
 it('returns the string to title case for each word', () => {
-
     expect(Stringable.of('steve_jobs').headline().toString())
         .toBe('Steve Jobs');
 
@@ -78,4 +79,9 @@ it('returns the string to title case for each word', () => {
     expect(Stringable.of(' orwell_- 1984 ').headline().toString())
         .toBe('Orwell 1984');
 
+    expect(Str.headline('steve_jobs'))
+        .toBe('Steve Jobs');
+
+    expect(headline('steve_jobs'))
+        .toBe('Steve Jobs');
 });

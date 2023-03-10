@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if a given condition is false', () => {
-
     expect(Stringable.of('unless')
         .unless(false, (stringable) => stringable.append(' false'))
         .toString()
@@ -45,5 +44,4 @@ it('returns a passed closure if a given condition is false', () => {
         )
         .toString()
     ).toBe('gets the value 0');
-
 });

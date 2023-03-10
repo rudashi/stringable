@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {isJson} = require('../src/methods');
 
 it('determines if a string is a valid JSON', () => {
-
     expect(Stringable.of('[1,2,3]').isJson())
         .toBe(true);
 
@@ -43,4 +44,9 @@ it('determines if a string is a valid JSON', () => {
     expect(Stringable.of(null).isJson())
         .toBe(false);
 
+    expect(Str.isJson('{"first": "John", "last": "Doe"}'))
+        .toBe(true);
+
+    expect(isJson('{"first": "John", "last": "Doe"}'))
+        .toBe(true);
 });

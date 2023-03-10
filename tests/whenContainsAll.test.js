@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string contains all of the given strings', () => {
-
     expect(Stringable.of('tony stark')
         .whenContainsAll(['tony', 'stark'], stringable => stringable.title())
         .toString()
@@ -31,5 +30,4 @@ it('returns a passed closure if the string contains all of the given strings', (
         )
         .toString()
     ).toBe('TonyStark');
-
 });
