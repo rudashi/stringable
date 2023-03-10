@@ -202,7 +202,7 @@ export const Str = {
 
         if (!(/^[a-z]+$/).test(value)) {
             value = value
-                .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
+                .replace(new RegExp(/(^|\s)\S/, 'gu'), s => s.toLocaleUpperCase())
                 .replace(new RegExp(/\s+/, 'gu'), '')
                 .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'), '$1' + delimiter)
                 .toLocaleLowerCase();
