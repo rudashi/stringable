@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string is a valid ULID', () => {
-
     expect(Stringable.of('01GJSNW9MAF792C0XYY8RX6QFT')
         .whenIsUlid(
             stringable => stringable.prepend('Ulid: '),
@@ -24,5 +23,4 @@ it('returns a passed closure if the string is a valid ULID', () => {
         )
         .toString()
     ).toBe('Not Ulid: ss-01GJSNW9MAF792C0XYY8RX6QFT');
-
 });

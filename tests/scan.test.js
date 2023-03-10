@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns an array from a string parsed to a given format', () => {
-
     expect(Stringable.of('SN/123456').scan('SN/%d'))
         .toEqual(expect.arrayContaining(['123456']));
 
@@ -15,5 +14,4 @@ it('returns an array from a string parsed to a given format', () => {
 
     expect(Stringable.of('Otwell, Taylor').scan('%[^,],%s'))
         .toEqual(expect.arrayContaining(['Otwell', 'Taylor']));
-
 });

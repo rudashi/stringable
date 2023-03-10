@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {reverse} = require('../src/methods');
 
 it('returns reversed string', () => {
-
     expect(Stringable.of('Hello World').reverse().toString())
         .toBe('dlroW olleH');
 
@@ -16,4 +17,9 @@ it('returns reversed string', () => {
     expect(Stringable.of('☆etyBitluM❤').reverse().toString())
         .toBe('❤MultiByte☆');
 
+    expect(Str.reverse('Hello World'))
+        .toBe('dlroW olleH');
+
+    expect(reverse('Hello World'))
+        .toBe('dlroW olleH');
 });

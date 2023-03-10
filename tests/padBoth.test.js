@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {padBoth} = require('../src/methods');
 
 it('returns the string with padded both sides of a string', () => {
-
     expect(Stringable.of('James').padBoth(10, '_').toString())
         .toBe('__James___');
 
@@ -22,4 +23,9 @@ it('returns the string with padded both sides of a string', () => {
     expect(Stringable.of('❤MultiByte☆').padBoth(16, '❤☆').toString())
         .toBe('❤☆❤MultiByte☆❤☆❤');
 
+    expect(Str.padBoth('James', 10, '_'))
+        .toBe('__James___');
+
+    expect(padBoth('James', 10, '_'))
+        .toBe('__James___');
 });

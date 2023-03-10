@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {substrReplace} = require('../src/methods');
 
 it('returns a string with replaced text within a portion of a string', () => {
-
     expect(Stringable.of('1300').substrReplace(':', 2).toString())
         .toBe('13:');
 
@@ -21,4 +22,10 @@ it('returns a string with replaced text within a portion of a string', () => {
 
     expect(Stringable.of('ABCDEFGH:/MNRPQR/').substrReplace('bob', -7, -1).toString())
         .toBe('ABCDEFGH:/bob/');
+
+    expect(Str.substrReplace('1300', ':', 2))
+        .toBe('13:');
+
+    expect(substrReplace('1300', ':', 2))
+        .toBe('13:');
 });

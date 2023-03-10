@@ -1,9 +1,9 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
 
 it('returns the string as `kebab-case`', () => {
-
     expect(Stringable.of('fooBar').kebab().toString())
         .toBe('foo-bar');
 
@@ -40,4 +40,6 @@ it('returns the string as `kebab-case`', () => {
     expect(Stringable.of('ŻółtaŁódka').kebab().toString())
         .toBe('żółtałódka');
 
+    expect(Str.kebab('fooBar'))
+        .toBe('foo-bar');
 });

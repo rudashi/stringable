@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('determines if string is empty', () => {
-
     expect(Stringable.of('  ').isEmpty())
         .toBe(false);
 
@@ -21,5 +20,4 @@ it('determines if string is empty', () => {
 
     expect(Stringable.of('0').isEmpty())
         .toBe(false);
-
 });

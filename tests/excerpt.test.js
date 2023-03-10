@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {excerpt} = require('../src/methods');
 
 it('returns a truncated string', () => {
-
     expect(Stringable.of('This is my name')
         .excerpt('my', {radius: 3})
         .toString()
@@ -159,10 +160,14 @@ it('returns a truncated string', () => {
         .toString()
     ).toBe('João Antô...')
 
+    expect(Str.excerpt('This is my name', 'my', {radius: 3}).toString())
+        .toBe('...is my na...');
+
+    expect(excerpt('This is my name', 'my', {radius: 3}).toString())
+        .toBe('...is my na...');
 });
 
 it('returns a truncated string with custom omission', () => {
-
     expect(Stringable.of('This is my name')
         .excerpt('name', {radius: 3, omission: '(...) '})
         .toString()
@@ -182,11 +187,9 @@ it('returns a truncated string with custom omission', () => {
         .excerpt('What', {radius: 2, omission: '?'})
         .toString()
     ).toBe('What i?');
-
 });
 
 it('returns an empty string when truncate failed', () => {
-
     expect(Stringable.of('This is a beautiful morning')
         .excerpt('day')
         .toString()
@@ -211,5 +214,4 @@ it('returns an empty string when truncate failed', () => {
         .excerpt()
         .toString()
     ).toBe('');
-
 });

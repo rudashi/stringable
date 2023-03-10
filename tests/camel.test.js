@@ -1,9 +1,9 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
 
 it('returns the string as `camelCase`', () => {
-
     expect(Stringable.of('foo_bar').camel().toString())
         .toBe('fooBar');
 
@@ -35,18 +35,18 @@ it('returns the string as `camelCase`', () => {
     expect(Stringable.of('foo-bar_baz').camel().toString())
         .toBe('fooBarBaz');
 
+    expect(Str.camel('foo_bar'))
+        .toBe('fooBar');
 });
 
 it('should cache the string to _camelCache property', function () {
-
     Stringable.flushCache();
 
-    expect(Stringable._camelCache).toStrictEqual({});
+    expect(Str._camelCache).toStrictEqual({});
 
     Stringable.of('foo').camel();
-    expect(Stringable._camelCache).toStrictEqual({foo: 'foo'});
+    expect(Str._camelCache).toStrictEqual({foo: 'foo'});
 
     Stringable.of('bar').camel();
-    expect(Stringable._camelCache).toStrictEqual({foo: 'foo', bar: 'bar'});
-
+    expect(Str._camelCache).toStrictEqual({foo: 'foo', bar: 'bar'});
 });

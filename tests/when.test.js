@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if a given condition is true', () => {
-
     expect(Stringable.of('Taylor')
         .when(true, (stringable) => stringable.append(' Otwell'))
         .toString()
@@ -24,11 +23,9 @@ it('returns a passed closure if a given condition is true', () => {
         .when(false, (stringable, value) => stringable.append(value).append('false'))
         .toString()
     ).toBe('when');
-
 });
 
 it('returns a passed fail closure if a given condition is false', () => {
-
     expect(Stringable.of('gets a value ')
         .when(
             'from if',
@@ -44,5 +41,4 @@ it('returns a passed fail closure if a given condition is false', () => {
             (stringable) => stringable.append('fallbacks to default'),
         ).toString()
     ).toBe('when false fallbacks to default');
-
 });

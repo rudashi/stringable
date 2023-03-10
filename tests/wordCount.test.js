@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {wordCount} = require('../src/methods');
 
 it('returns the number of words in string', () => {
-
     expect(Stringable.of('Hello, world!').wordCount())
         .toBe(2);
 
@@ -29,5 +30,11 @@ it('returns the number of words in string', () => {
         .toBe(3);
 
     expect(Stringable.of(' Taylor Otwell ').wordCount())
+        .toBe(2);
+
+    expect(Str.wordCount('Hello, world!'))
+        .toBe(2);
+
+    expect(wordCount('Hello, world!'))
         .toBe(2);
 });

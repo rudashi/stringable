@@ -1,9 +1,9 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
 
 it('returns a html from GitHub markdown', () => {
-
     expect(Stringable.of('# Laravel').markdown())
         .toBe('<h1>Laravel</h1>');
 
@@ -15,4 +15,7 @@ it('returns a html from GitHub markdown', () => {
 
     expect(Stringable.of('## hello world').markdown())
         .toBe('<h2>hello world</h2>');
+
+    expect(Str.markdown('# Laravel'))
+        .toBe('<h1>Laravel</h1>');
 });

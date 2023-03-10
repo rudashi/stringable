@@ -1,9 +1,9 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
 
 it('returns the string as `StudlyCase`', () => {
-
     expect(Stringable.of('laravel_p_h_p_framework').studly().toString())
         .toBe('LaravelPHPFramework');
 
@@ -35,18 +35,18 @@ it('returns the string as `StudlyCase`', () => {
     expect(Stringable.of('öffentliche-überraschungen').studly().toString())
         .toBe('ÖffentlicheÜberraschungen');
 
+    expect(Str.studly('laravel_p_h_p_framework'))
+        .toBe('LaravelPHPFramework');
 });
 
 it('should cache the string to _studlyCache property', function () {
+    Str.flushCache();
 
-    Stringable.flushCache();
+    expect(Str._studlyCache).toStrictEqual({});
 
-    expect(Stringable._studlyCache).toStrictEqual({});
+    Str.of('foo').studly();
+    expect(Str._studlyCache).toStrictEqual({foo: 'Foo'});
 
-    Stringable.of('foo').studly();
-    expect(Stringable._studlyCache).toStrictEqual({foo: 'Foo'});
-
-    Stringable.of('bar').studly();
-    expect(Stringable._studlyCache).toStrictEqual({foo: 'Foo', bar: 'Bar'});
-
+    Str.of('bar').studly();
+    expect(Str._studlyCache).toStrictEqual({foo: 'Foo', bar: 'Bar'});
 });

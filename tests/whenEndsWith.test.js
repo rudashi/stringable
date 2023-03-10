@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string ends with the given string', () => {
-
     expect(Stringable.of('disney world')
         .whenEndsWith('world', stringable => stringable.title())
         .toString()
@@ -40,5 +39,4 @@ it('returns a passed closure if the string ends with the given string', () => {
         )
         .toString()
     ).toBe('TonyStark');
-
 });

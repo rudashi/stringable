@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string is empty', () => {
-
     expect(Stringable.of('')
         .whenEmpty(stringable => stringable.trim().prepend('Laravel'))
         .toString()
@@ -19,5 +18,4 @@ it('returns a passed closure if the string is empty', () => {
         .whenEmpty(() => 'empty')
         .toString()
     ).toBe('not-empty');
-
 });

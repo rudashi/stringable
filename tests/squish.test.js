@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {squish} = require('../src/methods');
 
 it('returns a string with removed all extraneous white spaces', () => {
-
     expect(Stringable.of('    laravel    framework    ').squish().toString())
         .toBe('laravel framework');
 
@@ -37,4 +38,9 @@ it('returns a string with removed all extraneous white spaces', () => {
     expect(Stringable.of('laravelㅤㅤㅤphpㅤframework').squish().toString())
         .toBe('laravel php framework');
 
+    expect(Str.squish('    laravel    framework    '))
+        .toBe('laravel framework');
+
+    expect(squish('    laravel    framework    '))
+        .toBe('laravel framework');
 });

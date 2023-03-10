@@ -1,9 +1,9 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
 
 it('returns the string as `snake_case`', () => {
-
     expect(Stringable.of('fooBar').snake().toString())
         .toBe('foo_bar');
 
@@ -46,18 +46,18 @@ it('returns the string as `snake_case`', () => {
     expect(Stringable.of('ŻółtaŁódka').snake().toString())
         .toBe('żółtałódka');
 
+    expect(Str.snake('fooBar'))
+        .toBe('foo_bar');
 });
 
 it('should cache the string to _snakeCache property', function () {
-
     Stringable.flushCache();
 
-    expect(Stringable._snakeCache).toStrictEqual({});
+    expect(Str._snakeCache).toStrictEqual({});
 
     Stringable.of('fooBar').snake();
-    expect(Stringable._snakeCache).toStrictEqual({fooBar: { _ :'foo_bar'}});
+    expect(Str._snakeCache).toStrictEqual({fooBar: { _ :'foo_bar'}});
 
     Stringable.of('fooBar').snake('-');
-    expect(Stringable._snakeCache).toStrictEqual({'fooBar': { '_' :'foo_bar', '-' :'foo-bar'}});
-
+    expect(Str._snakeCache).toStrictEqual({'fooBar': { '_' :'foo_bar', '-' :'foo-bar'}});
 });

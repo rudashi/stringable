@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {slug} = require('../src/methods');
 
 it('returns the string as a URL friendly', () => {
-
     expect(Stringable.of('Laravel Framework').slug('-').toString())
         .toBe('laravel-framework');
 
@@ -49,4 +50,9 @@ it('returns the string as a URL friendly', () => {
     expect(Stringable.of('500-$--bill').slug('-', 'en', {'$': 'dollar'}).toString())
         .toBe('500-dollar-bill');
 
+    expect(Str.slug('Laravel Framework', '-'))
+        .toBe('laravel-framework');
+
+    expect(slug('Laravel Framework', '-'))
+        .toBe('laravel-framework');
 });

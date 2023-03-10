@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {replaceFirst} = require('../src/methods');
 
 test.each([
     ['the quick brown fox jumps over the lazy dog', 'the', 'a', 'a quick brown fox jumps over the lazy dog'],
@@ -14,7 +16,12 @@ test.each([
     ['Jönköping Malmö', '', 'yyy', 'Jönköping Malmö'],
 
 ])('.replaceFirst from %p search %p and replace with %p then returns %p', (string, search, replace, expected) => {
-
     expect(Stringable.of(string).replaceFirst(search, replace).toString())
+        .toBe(expected);
+
+    expect(Str.replaceFirst(search, replace, string))
+        .toBe(expected);
+
+    expect(replaceFirst(search, replace, string))
         .toBe(expected);
 });

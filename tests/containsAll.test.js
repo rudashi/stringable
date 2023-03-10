@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {containsAll} = require('../src/methods');
 
 it('determines if string contains all of the given values', () => {
 
@@ -13,4 +15,6 @@ it('determines if string contains all of the given values', () => {
     expect(Stringable.of('Taylor Otwell').containsAll(['taylor', 'xxx'], false)).toBe(false);
     expect(Stringable.of('Taylor Otwell').containsAll(['taylor', 'xxx'], true)).toBe(false);
 
+    expect(Str.containsAll('This is my name', ['my', 'name'])).toBe(true);
+    expect(containsAll('This is my name', ['my', 'name'])).toBe(true);
 });

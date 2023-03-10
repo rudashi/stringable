@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string not matches the given value', () => {
-
     expect(Stringable.of('framework')
         .whenNotExactly('laravel', stringable => stringable.title())
         .toString()
@@ -22,5 +21,4 @@ it('returns a passed closure if the string not matches the given value', () => {
         )
         .toString()
     ).toBe('Swing and a miss...!');
-
 });

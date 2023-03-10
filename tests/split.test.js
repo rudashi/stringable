@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns an array split using the given pattern', () => {
-
     expect(Stringable.of('one, two, three').split(/[\s,]+/))
         .toStrictEqual(['one', 'two', 'three']);
 
@@ -21,5 +20,4 @@ it('returns an array split using the given pattern', () => {
 
     expect(Stringable.of('foobarbaz').split(' '))
         .toStrictEqual(['foobarbaz']);
-
 });

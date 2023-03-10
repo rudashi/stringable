@@ -3,7 +3,6 @@
 const {Stringable} = require('../src/Stringable');
 
 it('returns a passed closure if the string matches the given regular expression', () => {
-
     expect(Stringable.of('laravel framework')
         .whenTest('laravel', stringable => stringable.title())
         .toString()
@@ -36,5 +35,4 @@ it('returns a passed closure if the string matches the given regular expression'
         .whenTest(/link/, stringable => stringable.prepend('Winner: '))
         .toString()
     ).toBe('foo bar');
-
 });

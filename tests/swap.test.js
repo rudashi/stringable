@@ -1,9 +1,10 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {swap} = require('../src/methods');
 
 it('returns a string with replaced multiple values', () => {
-
     expect(Stringable.of('Tacos are great!')
         .swap({
             'Tacos': 'Burritos',
@@ -31,4 +32,15 @@ it('returns a string with replaced multiple values', () => {
         }).toString()
     ).toBe('-test-');
 
+    expect(Str.swap({
+            'Tacos': 'Burritos',
+            'great': 'fantastic',
+        }, 'Tacos are great!')
+    ).toBe('Burritos are fantastic!');
+
+    expect(swap({
+            'Tacos': 'Burritos',
+            'great': 'fantastic',
+        }, 'Tacos are great!')
+    ).toBe('Burritos are fantastic!');
 });

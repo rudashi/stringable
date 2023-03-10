@@ -1,6 +1,8 @@
 'use strict';
 
 const {Stringable} = require('../src/Stringable');
+const {Str} = require('../src/Str');
+const {substr} = require('../src/methods');
 
 test.each([
     ['Laravel Framework', 8, undefined, 'Framework'],
@@ -24,7 +26,12 @@ test.each([
      * @param {E} expected
     */
 (string, start, length, expected) => {
-
     expect(Stringable.of(string).substr(start, length).toString())
+        .toBe(expected);
+
+    expect(Str.substr(string, start, length))
+        .toBe(expected);
+
+    expect(substr(string, start, length))
         .toBe(expected);
 });
