@@ -272,6 +272,18 @@ export const match = (pattern: RegExp | string, subject: string): string => {
     return '';
 }
 
+export const isMatch = (pattern: RegExp | string | Array<string | RegExp>, value: string): boolean => {
+    pattern = Array.isArray(pattern) ? pattern : [pattern];
+
+    for (const item of pattern) {
+        if (new RegExp(item).test(value)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 export const matchAll = (pattern: RegExp | string, subject: string): Array<string> => {
     const matches = subject.matchAll(new RegExp(pattern, 'g'));
     const result = [];
