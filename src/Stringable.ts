@@ -240,6 +240,10 @@ export class Stringable {
         return Str.match(pattern, this._value);
     }
 
+    public isMatch = (pattern: RegExp | string | Array<string | RegExp>): boolean => {
+        return Str.isMatch(pattern, this._value);
+    }
+
     public matchAll = (pattern: RegExp | string): Array<string> => {
         return Str.matchAll(pattern, this._value);
     }
