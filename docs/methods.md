@@ -170,7 +170,12 @@ Stringable.of('[a] bc [d]').betweenFirst('[', ']');
 // 'a'
 ```
 ### charAt
-Not implemented
+The `charAt` method allows to get a character by index from a multibyte string:
+```js
+Stringable.of('Hello, world!').charAt(1);
+
+// 'e'
+```
 ### camel
 The `camel` method converts the given string to `camelCase`:
 ```js
@@ -386,7 +391,16 @@ Stringable.of('Taylor').isUuid();
 // false
 ```
 ### isMatch
-Not Implemented
+The `isMatch` method will return `true` if the string matches a given regular expression:
+```js
+Stringable.of('foo bar').isMatch(/foo (.*)/);
+
+// true
+
+Stringable.of('laravel').isMatch(/foo (.*)/);
+
+// false
+```
 ### kebab
 The `kebab` method converts the given string to `kebab-case`:
 ```js

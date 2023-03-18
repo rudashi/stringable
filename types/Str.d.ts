@@ -25,6 +25,7 @@ export declare const Str: {
     beforeLast: (subject: string, search?: string) => string;
     between: (subject: string, from?: string, to?: string) => string;
     betweenFirst: (subject: string, from?: string, to?: string) => string;
+    charAt: (subject: string, index: number) => string | false;
     camel: (value: string) => string;
     contains: (haystack: string, needles: string | string[], ignoreCase?: boolean) => boolean;
     containsAll: (haystack: string, needles: string[], ignoreCase?: boolean) => boolean;
@@ -47,6 +48,7 @@ export declare const Str: {
     inlineMarkdown: (string: string, options?: MarkdownConfiguration) => string;
     mask: (string: string, character: string, index: number, length?: number | null) => string;
     match: (pattern: string | RegExp, subject: string) => string;
+    isMatch: (pattern: string | RegExp | (string | RegExp)[], value: string) => boolean;
     matchAll: (pattern: string | RegExp, subject: string) => string[];
     padBoth: (value: string, length?: number, pad?: string) => string;
     padLeft: (value: string, length?: number, pad?: string) => string;

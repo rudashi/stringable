@@ -69,6 +69,14 @@ class Stringable {
                 return this;
             }
         });
+        Object.defineProperty(this, "charAt", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (index) => {
+                return Str_1.default.charAt(this._value, index);
+            }
+        });
         Object.defineProperty(this, "before", {
             enumerable: true,
             configurable: true,
@@ -334,6 +342,14 @@ class Stringable {
             writable: true,
             value: (pattern) => {
                 return Str_1.default.match(pattern, this._value);
+            }
+        });
+        Object.defineProperty(this, "isMatch", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (pattern) => {
+                return Str_1.default.isMatch(pattern, this._value);
             }
         });
         Object.defineProperty(this, "matchAll", {

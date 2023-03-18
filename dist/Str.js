@@ -25,6 +25,7 @@ exports.Str = {
     beforeLast: methods_1.beforeLast,
     between: methods_1.between,
     betweenFirst: methods_1.betweenFirst,
+    charAt: methods_1.charAt,
     camel: (value) => {
         if (typeof exports.Str._camelCache[value] !== 'undefined') {
             return exports.Str._camelCache[value];
@@ -66,6 +67,7 @@ exports.Str = {
     },
     mask: methods_1.mask,
     match: methods_1.match,
+    isMatch: methods_1.isMatch,
     matchAll: methods_1.matchAll,
     padBoth: methods_1.padBoth,
     padLeft: methods_1.padLeft,
@@ -125,7 +127,7 @@ exports.Str = {
         }
         if (!(/^[a-z]+$/).test(value)) {
             value = value
-                .replace(new RegExp(/(?<= )\S|^./, 'gu'), s => s.toLocaleUpperCase())
+                .replace(new RegExp(/(^|\s)\S/, 'gu'), s => s.toLocaleUpperCase())
                 .replace(new RegExp(/\s+/, 'gu'), '')
                 .replace(new RegExp(/(.)(?=[A-Z])/, 'gu'), '$1' + delimiter)
                 .toLocaleLowerCase();

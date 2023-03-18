@@ -68,14 +68,10 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 List of all static methods you can find [here](docs/statics.md#strings).
 
 ## TO DO
-- [charAt](docs/methods.md#charat)
-- [isMatch](docs/methods.md#ismatch)
 - [plural](docs/methods.md#plural)
 - [singular](docs/methods.md#singular)
 
 and for `Str`
-- [charAt](docs/statics.md#charat)
-- [isMatch](docs/statics.md#ismatch)
 - [password](docs/statics.md#password)
 - [orderedUuid](docs/statics.md#ordereduuid)
 

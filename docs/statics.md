@@ -133,7 +133,12 @@ Str.betweenFirst('[a] bc [d]', '[', ']');
 // 'a'
 ```
 ### charAt
-Not implemented
+The `charAt` function allows to get a character by index from a multibyte string:
+```js
+Str.charAt('Hello, world!', 1);
+
+// 'e'
+```
 ### camel
 The `camel` function converts the given string to `camelCase`:
 ```js
@@ -283,7 +288,16 @@ Str.isUuid('Taylor');
 // false
 ```
 ### isMatch
-Not implemented
+The `isMatch` function will return `true` if the string matches a given regular expression:
+```js
+Str.isMatch(/foo (.*)/, 'foo bar');
+
+// true
+
+Str.isMatch(/foo (.*)/, 'laravel');
+
+// false
+```
 ### kebab
 The `kebab` function converts the given string to `kebab-case`:
 ```js

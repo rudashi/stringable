@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.trim = exports.swap = exports.substrReplace = exports.substrCount = exports.substr = exports.stripTags = exports.startsWith = exports.squish = exports.slug = exports.headline = exports.title = exports.upper = exports.start = exports.reverse = exports.remove = exports.replaceLast = exports.replaceFirst = exports.replace = exports.replaceArray = exports.repeat = exports.parseCallback = exports.padRight = exports.padLeft = exports.padBoth = exports.matchAll = exports.match = exports.mask = exports.words = exports.lower = exports.limit = exports.length = exports.isUlid = exports.isUuid = exports.isJson = exports.isAscii = exports.is = exports.wrap = exports.finish = exports.explode = exports.excerpt = exports.endsWith = exports.containsAll = exports.contains = exports.betweenFirst = exports.between = exports.beforeLast = exports.before = exports.ascii = exports.afterLast = exports.after = void 0;
-exports.preg_quote = exports.wordCount = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = void 0;
+exports.substrReplace = exports.substrCount = exports.substr = exports.stripTags = exports.startsWith = exports.squish = exports.slug = exports.headline = exports.title = exports.upper = exports.start = exports.reverse = exports.remove = exports.replaceLast = exports.replaceFirst = exports.replace = exports.replaceArray = exports.repeat = exports.parseCallback = exports.padRight = exports.padLeft = exports.padBoth = exports.matchAll = exports.isMatch = exports.match = exports.mask = exports.words = exports.lower = exports.limit = exports.length = exports.isUlid = exports.isUuid = exports.isJson = exports.isAscii = exports.is = exports.wrap = exports.finish = exports.explode = exports.excerpt = exports.endsWith = exports.containsAll = exports.contains = exports.charAt = exports.betweenFirst = exports.between = exports.beforeLast = exports.before = exports.ascii = exports.afterLast = exports.after = void 0;
+exports.preg_quote = exports.wordCount = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = exports.trim = exports.swap = void 0;
 const after = (subject, search = '') => {
     if (search !== '' && subject.indexOf(search) >= 0) {
         return subject.substring(subject.indexOf(search) + search.length);
@@ -48,6 +48,11 @@ const betweenFirst = (subject, from = '', to = '') => {
     return (0, exports.before)((0, exports.after)(subject, from), to);
 };
 exports.betweenFirst = betweenFirst;
+const charAt = (subject, index) => {
+    const pos = index > 0 ? subject.charAt(index) : subject.slice(index, subject.length + index + 1);
+    return pos === '' ? false : pos;
+};
+exports.charAt = charAt;
 const contains = (haystack, needles, ignoreCase = false) => {
     if (needles === '') {
         return false;
@@ -221,6 +226,16 @@ const match = (pattern, subject) => {
     return '';
 };
 exports.match = match;
+const isMatch = (pattern, value) => {
+    pattern = Array.isArray(pattern) ? pattern : [pattern];
+    for (const item of pattern) {
+        if (new RegExp(item).test(value)) {
+            return true;
+        }
+    }
+    return false;
+};
+exports.isMatch = isMatch;
 const matchAll = (pattern, subject) => {
     var _a;
     const matches = subject.matchAll(new RegExp(pattern, 'g'));
