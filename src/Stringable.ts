@@ -75,6 +75,10 @@ export class Stringable {
         return this;
     }
 
+    public charAt = (index: number): string | false => {
+        return Str.charAt(this._value, index);
+    }
+
     public before = (search: string = ''): this => {
         this._value = Str.before(this._value, search);
 

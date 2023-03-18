@@ -6,6 +6,7 @@ import {
     beforeLast,
     between,
     betweenFirst,
+    charAt,
     contains,
     containsAll,
     endsWith,
@@ -88,6 +89,7 @@ export const Str = {
     beforeLast,
     between,
     betweenFirst,
+    charAt,
     camel: (value: string): string => {
         if (typeof Str._camelCache[value] !== 'undefined') {
             return Str._camelCache[value];

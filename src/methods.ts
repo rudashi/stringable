@@ -59,6 +59,12 @@ export const betweenFirst = (subject: string, from: string = '', to: string = ''
     return before(after(subject, from), to);
 }
 
+export const charAt = (subject: string, index: number): string | false => {
+    const pos = index > 0 ? subject.charAt(index) : subject.slice(index, subject.length + index + 1);
+
+    return pos === '' ? false : pos;
+}
+
 export const contains = (haystack: string, needles: string | Array<string>, ignoreCase: boolean = false): boolean => {
     if (needles === '') {
         return false;
