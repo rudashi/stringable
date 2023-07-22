@@ -43,4 +43,7 @@ it('returns a string with removed all extraneous white spaces', () => {
 
     expect(squish('    laravel    framework    '))
         .toBe('laravel framework');
+
+    expect(squish('laravelᅠᅠᅠᅠᅠᅠᅠᅠᅠᅠphpᅠᅠframework'))
+        .toBe('laravel php framework');
 });

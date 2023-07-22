@@ -443,7 +443,7 @@ export const slug = (title: string, separator: string = '-', language: string | 
 }
 
 export const squish = (value: string): string => {
-    return value.trim().replace(new RegExp(/\s+|\u3164+/, 'g'), ' ');
+    return value.trim().replace(new RegExp(/\s+|\u3164+|\u1160+/, 'g'), ' ');
 }
 
 export const startsWith = (haystack: string, needles: null | string | number | Array<string>): boolean => {
