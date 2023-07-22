@@ -1,3 +1,8 @@
+## [1.4.2](https://github.com/rudashi/stringable/compare/v1.4.1...v1.4.2) (2023-04-08)
+
+### Feature
+* Add `password` method to `Str
+
 ## [1.4.1](https://github.com/rudashi/stringable/compare/v1.4.0...v1.4.1) (2023-03-18)
 
 ### Feature

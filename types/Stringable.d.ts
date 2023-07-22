@@ -52,6 +52,7 @@ export declare const str: (string?: string) => Stringable | {
     padLeft: (value: string, length?: number, pad?: string) => string;
     padRight: (value: string, length?: number, pad?: string) => string;
     parseCallback: (callback: string, method?: string | null) => (string | null)[];
+    password: (length?: number, letters?: boolean, numbers?: boolean, symbols?: boolean) => string;
     random: (length?: number) => string;
     createRandomStringsUsing: (callable: import("./Str").Callable) => void;
     createRandomStringsUsingSequence: (sequence: import("./Str").AssociativeArray, whenMissing?: import("./Str").Callable) => void;

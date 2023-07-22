@@ -73,6 +73,23 @@ exports.Str = {
     padLeft: methods_1.padLeft,
     padRight: methods_1.padRight,
     parseCallback: methods_1.parseCallback,
+    password: (length = 32, letters = true, numbers = true, symbols = true) => {
+        let characters = [];
+        if (letters) {
+            characters.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+        }
+        if (numbers) {
+            characters.push('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        }
+        if (symbols) {
+            characters.push('~', '!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '.', ',', '<', '>', '?', '/', '\\', '{', '}', '[', ']', '|', ':', ';');
+        }
+        const random = characters.length * 3;
+        return new Array(length)
+            .fill(0)
+            .map(() => characters[Math.floor(crypto_1.default.randomInt(random) % characters.length)])
+            .join('');
+    },
     random: (length = 16) => {
         var _a;
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

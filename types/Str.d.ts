@@ -54,6 +54,7 @@ export declare const Str: {
     padLeft: (value: string, length?: number, pad?: string) => string;
     padRight: (value: string, length?: number, pad?: string) => string;
     parseCallback: (callback: string, method?: string | null) => (string | null)[];
+    password: (length?: number, letters?: boolean, numbers?: boolean, symbols?: boolean) => string;
     random: (length?: number) => string;
     createRandomStringsUsing: (callable: Callable) => void;
     createRandomStringsUsingSequence: (sequence: AssociativeArray, whenMissing?: Callable) => void;

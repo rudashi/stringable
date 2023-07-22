@@ -439,7 +439,17 @@ Str.parseCallback('Class@method');
 // ['Class', 'method']
 ```
 ### password
-Not implemented
+The `password` method may be used to generate a secure, random password of a given length. The password will consist 
+of a combination of letters, numbers, symbols, and spaces. By default, passwords are 32 characters long.
+```js
+Str.password();
+
+// 'EbJo2vE-AS:U,$%_gkrV4n,q~1xy/-_4'
+
+Str.password(12);
+
+// 'qwuar>#V|i]N'
+```
 ### random
 The `random` function generates a random string of the specified length:
 ```js

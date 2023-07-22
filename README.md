@@ -72,7 +72,6 @@ List of all static methods you can find [here](docs/statics.md#strings).
 - [singular](docs/methods.md#singular)
 
 and for `Str`
-- [password](docs/statics.md#password)
 - [orderedUuid](docs/statics.md#ordereduuid)
 
 ## Changelog
