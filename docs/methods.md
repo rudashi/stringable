@@ -28,6 +28,7 @@
 - [isEmpty](#isempty)
 - [isNotEmpty](#isnotempty)
 - [isJson](#isjson)
+- [isUrl](#isurl)
 - [isUlid](#isulid)
 - [isUuid](#isuuid)
 - [isMatch](#ismatch)
@@ -365,6 +366,17 @@ Stringable.of('{"first": "John", "last": "Doe"}').isJson();
 // true
 
 Stringable.of('{first: "John", last: "Doe"}').isJson();
+
+// false
+```
+### isUrl
+The `isUrl` method determines if a given string is a valid URL:
+```js
+Stringable.of('http://example.com').isUrl();
+
+// true
+
+Stringable.of('example').isUrl();
 
 // false
 ```

@@ -21,6 +21,7 @@
 - [is](#is)
 - [isAscii](#isascii)
 - [isJson](#isjson)
+- [isUrl](#isUrl)
 - [isUlid](#isulid)
 - [isUuid](#isuuid)
 - [isMatch](#ismatch)
@@ -262,6 +263,17 @@ Str.isJson('{"first": "John", "last": "Doe"}');
 // true
 
 Str.isJson('{first: "John", last: "Doe"}');
+
+// false
+```
+### isUrl
+The `isUrl` function determines if a given string is a valid URL:
+```js
+Str.isUrl('https://example.com');
+
+// true
+
+Str.isUrl('example');
 
 // false
 ```

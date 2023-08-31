@@ -67,13 +67,6 @@ List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 ## Strings methods
 List of all static methods you can find [here](docs/statics.md#strings).
 
-## TO DO
-- [plural](docs/methods.md#plural)
-- [singular](docs/methods.md#singular)
-
-and for `Str`
-- [orderedUuid](docs/statics.md#ordereduuid)
-
 ## Changelog
 
 Detailed changes for each release are documented in the [release notes](https://github.com/rudashi/stringable/releases).

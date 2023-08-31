@@ -1,3 +1,11 @@
+## [1.4.4](https://github.com/rudashi/stringable/compare/v1.4.2...v1.4.4) (2023-08-31)
+
+### Feature
+* Add `isUrl` method
+
+### Fix
+* Added empty string definition to `squish`
+
 ## [1.4.2](https://github.com/rudashi/stringable/compare/v1.4.1...v1.4.2) (2023-04-08)
 
 ### Feature
