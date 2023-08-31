@@ -194,6 +194,38 @@ export const isJson = (value: string): boolean => {
     return true;
 }
 
+export const isUrl = (value: string): boolean => {
+    if (value === '') {
+        return false;
+    }
+
+    if (value.indexOf('//') < 0) {
+        return false;
+    }
+
+    value = value.substring(0, 2) === '//' ? 'https:' + value : value;
+
+    if (value.indexOf('..') > -1) {
+        return false;
+    }
+
+    if (new RegExp(/\/{3,}/).test(value)) {
+        return false;
+    }
+
+    try {
+        const url = new URL(value);
+
+        if (['http:', 'https:', 'ftp:', 'ftps:', 'file:', 'git:'].indexOf(url.protocol) < 0) {
+            return false;
+        }
+
+        return url.host[0] !== '.';
+    } catch (_) {
+        return false;
+    }
+}
+
 export const isUuid = (value: string): boolean => {
     return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(value);
 }

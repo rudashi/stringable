@@ -17,6 +17,7 @@ import {
     is,
     isAscii,
     isJson,
+    isUrl,
     isUuid,
     isUlid,
     length,
@@ -75,10 +76,10 @@ export type AssociativeArray = {
 export type Callable = Function | null;
 
 export const Str = {
-    randomStringFactory: <Callable> null,
-    _camelCache: <{[key: string]: string}> {},
-    _studlyCache: <{[key: string]: string}> {},
-    _snakeCache: <{[key: string]: Record<string, string>}> {},
+    randomStringFactory: <Callable>null,
+    _camelCache: <{ [key: string]: string }>{},
+    _studlyCache: <{ [key: string]: string }>{},
+    _snakeCache: <{ [key: string]: Record<string, string> }>{},
 
     of: (string: string): Stringable => {
         return Stringable.of(string);
@@ -108,6 +109,7 @@ export const Str = {
     is,
     isAscii,
     isJson,
+    isUrl,
     isUuid,
     isUlid,
     kebab: (value: string): string => {
