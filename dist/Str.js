@@ -42,6 +42,7 @@ exports.Str = {
     is: methods_1.is,
     isAscii: methods_1.isAscii,
     isJson: methods_1.isJson,
+    isUrl: methods_1.isUrl,
     isUuid: methods_1.isUuid,
     isUlid: methods_1.isUlid,
     kebab: (value) => {

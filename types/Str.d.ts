@@ -37,6 +37,7 @@ export declare const Str: {
     is: (pattern: string | (string | null)[], value: string) => boolean;
     isAscii: (value: string) => boolean;
     isJson: (value: string) => boolean;
+    isUrl: (value: string) => boolean;
     isUuid: (value: string) => boolean;
     isUlid: (value: string) => boolean;
     kebab: (value: string) => string;

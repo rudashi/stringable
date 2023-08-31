@@ -20,6 +20,7 @@ export declare const wrap: (value: string, before: string, after?: string) => st
 export declare const is: (pattern: string | Array<string | null>, value: string) => boolean;
 export declare const isAscii: (value: string) => boolean;
 export declare const isJson: (value: string) => boolean;
+export declare const isUrl: (value: string) => boolean;
 export declare const isUuid: (value: string) => boolean;
 export declare const isUlid: (value: string) => boolean;
 export declare const length: (value: string) => number;

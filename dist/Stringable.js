@@ -242,6 +242,14 @@ class Stringable {
                 return Str_1.default.isJson(this._value);
             }
         });
+        Object.defineProperty(this, "isUrl", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => {
+                return Str_1.default.isUrl(this._value);
+            }
+        });
         Object.defineProperty(this, "isUlid", {
             enumerable: true,
             configurable: true,

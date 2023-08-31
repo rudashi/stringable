@@ -35,6 +35,7 @@ export declare const str: (string?: string) => Stringable | {
     is: (pattern: string | (string | null)[], value: string) => boolean;
     isAscii: (value: string) => boolean;
     isJson: (value: string) => boolean;
+    isUrl: (value: string) => boolean;
     isUuid: (value: string) => boolean;
     isUlid: (value: string) => boolean;
     kebab: (value: string) => string;
@@ -120,6 +121,7 @@ export declare class Stringable {
     isEmpty: () => boolean;
     isNotEmpty: () => boolean;
     isJson: () => boolean;
+    isUrl: () => boolean;
     isUlid: () => boolean;
     isUuid: () => boolean;
     kebab: () => this;

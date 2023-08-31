@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.substrReplace = exports.substrCount = exports.substr = exports.stripTags = exports.startsWith = exports.squish = exports.slug = exports.headline = exports.title = exports.upper = exports.start = exports.reverse = exports.remove = exports.replaceLast = exports.replaceFirst = exports.replace = exports.replaceArray = exports.repeat = exports.parseCallback = exports.padRight = exports.padLeft = exports.padBoth = exports.matchAll = exports.isMatch = exports.match = exports.mask = exports.words = exports.lower = exports.limit = exports.length = exports.isUlid = exports.isUuid = exports.isJson = exports.isAscii = exports.is = exports.wrap = exports.finish = exports.explode = exports.excerpt = exports.endsWith = exports.containsAll = exports.contains = exports.charAt = exports.betweenFirst = exports.between = exports.beforeLast = exports.before = exports.ascii = exports.afterLast = exports.after = void 0;
-exports.preg_quote = exports.wordCount = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = exports.trim = exports.swap = void 0;
+exports.substrCount = exports.substr = exports.stripTags = exports.startsWith = exports.squish = exports.slug = exports.headline = exports.title = exports.upper = exports.start = exports.reverse = exports.remove = exports.replaceLast = exports.replaceFirst = exports.replace = exports.replaceArray = exports.repeat = exports.parseCallback = exports.padRight = exports.padLeft = exports.padBoth = exports.matchAll = exports.isMatch = exports.match = exports.mask = exports.words = exports.lower = exports.limit = exports.length = exports.isUlid = exports.isUuid = exports.isUrl = exports.isJson = exports.isAscii = exports.is = exports.wrap = exports.finish = exports.explode = exports.excerpt = exports.endsWith = exports.containsAll = exports.contains = exports.charAt = exports.betweenFirst = exports.between = exports.beforeLast = exports.before = exports.ascii = exports.afterLast = exports.after = void 0;
+exports.preg_quote = exports.wordCount = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = exports.trim = exports.swap = exports.substrReplace = void 0;
 const after = (subject, search = '') => {
     if (search !== '' && subject.indexOf(search) >= 0) {
         return subject.substring(subject.indexOf(search) + search.length);
@@ -160,6 +160,32 @@ const isJson = (value) => {
     return true;
 };
 exports.isJson = isJson;
+const isUrl = (value) => {
+    if (value === '') {
+        return false;
+    }
+    if (value.indexOf('//') < 0) {
+        return false;
+    }
+    value = value.substring(0, 2) === '//' ? 'https:' + value : value;
+    if (value.indexOf('..') > -1) {
+        return false;
+    }
+    if (new RegExp(/\/{3,}/).test(value)) {
+        return false;
+    }
+    try {
+        const url = new URL(value);
+        if (['http:', 'https:', 'ftp:', 'ftps:', 'file:', 'git:'].indexOf(url.protocol) < 0) {
+            return false;
+        }
+        return url.host[0] !== '.';
+    }
+    catch (_) {
+        return false;
+    }
+};
+exports.isUrl = isUrl;
 const isUuid = (value) => {
     return new RegExp(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i).test(value);
 };
@@ -371,7 +397,7 @@ const slug = (title, separator = '-', language = 'en', dictionary = { '@': 'at' 
 };
 exports.slug = slug;
 const squish = (value) => {
-    return value.trim().replace(new RegExp(/\s+|\u3164+/, 'g'), ' ');
+    return value.trim().replace(new RegExp(/\s+|\u3164+|\u1160+/, 'g'), ' ');
 };
 exports.squish = squish;
 const startsWith = (haystack, needles) => {
