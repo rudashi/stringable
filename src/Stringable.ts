@@ -179,6 +179,10 @@ export class Stringable {
         return Str.isJson(this._value);
     }
 
+    public isUrl = (): boolean => {
+        return Str.isUrl(this._value);
+    }
+
     public isUlid = (): boolean => {
         return Str.isUlid(this._value);
     }
