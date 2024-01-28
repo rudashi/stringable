@@ -147,6 +147,41 @@ export const wrap = (value: string, before: string, after?: string): string => {
     return before + value + (after ?? before);
 }
 
+export const wordWrap = (str: string, width: number = 75, breakChar: string = "\n", cut: boolean = false): string => {
+    if (str === '') {
+        return str
+    }
+
+    let pattern = `(?![^\\n]{1,${width}}$)([^\\n]{1,${width}})\\s`;
+
+    if (cut) {
+        let result = '';
+        let line = '';
+
+        for (const word of str.split(/\s+/)) {
+            if (word.length < width) {
+                if ((line + word + ' ').length > width) {
+                    line = line.trimEnd() + breakChar
+                }
+
+                line += word + ' '
+            } else {
+                if (line !== '' && !line.endsWith(breakChar)) {
+                    line = line.trimEnd() + breakChar
+                }
+
+                line += word.replace(new RegExp(`.{1,${width}}`, 'gu'), match => match + breakChar);
+            }
+
+            result = line;
+        }
+
+        return result.slice(0, breakChar.length * -1);
+    }
+
+    return str.replace(new RegExp(pattern, 'gu'),  '$1' + breakChar);
+}
+
 export const is = (pattern: string | Array<string | null>, value: string): boolean => {
     pattern = pattern instanceof Array ? pattern : [pattern];
 
