@@ -58,6 +58,7 @@ import {
     ucfirst,
     ucsplit,
     wordCount,
+    wordWrap,
     preg_quote,
     ExcerptOptions,
 } from './methods';
@@ -118,6 +119,7 @@ export const Str = {
     length,
     limit,
     lower,
+    wordWrap,
     words,
     markdown: (string: string, options: MarkdownConfiguration = defaultConfiguration): string => {
         options = {...defaultConfiguration, ...options};
