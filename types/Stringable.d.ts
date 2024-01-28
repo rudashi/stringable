@@ -42,6 +42,7 @@ export declare const str: (string?: string) => Stringable | {
     length: (value: string) => number;
     limit: (value: string, limit?: number, end?: string) => string;
     lower: (value: string) => string;
+    wordWrap: (str: string, width?: number, breakChar?: string, cut?: boolean) => string;
     words: (value: string, words?: number, end?: string) => string;
     markdown: (string: string, options?: MarkdownConfiguration) => string;
     inlineMarkdown: (string: string, options?: MarkdownConfiguration) => string;
@@ -189,6 +190,7 @@ export declare class Stringable {
     whenTest: (pattern: RegExp | string, callback: Closure, defaultValue?: Closure) => this;
     wordCount: () => number;
     words: (words?: number, end?: string) => this;
+    wordWrap: (width?: number, breaks?: string, cut?: boolean) => this;
     wrap: (before: string, after?: string) => this;
     toHtmlString: () => Element | Node | null;
     dump: () => this;

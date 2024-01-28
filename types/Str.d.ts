@@ -44,6 +44,7 @@ export declare const Str: {
     length: (value: string) => number;
     limit: (value: string, limit?: number, end?: string) => string;
     lower: (value: string) => string;
+    wordWrap: (str: string, width?: number, breakChar?: string, cut?: boolean) => string;
     words: (value: string, words?: number, end?: string) => string;
     markdown: (string: string, options?: MarkdownConfiguration) => string;
     inlineMarkdown: (string: string, options?: MarkdownConfiguration) => string;

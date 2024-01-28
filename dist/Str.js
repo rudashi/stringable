@@ -51,6 +51,7 @@ exports.Str = {
     length: methods_1.length,
     limit: methods_1.limit,
     lower: methods_1.lower,
+    wordWrap: methods_1.wordWrap,
     words: methods_1.words,
     markdown: (string, options = markdown_1.defaultConfiguration) => {
         options = Object.assign(Object.assign({}, markdown_1.defaultConfiguration), options);

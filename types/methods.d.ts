@@ -17,6 +17,7 @@ export declare const excerpt: (text: string, phrase?: string, { radius, omission
 export declare const explode: (text: string, delimiter: string, limit?: number) => Array<string>;
 export declare const finish: (value: string, cap: string) => string;
 export declare const wrap: (value: string, before: string, after?: string) => string;
+export declare const wordWrap: (str: string, width?: number, breakChar?: string, cut?: boolean) => string;
 export declare const is: (pattern: string | Array<string | null>, value: string) => boolean;
 export declare const isAscii: (value: string) => boolean;
 export declare const isJson: (value: string) => boolean;

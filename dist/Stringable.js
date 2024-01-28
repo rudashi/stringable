@@ -881,6 +881,15 @@ class Stringable {
                 return this;
             }
         });
+        Object.defineProperty(this, "wordWrap", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (width = 75, breaks = "\n", cut = false) => {
+                this._value = Str_1.default.wordWrap(this._value, width, breaks, cut);
+                return this;
+            }
+        });
         Object.defineProperty(this, "wrap", {
             enumerable: true,
             configurable: true,
