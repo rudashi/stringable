@@ -590,6 +590,12 @@ export class Stringable {
         return this;
     }
 
+    public wordWrap = (width: number = 75, breaks: string = "\n", cut: boolean = false): this => {
+        this._value = Str.wordWrap(this._value, width, breaks, cut);
+
+        return this;
+    }
+
     public wrap = (before: string, after?: string): this => {
         this._value = Str.wrap(this._value, before, after);
 
