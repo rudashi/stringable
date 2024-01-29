@@ -603,6 +603,14 @@ export const swap = (map: Record<string, string>, subject: string): string => {
         .join('');
 }
 
+export const take = (value: string, limit: number): string => {
+    if (limit < 0) {
+        return substr(value, limit);
+    }
+
+    return substr(value, 0, limit);
+}
+
 export const trim = (value: string, characters?: string): string => {
     return characters
         ? rtrim(ltrim(value, characters), characters)

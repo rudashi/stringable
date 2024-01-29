@@ -565,6 +565,13 @@ Str.upper('laravel');
 
 // 'LARAVEL'
 ```
+### take
+The `take` function returns a specified number of characters from the beginning of a string:
+```js
+Str.take('Build something amazing!', 5);
+
+// 'Build'
+```
 ### title
 The `title` function converts the given string to `Title Case`:
 ```js

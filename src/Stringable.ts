@@ -602,6 +602,12 @@ export class Stringable {
         return this;
     }
 
+    public take = (limit: number): this => {
+        this._value = Str.take(this._value, limit);
+
+        return this;
+    }
+
     public toHtmlString = (): Element | Node | null => {
         const template = document.createElement('template');
 
