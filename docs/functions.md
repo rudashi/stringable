@@ -1,17 +1,10 @@
-## Static Methods
+## Functions
 
-### of
-The `of` function creates new instance of `Stringable` class:
-```js
-Str.of('foo bar');
-
-// Stringable Object
-```
 ### after
 The `after` function returns everything after the given value in a string.
 The entire string will be returned if the value does not exist within the string:
 ```js
-Str.after('This is my name', 'This is');
+after('This is my name', 'This is');
 
 // ' my name'
 ```
@@ -19,100 +12,93 @@ Str.after('This is my name', 'This is');
 The `afterLast` function returns everything after the last occurrence of the given value in a string.
 The entire string will be returned if the value does not exist within the string:
 ```js
-Str.afterLast('App\\Http\\Controllers\\Controller', '\\');
+afterLast('App\\Http\\Controllers\\Controller', '\\');
 
 // 'Controller'
 ```
 ### ascii
 The `ascii` function will attempt to transliterate the string into an ASCII value:
 ```js
-Str.ascii('ü');
+ascii('ü');
 
 // 'u'
 ```
 ### before
 The `before` function returns everything before the given value in a string:
 ```js
-Str.before('This is my name', 'my name');
+before('This is my name', 'my name');
 
 // 'This is '
 ```
 ### beforeLast
 The `beforeLast` function returns everything before the last occurrence of the given value in a string:
 ```js
-Str.beforeLast('This is my name', 'is');
+beforeLast('This is my name', 'is');
 
 // 'This '
 ```
 ### between
 The `between` function returns the portion of a string between two values:
 ```js
-Str.between('This is my name', 'This', 'name');
+between('This is my name', 'This', 'name');
 
 // ' is my '
 ```
 ### betweenFirst
 The `betweenFirst` function returns the smallest possible portion of a string between two values:
 ```js
-Str.betweenFirst('[a] bc [d]', '[', ']');
+betweenFirst('[a] bc [d]', '[', ']');
 
 // 'a'
-```
-### camel
-The `camel` function converts the given string to `camelCase`:
-```js
-Str.camel('foo_bar');
-
-// 'fooBar'
 ```
 ### charAt
 The `charAt` function allows to get a character by index from a multibyte string:
 ```js
-Str.charAt('Hello, world!', 1);
+charAt('Hello, world!', 1);
 
 // 'e'
 ```
 ### contains
 The `contains` function determines if the given string contains the given value. This function is case-sensitive:
 ```js
-Str.contains('This is my name', 'my');
+contains('This is my name', 'my');
 
 // true
 ```
 You may also pass an array of values to determine if the given string contains any of the values in the array:
 ```js
-Str.contains('This is my name', ['my', 'foo']);
+contains('This is my name', ['my', 'foo']);
 
 // true
 ```
 ### containsAll
 The `containsAll` function determines if the given string contains all the values in the given array:
 ```js
-Str.containsAll('This is my name', ['my', 'name']);
+containsAll('This is my name', ['my', 'name']);
 
 // true
 ```
 ### endsWith
 The `endsWith` function determines if the given string ends with the given value:
 ```js
-Str.endsWith('This is my name', 'name');
+endsWith('This is my name', 'name');
 
 // true
 ```
 You may also pass an array of values to determine if the given string ends with any of the values in the array:
 ```js
-Str.endsWith('This is my name', ['name', 'foo']);
+endsWith('This is my name', ['name', 'foo']);
 
 // true
 
-Str.endsWith('This is my name', ['this', 'foo']);
+endsWith('This is my name', ['this', 'foo']);
 
 // false
 ```
 ### excerpt
 The `excerpt` function extracts an excerpt from the string that matches the first instance of a phrase within that string:
 ```js
-Str.excerpt('This is my name', 'my', {
+excerpt('This is my name', 'my', {
     radius: 3 
 });
 
@@ -122,7 +108,7 @@ The `radius` option, which defaults to `100`, allows you to define the number of
 
 In addition, you may use the `omission` option to change the string that will be prepended and appended to the truncated string:
 ```js
-Str.excerpt('This is my name', 'name', {
+excerpt('This is my name', 'name', {
     radius: 3,
     omission: '(...) '
 });
@@ -132,120 +118,123 @@ Str.excerpt('This is my name', 'name', {
 ### explode
 The `explode` function splits the string by the given delimiter and returns an array containing each section of the split string:
 ```js
-Str.explode('foo bar baz', ' ');
+explode('foo bar baz', ' ');
 
 // ['foo', 'bar', 'baz']
 ```
 ### finish
 The `finish` function adds a single instance of the given value to a string if it does not already end with that value:
 ```js
-Str.finish('this/string', '/');
+finish('this/string', '/');
 
 // 'this/string/'
 
-Str.finish('this/string/', '/');
+finish('this/string/', '/');
 
 // 'this/string/'
 ```
-### wrap
-The `wrap` function wraps the string with the given strings:
+### headline
+The `headline` function will convert strings delimited by casing, hyphens, or underscores into a space delimited string with each word's first letter capitalized:
 ```js
-Str.wrap('is', 'This ', ' me!');
+headline('steve_jobs');
 
-// 'This is me!'
+// 'Steve Jobs'
+headline('EmailNotificationSent');
+
+// 'Email Notification Sent'
 ```
 ### is
 The `is` function determines if a given string matches a given pattern. Asterisks may be used as wildcard values
 ```js
-Str.is('foo*', 'foobar');
+is('foo*', 'foobar');
 
 // true
 
-Str.is(/baz*/, 'foobar');
+is(/baz*/, 'foobar');
 
 // false
 ```
 ### isAscii
 The `isAscii` function determines if a given string is an ASCII string:
 ```js
-Str.isAscii('Taylor');
+isAscii('Taylor');
 
 // true
 
-Str.isAscii('ü');
+isAscii('ü');
 
 // false
 ```
 ### isJson
 The `isJson` function determines if a given string is valid JSON:
 ```js
-Str.isJson('[1,2,3]');
+isJson('[1,2,3]');
 
 // true
 
-Str.isJson('{"first": "John", "last": "Doe"}');
+isJson('{"first": "John", "last": "Doe"}');
 
 // true
 
-Str.isJson('{first: "John", last: "Doe"}');
-
-// false
-```
-### isUrl
-The `isUrl` function determines if a given string is a valid URL:
-```js
-Str.isUrl('https://example.com');
-
-// true
-
-Str.isUrl('example');
+isJson('{first: "John", last: "Doe"}');
 
 // false
 ```
 ### isUlid
 The `isUlid` function determines if a given string is a valid ULID:
 ```js
-Str.isUlid('01ARZ3NDEKTSV4RRFFQ69G5FAV');
+isUlid('01ARZ3NDEKTSV4RRFFQ69G5FAV');
 
 // true
 
-Str.isUlid('Taylor');
+isUlid('Taylor');
+
+// false
+```
+### isUrl
+The `isUrl` function determines if a given string is a valid URL:
+```js
+isUrl('https://example.com');
+
+// true
+
+isUrl('example');
 
 // false
 ```
 ### isUuid
 The `isUuid` function determines if a given string is a UUID:
 ```js
-Str.isUuid('5ace9ab9-e9cf-4ec6-a19d-5881212a452c');
+isUuid('5ace9ab9-e9cf-4ec6-a19d-5881212a452c');
 
 // true
 
-Str.isUuid('Taylor');
+isUuid('Taylor');
 
 // false
 ```
 ### isMatch
 The `isMatch` function will return `true` if the string matches a given regular expression:
 ```js
-Str.isMatch(/foo (.*)/, 'foo bar');
+isMatch(/foo (.*)/, 'foo bar');
 
 // true
 
-Str.isMatch(/foo (.*)/, 'laravel');
+isMatch(/foo (.*)/, 'laravel');
 
 // false
 ```
-### kebab
-The `kebab` function converts the given string to `kebab-case`:
+### lcfirst
+The `lcfirst` function returns the given string with the first character lowercase:
 ```js
-Str.kebab('fooBar');
+lcfirst('Foo Bar');
 
-// 'foo-bar'
+// 'foo Bar'
 ```
 ### length
 The `length` function returns the length of the given string:
 ```js
-Str.length('Laravel');
+length('Laravel');
 
 // 7
 ```
@@ -253,319 +242,232 @@ Str.length('Laravel');
 The `limit` function truncates the given string to the specified length:
 
 ```js
-Str.limit('The quick brown fox jumps over the lazy dog', 20);
+limit('The quick brown fox jumps over the lazy dog', 20);
 
 // 'The quick brown fox...'
 ```
 You may also pass a second argument to change the string that will be appended to the end of the truncated string:
 ```js
-Str.limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
+limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
 
 // 'The quick brown fox (...)'
 ```
 ### lower
 The `lower` function converts the given string to lowercase:
 ```js
-Str.lower('LARAVEL');
+lower('LARAVEL');
 
 // 'laravel'
 ```
-### words
-The `words` function limits the number of words in a string. If necessary, you may specify an additional string that will be appended to the truncated string:
+### ltrim
+The `ltrim` function trims the left side of the string:
 ```js
-Str.words('Perfectly balanced, as all things should be.', 3, ' >>>');
+ltrim('  Laravel  ');
 
-// 'Perfectly balanced, as >>>'
-```
-### markdown
-The `markdown` function converts GitHub flavored Markdown into HTML:
-```js
-Str.markdown('# Laravel');
+// 'Laravel  '
 
-// <h1>Laravel</h1>
+ltrim('/Laravel/', '/');
 
-Str.markdown('# Taylor <b>Otwell</b>', {'html_input': 'strip'});
-
-// <h1>Taylor Otwell</h1>
-```
-### inlineMarkdown
-The `inlineMarkdown` function converts GitHub flavored Markdown into inline HTML.
-However, unlike the markdown function, it does not wrap all generated HTML in a block-level element:
-```js
-Str.inlineMarkdown('**Laravel**');
-
-// <strong>Laravel</strong>
+// 'Laravel/'
 ```
 ### mask
 The `mask` function masks a portion of a string with a repeated character, and may be used to obfuscate
 segments of strings such as email addresses and phone numbers:
 ```js
-Str.mask('taylor@example.com', '*', 3);
+mask('taylor@example.com', '*', 3);
 
 // 'tay***************'
 ```
 If needed, you provide a negative number as the third argument to the `mask` function, which will instruct the function
 to begin masking at the given distance from the end of the string:
 ```js
-Str.mask('taylor@example.com', '*', -15, 3);
+mask('taylor@example.com', '*', -15, 3);
 
 // 'tay***@example.com'
 ```
 ### match
 The `match` function will return the portion of a string that matches a given regular expression pattern:
 ```js
-Str.match('bar', 'foo bar');
+match('bar', 'foo bar');
 
 // 'bar'
 
-Str.match(/foo (.*)/, 'foo bar');
+match(/foo (.*)/, 'foo bar');
 
 // 'bar'
 ```
 ### matchAll
 The `matchAll` function will return an array containing the portions of a string that match a given regular expression pattern:
 ```js
-Str.matchAll('bar', 'bar foo bar');
+matchAll('bar', 'bar foo bar');
 
 // ['bar', 'bar']
 ```
 If you specify a matching group within the expression, package will return an array of that group's matches:
 ```js
-Str.matchAll(/f(\w*)/, 'bar fun bar fly');
+matchAll(/f(\w*)/, 'bar fun bar fly');
 
 // ['un', 'ly']
 ```
 ### padBoth
 The `padBoth` function wraps both sides of a string with another string until the final string reaches the desired length:
 ```js
-Str.padBoth('James', 10, '_');
+padBoth('James', 10, '_');
 
 // '__James___'
 
-Str.padBoth('James', 10);
+padBoth('James', 10);
 
 // '  James   '
 ```
 ### padLeft
 The `padLeft` function wraps the left side of a string with another string until the final string reaches the desired length:
 ```js
-Str.padLeft('James', 10, '-=');
+padLeft('James', 10, '-=');
 
 // '-=-=-James'
 
-Str.padLeft('James', 10);
+padLeft('James', 10);
 
 // '     James'
 ```
 ### padRight
 The `padRight` function wraps the right side of a string with another string until the final string reaches the desired length:
 ```js
-Str.padRight('James', 10, '-');
+padRight('James', 10, '-');
 
 // 'James-----'
 
-Str.padRight('James', 10);
+padRight('James', 10);
 
 // 'James     '
 ```
 ### parseCallback
 The `parseCallback` function parse to an array a `Class@method` style callback into class and method:
 ```js
-Str.parseCallback('Class@method');
+parseCallback('Class@method');
 
 // ['Class', 'method']
 ```
-### password
-The `password` method may be used to generate a secure, random password of a given length. The password will consist 
-of a combination of letters, numbers, symbols, and spaces. By default, passwords are 32 characters long.
+### preg_quote
+The `preg_quote` function quote regular expression characters:
 ```js
-Str.password();
+preg_quote('*RRRING* Hello?');
 
-// 'EbJo2vE-AS:U,$%_gkrV4n,q~1xy/-_4'
-
-Str.password(12);
-
-// 'qwuar>#V|i]N'
+// '\*RRRING\* Hello\?'
 ```
-### random
-The `random` function generates a random string of the specified length:
+### remove
+The `remove` function removes the given value or array of values from the string:
 ```js
-Str.random(40);
-```
-### createRandomStringsUsing
-The `createRandomStringsUsing` function allows to intercept and control the random string generation.
-```js
-Str.createRandomStringsUsing((length) => `xyz|${length}`);
-Str.random(7);
+remove('quite', 'Arkansas is quite beautiful!');
 
-// 'xyz:7'
-```
-### createRandomStringsUsingSequence
-The `createRandomStringsUsingSequence` function allows to set a sequence that will be used to generate random strings.
-```js
-Str.createRandomStringsUsingSequence({0: 'x', 2: 'y', 3: 'z'});
-
-Str.random();
-// 'x'
-Str.random();
-// random String
-Str.random();
-// 'y'
-```
-### createRandomStringsNormally
-The `createRandomStringsNormally` function resets to default random string generator.
-```js
-Str.createRandomStringsUsing((length) => `xyz|${length}`);
-Str.createRandomStringsNormally();
-Str.random(7);
-
-// random 7 characters
+// 'Arkansas is beautiful!'
 ```
 ### repeat
 The `repeat` function repeats the given value N times:
 ```js
-Str.repeat('a', '5');
+repeat('a', '5');
 
 // 'aaaaa'
-```
-### replaceArray
-The `replaceArray` function replaces a given value in the string sequentially using an array:
-```js
-Str.replaceArray('?', ['8:30', '9:00'], 'The event will take place between ? and ?');
-
-// 'The event will take place between 8:30 and 9:00'
 ```
 ### replace
 The `replace` function replaces a given string within the string:
 ```js
-Str.replace('6.x', '7.x', 'Laravel 6.x');
+replace('6.x', '7.x', 'Laravel 6.x');
 
 // 'Laravel 7.x'
+```
+### replaceArray
+The `replaceArray` function replaces a given value in the string sequentially using an array:
+```js
+replaceArray('?', ['8:30', '9:00'], 'The event will take place between ? and ?');
+
+// 'The event will take place between 8:30 and 9:00'
 ```
 ### replaceFirst
 The `replaceFirst` function replaces the first occurrence of a given value in a string:
 ```js
-Str.replaceFirst('the', 'a', 'the quick brown fox jumps over the lazy dog');
+replaceFirst('the', 'a', 'the quick brown fox jumps over the lazy dog');
 
 // 'a quick brown fox jumps over the lazy dog'
 ```
 ### replaceLast
 The `replaceLast` function replaces the last occurrence of a given value in a string:
 ```js
-Str.replaceLast('the', 'a', 'the quick brown fox jumps over the lazy dog');
+replaceLast('the', 'a', 'the quick brown fox jumps over the lazy dog');
 
 // 'the quick brown fox jumps over a lazy dog'
 ```
-### remove
-The `remove` function removes the given value or array of values from the string:
-```js
-Str.remove('quite', 'Arkansas is quite beautiful!');
 
-// 'Arkansas is beautiful!'
-```
 You may also pass `false` as a third parameter to ignore case when removing strings.
 ### reverse
 The `reverse` function reverses the given string:
 ```js
-Str.reverse('Hello World');
+reverse('Hello World');
 
 // 'dlroW olleH'
 ```
-### start
-The `start` function adds a single instance of the given value to a string if it does not already start with that value:
+### rtrim
+The `rtrim` function trims the right side of the given string:
 ```js
-Str.start('this/string', '/');
+trim('  Laravel  ');
 
-// '/this/string'
+// '  Laravel'
 
-Str.start('/this/string', '/');
+rtrim('/Laravel/', '/');
 
-// '/this/string'
-```
-### upper
-The `upper` function converts the given string to uppercase:
-```js
-Str.upper('laravel');
-
-// 'LARAVEL'
-```
-### take
-The `take` function returns a specified number of characters from the beginning of a string:
-```js
-Str.take('Build something amazing!', 5);
-
-// 'Build'
-```
-### title
-The `title` function converts the given string to `Title Case`:
-```js
-Str.title('a nice title uses the correct case');
-
-// 'A Nice Title Uses The Correct Case'
-```
-### headline
-The `headline` function will convert strings delimited by casing, hyphens, or underscores into a space delimited string with each word's first letter capitalized:
-```js
-Str.headline('steve_jobs');
-
-// 'Steve Jobs'
-Str.headline('EmailNotificationSent');
-
-// 'Email Notification Sent'
+// '/Laravel'
 ```
 ### slug
 The `slug` function generates a URL friendly "slug" from the given string:
 ```js
-Str.slug('Laravel Framework', '-');
+slug('Laravel Framework', '-');
 
 // 'laravel-framework'
-```
-### snake
-The `snake` function converts the given string to `snake_case`:
-```js
-Str.snake('fooBar');
-
-// 'foo_bar'
 ```
 ### squish
 The `squish` function removes all extraneous white space from a string, including extraneous white space between words:
 ```js
-Str.squish('    laravel    framework    ');
+squish('    laravel    framework    ');
 
 // 'laravel framework'
+```
+### start
+The `start` function adds a single instance of the given value to a string if it does not already start with that value:
+```js
+start('this/string', '/');
+
+// '/this/string'
+
+start('/this/string', '/');
+
+// '/this/string'
 ```
 ### startsWith
 The `startsWith` function determines if the given string begins with the given value:
 ```js
-Str.startsWith('This is my name', 'This');
+startsWith('This is my name', 'This');
 
 // true
 ```
 ### stripTags
 The `stripTags` function strips HTML and PHP tags from the given string:
 ```js
-Str.stripTags('before<br>after');
+stripTags('before<br>after');
 
 // 'beforeafter'
-```
-### studly
-The `studly` function converts the given string to `StudlyCase`:
-```js
-Str.studly('foo_bar');
-
-// 'FooBar'
 ```
 ### substr
 The `substr` function returns the portion of string specified by the start and length parameters:
 ```js
-Str.substr('The Laravel Framework', 4, 7);
+substr('The Laravel Framework', 4, 7);
 
 // 'Laravel'
 ```
 ### substrCount
 The `substrCount` function returns the number of occurrences of a given value in the given string:
 ```js
-Str.substrCount('If you like ice cream, you will like snow cones.', 'like');
+substrCount('If you like ice cream, you will like snow cones.', 'like');
 
 // 2
 ```
@@ -574,89 +476,88 @@ The `substrReplace` function replaces text within a portion of a string, startin
 and replacing the number of characters specified by the fourth argument. Passing `0` to the function's fourth argument
 will insert the string at the specified position without replacing any of the existing characters in the string:
 ```js
-Str.substrReplace('1300', ':', 2);
+substrReplace('1300', ':', 2);
 
 // '13':
 
-Str.substrReplace('The Framework', ' Laravel', 3, 0);
+substrReplace('The Framework', ' Laravel', 3, 0);
 
 // 'The Laravel Framework'
 ```
 ### swap
 The `swap` function replaces multiple values in the string similar to PHP `strtr` function:
 ```js
-Str.swap({
+swap({
     'Tacos': 'Burritos',
     'great': 'fantastic',
 }, 'Tacos are great!');
 
 // 'Burritos are fantastic!'
 ```
+### take
+The `take` function returns a specified number of characters from the beginning of a string:
+```js
+take('Build something amazing!', 5);
+
+// 'Build'
+```
+### title
+The `title` function converts the given string to `Title Case`:
+```js
+title('a nice title uses the correct case');
+
+// 'A Nice Title Uses The Correct Case'
+```
 ### trim
 The `trim` function trims the given string:
 ```js
-Str.trim('  Laravel  ');
+trim('  Laravel  ');
 
 // 'Laravel'
 
-Str.trim('/Laravel/', '/');
+trim('/Laravel/', '/');
 
 // 'Laravel'
-```
-### ltrim
-The `ltrim` function trims the left side of the string:
-```js
-Str.ltrim('  Laravel  ');
-
-// 'Laravel  '
-
-Str.ltrim('/Laravel/', '/');
-
-// 'Laravel/'
-```
-### rtrim
-The `rtrim` function trims the right side of the given string:
-```js
-Str.trim('  Laravel  ');
-
-// '  Laravel'
-
-Str.rtrim('/Laravel/', '/');
-
-// '/Laravel'
-```
-### lcfirst
-The `lcfirst` function returns the given string with the first character lowercase:
-```js
-Str.lcfirst('Foo Bar');
-
-// 'foo Bar'
 ```
 ### ucfirst
 The `ucfirst` function returns the given string with the first character capitalized:
 ```js
-Str.ucfirst('foo bar');
+ucfirst('foo bar');
 
 // 'Foo bar'
 ```
 ### ucsplit
 The `ucsplit` function splits the given string into an array by uppercase characters:
 ```js
-Str.ucsplit('Foo Bar');
+ucsplit('Foo Bar');
 
 // ['Foo', 'Bar']
+```
+### unwrap
+The `unwrap` function removes the specified strings from the beginning and end of a given string:
+```js
+unwrap('-Laravel-', '- ');
+
+// 'Laravel'
+```
+### upper
+The `upper` function converts the given string to uppercase:
+```js
+upper('laravel');
+
+// 'LARAVEL'
 ```
 ### wordCount
 The `wordCount` function returns the number of words that a string contains:
 ```js
-Str.wordCount('Hello, world!'); 
+wordCount('Hello, world!'); 
 
 // 2
 ```
 ### wordWrap
 The `wordWrap` function wraps a string to a given number of characters:
 ```js
-Str.wordWrap('The quick brown fox jumped over the lazy dog', 20, "<br />\n");
+wordWrap('The quick brown fox jumped over the lazy dog', 20, "<br />\n");
 
 /*
 The quick brown fox<br />
@@ -664,36 +565,17 @@ jumped over the lazy<br />
 dog.
 */
 ```
-### uuid
-The `uuid` function generates a UUID (version 4):
+### words
+The `words` function limits the number of words in a string. If necessary, you may specify an additional string that will be appended to the truncated string:
 ```js
-Str.uuid();
+words('Perfectly balanced, as all things should be.', 3, ' >>>');
 
-// Stringable object
+// 'Perfectly balanced, as >>>'
 ```
-### ulid
-The `ulid` function generates a ULID:
+### wrap
+The `wrap` function wraps the string with the given strings:
 ```js
-Str.ulid();
+wrap('is', 'This ', ' me!');
 
-// Stringable object
-```
-### preg_quote
-The `preg_quote` function quote regular expression characters:
-```js
-Str.preg_quote('*RRRING* Hello?');
-
-// '\*RRRING\* Hello\?'
-```
-### unwrap
-The `unwrap` function removes the specified strings from the beginning and end of a given string:
-```js
-Str.unwrap('-Laravel-', '- ');
-
-// 'Laravel'
-```
-### flushCache
-The `flushCache` function removes all strings from the casing caches.
-```js
-Str.flushCache();
+// 'This is me!'
 ```

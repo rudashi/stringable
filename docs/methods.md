@@ -1,107 +1,24 @@
 ## Fluent Methods
 
-- [after](#after)
-- [afterLast](#afterlast)
-- [append](#append)
-- [ascii](#ascii)
-- [basename](#basename)
-- [before](#before)
-- [beforeLast](#beforelast)
-- [between](#between)
-- [betweenFirst](#betweenfirst)
-- [charAt](#charat)
-- [camel](#camel)
-- [contains](#contains)
-- [containsAll](#containsall)
-- [dirname](#dirname)
-- [dd](#dd)
-- [dump](#dump)
-- [endsWith](#endswith)
-- [excerpt](#excerpt)
-- [exactly](#exactly)
-- [explode](#explode)
-- [finish](#finish)
-- [flushCache](#flushcache)
-- [headline](#headline)
-- [is](#is)
-- [isAscii](#isascii)
-- [isEmpty](#isempty)
-- [isNotEmpty](#isnotempty)
-- [isJson](#isjson)
-- [isUrl](#isurl)
-- [isUlid](#isulid)
-- [isUuid](#isuuid)
-- [isMatch](#ismatch)
-- [kebab](#kebab)
-- [lcfirst](#lcfirst)
-- [length](#length)
-- [limit](#limit)
-- [lower](#lower)
-- [ltrim](#ltrim)
-- [mask](#mask)
-- [match](#match)
-- [matchAll](#matchall)
-- [newLine](#newline)
-- [padBoth](#padboth)
-- [padLeft](#padleft)
-- [padRight](#padright)
-- [parseCallback](#parsecallback)
-- [pipe](#pipe)
-- [prepend](#prepend)
-- [remove](#remove)
-- [repeat](#repeat)
-- [replace](#replace)
-- [replaceArray](#replacearray)
-- [replaceFirst](#replacefirst)
-- [replaceLast](#replacelast)
-- [replaceMatches](#replacematches)
-- [reverse](#reverse)
-- [rtrim](#rtrim)
-- [scan](#scan)
-- [slug](#slug)
-- [snake](#snake)
-- [split](#split)
-- [squish](#squish)
-- [start](#start)
-- [startsWith](#startswith)
-- [stripTags](#striptags)
-- [studly](#studly)
-- [substr](#substr)
-- [substrCount](#substrcount)
-- [substrReplace](#substrreplace)
-- [swap](#swap)
-- [take](#take)
-- [tap](#tap)
-- [test](#test)
-- [title](#title)
-- [toHtmlString](#tohtmlstring)
-- [toString](#tostring)
-- [trim](#trim)
-- [ucfirst](#ucfirst)
-- [ucsplit](#ucsplit)
-- [upper](#upper)
-- [when](#when)
-- [whenContains](#whencontains)
-- [whenContainsAll](#whencontainsall)
-- [whenEmpty](#whenempty)
-- [whenNotEmpty](#whennotempty)
-- [whenStartsWith](#whenstartswith)
-- [whenEndsWith](#whenendswith)
-- [whenExactly](#whenexactly)
-- [whenNotExactly ](#whennotexactly)
-- [whenIs](#whenis)
-- [whenIsAscii](#whenisascii)
-- [whenIsUlid](#whenisulid)
-- [whenIsUuid](#whenisuuid)
-- [whenTest](#whentest)
-- [wordCount](#wordcount)
-- [wordWrap](#wordwrap)
-- [words](#words)
-- [wrap](#wrap)
-- [unwrap](#unwrap)
-- [value](#value)
+### str
+The `str` function returns a new `Stringable` instance of the given string.
+If no argument is given to the function, it returns an instance of `Str`.
+```js
+str('Taylor');
 
-## Fluent Strings
+// Stringable Object
+
+str();
+
+// Str Object
+```
+### of
+The `of` method returns a new `Stringable` instance of the given string.
+```js
+Stringable.of('Taylor');
+
+// Stringable Object
+```
 ### after
 The `after` method returns everything after the given value in a string.
 The entire string will be returned if the value does not exist within the string:
@@ -424,7 +341,7 @@ Stringable.of('fooBar').kebab();
 // 'foo-bar'
 ```
 ### lcfirst
-The `lcfirst` method returns the given string with the first character lowercased:
+The `lcfirst` method returns the given string with the first character lowercase:
 ```js
 Stringable.of('Foo Bar').lcfirst();
 
@@ -587,8 +504,6 @@ Stringable.of('foo').pipe(str => 'bar');
 
 // 'bar'
 ```
-### plural
-Not implemented.
 ### prepend
 The `prepend` method prepends the given values onto the string:
 ```js
@@ -678,8 +593,6 @@ Stringable.of('filename.jpg').scan('%[^.].%s');
 
 // ['filename', 'jpg']
 ```
-### singular
-Not implemented.
 ### slug
 The `slug` method generates a URL friendly "slug" from the given string:
 ```js
@@ -880,6 +793,14 @@ Stringable.of('Foo Bar').ucsplit();
 
 // ['Foo', 'Bar']
 ```
+### unless
+The `unless` method invokes the given function if a given condition is `false`. 
+The function will receive the fluent string instance:
+```js
+Stringable.of('Taylor').unless(false, (str) => str.append(' false'));
+
+// 'unless false'
+```
 ### upper
 The `upper` method converts the given string to uppercase:
 ```js
@@ -978,7 +899,7 @@ Stringable.of('foo/bar').whenIs('foo/*', (str) => str.append('/baz'));
 // 'foo/bar/baz'
 ```
 ### whenIsAscii
-The `whenIsAscii` method invokes the given function if the string is 7 bit ASCII.
+The `whenIsAscii` method invokes the given function if the string is 7-bit ASCII.
 The function will receive the fluent string instance:
 ```js
 Stringable.of('A').whenIsAscii((str) => str.prepend('Ascii:'));

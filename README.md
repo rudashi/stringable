@@ -65,7 +65,10 @@ chain multiple string operations together using a more readable syntax compared 
 List of all fluent methods you can find [here](docs/methods.md#fluent-methods).
 
 ## Strings methods
-List of all static methods you can find [here](docs/statics.md#strings).
+List of all static methods you can find [here](docs/statics.md#static-methods).
+
+## Strings functions
+List of all module functions [here](docs/functions.md#functions).
 
 ## Changelog
 
