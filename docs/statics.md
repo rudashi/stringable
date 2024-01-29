@@ -63,9 +63,10 @@
 - [ucsplit](#ucsplit)
 - [upper](#upper)
 - [wordCount](#wordcount)
+- [wordWrap](#wordwrap)
 - [words](#words)
 - [wrap](#wrap)
-- [preg_quote](#pregquote)
+- [preg_quote](#preg_quote)
 - [random](#random)
 - [createRandomStringsUsing](#createrandomstringsusing)
 - [createRandomStringsUsingSequence](#createrandomstringsusingsequence)
@@ -720,6 +721,17 @@ The `wordCount` function returns the number of words that a string contains:
 Str.wordCount('Hello, world!'); 
 
 // 2
+```
+### wordWrap
+The `wordWrap` function wraps a string to a given number of characters:
+```js
+Str.wordWrap('The quick brown fox jumped over the lazy dog', 20, "<br />\n");
+
+/*
+The quick brown fox<br />
+jumped over the lazy<br />
+dog.
+*/
 ```
 ### uuid
 The `uuid` function generates a UUID (version 4):

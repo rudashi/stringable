@@ -94,6 +94,7 @@
 - [whenIsUuid](#whenisuuid)
 - [whenTest](#whentest)
 - [wordCount](#wordcount)
+- [wordWrap](#wordwrap)
 - [words](#words)
 - [wrap](#wrap)
 - [value](#value)
@@ -1005,6 +1006,17 @@ The `wordCount` method returns the number of words that a string contains:
 Stringable.of('Hello, world!').wordCount(); 
 
 // 2
+```
+### wordWrap
+The `wordWrap` method wraps a string to a given number of characters:
+```js
+Stringable.of('The quick brown fox jumped over the lazy dog').wordWrap(20, "<br />\n");
+
+/*
+The quick brown fox<br />
+jumped over the lazy<br />
+dog.
+*/
 ```
 ### words
 The `words` method limits the number of words in a string. If necessary, you may specify an additional string that will be appended to the truncated string:
