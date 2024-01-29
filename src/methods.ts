@@ -641,6 +641,18 @@ export const ucsplit = (string: string): Array<string> => {
     return string.split(/(?=\p{Lu})/u).map(i => i.trim());
 }
 
+export const unwrap = (value: string, before: string, after?: string): string => {
+    if (value.startsWith(before)) {
+        value = value.substring(before.length);
+    }
+
+    if (value.endsWith(after ??= before)) {
+        value = value.slice(0, -after.length);
+    }
+
+    return value;
+}
+
 export const wordCount = (value: string): number => {
     return value.trim().split(/\s+/).length;
 }

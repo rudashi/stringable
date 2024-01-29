@@ -66,6 +66,7 @@
 - [wordWrap](#wordwrap)
 - [words](#words)
 - [wrap](#wrap)
+- [unwrap](#unwrap)
 - [preg_quote](#preg_quote)
 - [random](#random)
 - [createRandomStringsUsing](#createrandomstringsusing)
@@ -229,6 +230,13 @@ The `wrap` function wraps the string with the given strings:
 Str.wrap('is', 'This ', ' me!');
 
 // 'This is me!'
+```
+### unwrap
+The `unwrap` function removes the specified strings from the beginning and end of a given string:
+```js
+Str.unwrap('-Laravel-', '- ');
+
+// 'Laravel'
 ```
 ### is
 The `is` function determines if a given string matches a given pattern. Asterisks may be used as wildcard values
