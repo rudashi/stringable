@@ -608,6 +608,12 @@ export class Stringable {
         return this;
     }
 
+    public unwrap = (before: string, after?: string): this => {
+        this._value = Str.unwrap(this._value, before, after);
+
+        return this;
+    }
+
     public toHtmlString = (): Element | Node | null => {
         const template = document.createElement('template');
 

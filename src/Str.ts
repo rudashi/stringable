@@ -61,6 +61,7 @@ import {
     wordCount,
     wordWrap,
     preg_quote,
+    unwrap,
     ExcerptOptions,
 } from './methods';
 import Stringable from './Stringable';
@@ -294,6 +295,7 @@ export const Str = {
         return Stringable.of(ulid());
     },
     preg_quote,
+    unwrap,
     flushCache(): void {
         this._camelCache = {};
         this._snakeCache = {};

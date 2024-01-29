@@ -98,6 +98,7 @@
 - [wordWrap](#wordwrap)
 - [words](#words)
 - [wrap](#wrap)
+- [unwrap](#unwrap)
 - [value](#value)
 
 ## Fluent Strings
@@ -374,7 +375,7 @@ Stringable.of('{first: "John", last: "Doe"}').isJson();
 ### isUrl
 The `isUrl` method determines if a given string is a valid URL:
 ```js
-Stringable.of('http://example.com').isUrl();
+Stringable.of('https://example.com').isUrl();
 
 // true
 
@@ -1039,6 +1040,13 @@ The `wrap` method wraps the string with the given strings:
 Stringable.of('is').wrap('This ', ' me!');
 
 // 'This is me!'
+```
+### unwrap
+The `unwrap` method removes the specified strings from the beginning and end of a given string:
+```js
+Stringable.of('-Laravel-').unwrap('- ');
+
+// 'Laravel'
 ```
 ### value
 The `value` method returns the underlying string value.
