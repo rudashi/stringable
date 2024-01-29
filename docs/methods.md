@@ -70,6 +70,7 @@
 - [substrCount](#substrcount)
 - [substrReplace](#substrreplace)
 - [swap](#swap)
+- [take](#take)
 - [tap](#tap)
 - [test](#test)
 - [title](#title)
@@ -778,6 +779,13 @@ Stringable.of('Tacos are great!').swap({
 });
 
 // 'Burritos are fantastic!'
+```
+### take
+The `take` method returns a specified number of characters from the beginning of a string:
+```js
+Stringable.of('Build something amazing!').take(5);
+
+// 'Build'
 ```
 ### tap
 The `tap` method passes the string to the given closure, allowing you to examine and interact with the string while
