@@ -238,7 +238,9 @@ length('Laravel');
 
 // 7
 ```
+
 ### limit
+
 The `limit` function truncates the given string to the specified length:
 
 ```js
@@ -246,12 +248,24 @@ limit('The quick brown fox jumps over the lazy dog', 20);
 
 // 'The quick brown fox...'
 ```
-You may also pass a second argument to change the string that will be appended to the end of the truncated string:
+
+You may also pass a third argument to change the string that will be appended to the end of the truncated string:
+
 ```js
 limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
 
 // 'The quick brown fox (...)'
 ```
+
+If you want to keep whole words when truncating a string, you can use the fourth argument.
+When this argument is true, the string will be truncated to the nearest full word boundary:
+
+```js
+limit('The quick brown fox jumps over the lazy dog', 12, '...', true);
+
+// 'The quick...'
+```
+
 ### lower
 The `lower` function converts the given string to lowercase:
 ```js

@@ -14,14 +14,29 @@ it('truncates the given string to the specified length', () => {
     expect(Stringable.of('这是一段中文').limit(3).toString())
         .toBe('这是一...');
 
+    expect(Stringable.of('Laravel is a free, open source PHP web application framework.').limit(15, '...', true).toString())
+        .toBe('Laravel is a...');
+
     expect(Stringable.of('The PHP framework for web artisans.').limit(7).toString())
+        .toBe('The PHP...');
+
+    expect(Stringable.of('The PHP framework for web artisans.').limit(10, '...', true).toString())
         .toBe('The PHP...');
 
     expect(Stringable.of('The PHP framework for web artisans.').limit(7, '').toString())
         .toBe('The PHP');
 
+    expect(Stringable.of('The PHP framework for web artisans.').limit(10, '', true).toString())
+        .toBe('The PHP');
+
     expect(Stringable.of('The PHP framework for web artisans.').limit(100).toString())
         .toBe('The PHP framework for web artisans.');
+
+    expect(Stringable.of('The PHP framework for web artisans.').limit(100, '...', true).toString())
+        .toBe('The PHP framework for web artisans.');
+
+    expect(Stringable.of('The PHP framework for web artisans.').limit(20, '...', true).toString())
+        .toBe('The PHP framework...');
 
     expect(Str.limit('The quick brown fox jumps over the lazy dog', 20))
         .toBe('The quick brown fox...');
@@ -34,6 +49,12 @@ it('truncates a non ascii string', () => {
     expect(Stringable.of('这是一段中文').limit(3).toString())
         .toBe('这是一...');
 
+    expect(Stringable.of('这是一段中文').limit(3, '...', true).toString())
+        .toBe('这是一...');
+
     expect(Stringable.of('这是一段中文').limit(3, '').toString())
+        .toBe('这是一');
+
+    expect(Stringable.of('这是一段中文').limit(3, '', true).toString())
         .toBe('这是一');
 });

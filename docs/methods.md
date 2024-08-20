@@ -354,7 +354,9 @@ Stringable.of('Laravel').length();
 
 // 7
 ```
+
 ### limit
+
 The `limit` method truncates the given string to the specified length:
 
 ```js
@@ -362,12 +364,24 @@ Stringable.of('The quick brown fox jumps over the lazy dog').limit(20);
 
 // 'The quick brown fox...'
 ```
+
 You may also pass a second argument to change the string that will be appended to the end of the truncated string:
+
 ```js
 Stringable.of('The quick brown fox jumps over the lazy dog').limit(20, ' (...)');
 
 // 'The quick brown fox (...)'
 ```
+
+If you want to keep whole words when truncating a string, you can use the third argument. 
+When this argument is true, the string will be truncated to the nearest full word boundary:
+
+```js
+Stringable.of('The quick brown fox jumps over the lazy dog').limit(12, '...', true);
+
+// 'The quick...'
+```
+
 ### lower
 The `lower` method converts the given string to lowercase:
 ```js

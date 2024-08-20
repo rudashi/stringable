@@ -207,8 +207,8 @@ export class Stringable {
         return this._value.length;
     }
 
-    public limit = (limit: number = 100, end: string = '...'): this => {
-        this._value = Str.limit(this._value, limit, end);
+    public limit = (limit: number = 100, end: string = '...', preserveWords: boolean = false): this => {
+        this._value = Str.limit(this._value, limit, end, preserveWords);
 
         return this;
     }

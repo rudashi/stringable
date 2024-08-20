@@ -281,12 +281,16 @@ export const length = (value: string): number => {
     return value.length;
 }
 
-export const limit = (value: string, limit: number = 100, end: string = '...'): string => {
+export const limit = (value: string, limit: number = 100, end: string = '...', preserveWords: boolean = false): string => {
     if (limit >= value.length) {
         return value;
     }
 
-    return value.slice(0, limit).trimEnd() + end;
+    if (!preserveWords) {
+        return value.slice(0, limit).trimEnd() + end;
+    }
+
+    return value.slice(0, limit).replace(/\s+\S*$/, '') + end;
 }
 
 export const lower = (value: string): string => {
