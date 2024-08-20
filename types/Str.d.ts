@@ -70,6 +70,7 @@ export declare const Str: {
     reverse: (value: string) => string;
     start: (value: string, prefix: string) => string;
     upper: (value: string) => string;
+    take: (value: string, limit: number) => string;
     title: (value: string) => string;
     headline: (value: string) => string;
     slug: (title: string, separator?: string, language?: string | null, dictionary?: Record<string, string>) => string;
@@ -92,6 +93,7 @@ export declare const Str: {
     uuid: () => Stringable;
     ulid: () => Stringable;
     preg_quote: (value: string, delimiter?: string) => string;
+    unwrap: (value: string, before: string, after?: string | undefined) => string;
     flushCache(): void;
 };
 export default Str;

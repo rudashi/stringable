@@ -55,11 +55,13 @@ export declare const substr: (value: string, start: number, length?: number | nu
 export declare const substrCount: (haystack: string, needle: string, offset?: number, length?: number) => number;
 export declare const substrReplace: (string: string, replace: string, offset?: number, length?: number | null) => string;
 export declare const swap: (map: Record<string, string>, subject: string) => string;
+export declare const take: (value: string, limit: number) => string;
 export declare const trim: (value: string, characters?: string) => string;
 export declare const rtrim: (value: string, characters?: string) => string;
 export declare const ltrim: (value: string, characters?: string) => string;
 export declare const lcfirst: (string: string) => string;
 export declare const ucfirst: (string: string) => string;
 export declare const ucsplit: (string: string) => Array<string>;
+export declare const unwrap: (value: string, before: string, after?: string) => string;
 export declare const wordCount: (value: string) => number;
 export declare const preg_quote: (value: string, delimiter?: string) => string;

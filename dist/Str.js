@@ -136,6 +136,7 @@ exports.Str = {
     reverse: methods_1.reverse,
     start: methods_1.start,
     upper: methods_1.upper,
+    take: methods_1.take,
     title: methods_1.title,
     headline: methods_1.headline,
     slug: methods_1.slug,
@@ -191,6 +192,7 @@ exports.Str = {
         return Stringable_1.default.of((0, ulid_1.ulid)());
     },
     preg_quote: methods_1.preg_quote,
+    unwrap: methods_1.unwrap,
     flushCache() {
         this._camelCache = {};
         this._snakeCache = {};

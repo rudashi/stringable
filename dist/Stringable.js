@@ -899,6 +899,24 @@ class Stringable {
                 return this;
             }
         });
+        Object.defineProperty(this, "take", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (limit) => {
+                this._value = Str_1.default.take(this._value, limit);
+                return this;
+            }
+        });
+        Object.defineProperty(this, "unwrap", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (before, after) => {
+                this._value = Str_1.default.unwrap(this._value, before, after);
+                return this;
+            }
+        });
         Object.defineProperty(this, "toHtmlString", {
             enumerable: true,
             configurable: true,

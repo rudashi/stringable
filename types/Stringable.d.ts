@@ -68,6 +68,7 @@ export declare const str: (string?: string) => Stringable | {
     reverse: (value: string) => string;
     start: (value: string, prefix: string) => string;
     upper: (value: string) => string;
+    take: (value: string, limit: number) => string;
     title: (value: string) => string;
     headline: (value: string) => string;
     slug: (title: string, separator?: string, language?: string | null, dictionary?: Record<string, string>) => string;
@@ -90,6 +91,7 @@ export declare const str: (string?: string) => Stringable | {
     uuid: () => Stringable;
     ulid: () => Stringable;
     preg_quote: (value: string, delimiter?: string) => string;
+    unwrap: (value: string, before: string, after?: string | undefined) => string;
     flushCache(): void;
 };
 export declare class Stringable {
@@ -192,6 +194,8 @@ export declare class Stringable {
     words: (words?: number, end?: string) => this;
     wordWrap: (width?: number, breaks?: string, cut?: boolean) => this;
     wrap: (before: string, after?: string) => this;
+    take: (limit: number) => this;
+    unwrap: (before: string, after?: string) => this;
     toHtmlString: () => Element | Node | null;
     dump: () => this;
     dd: () => never;

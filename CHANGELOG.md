@@ -1,3 +1,9 @@
+## [1.4.6](https://github.com/rudashi/stringable/compare/v1.4.5...v1.4.6) (2024-02-14)
+
+### Feature
+* Add `take` method
+* Add `unwrap` method
+
 ## [1.4.5](https://github.com/rudashi/stringable/compare/v1.4.4...v1.4.5) (2024-01-28)
 
 ### Feature

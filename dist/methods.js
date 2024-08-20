@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.substr = exports.stripTags = exports.startsWith = exports.squish = exports.slug = exports.headline = exports.title = exports.upper = exports.start = exports.reverse = exports.remove = exports.replaceLast = exports.replaceFirst = exports.replace = exports.replaceArray = exports.repeat = exports.parseCallback = exports.padRight = exports.padLeft = exports.padBoth = exports.matchAll = exports.isMatch = exports.match = exports.mask = exports.words = exports.lower = exports.limit = exports.length = exports.isUlid = exports.isUuid = exports.isUrl = exports.isJson = exports.isAscii = exports.is = exports.wordWrap = exports.wrap = exports.finish = exports.explode = exports.excerpt = exports.endsWith = exports.containsAll = exports.contains = exports.charAt = exports.betweenFirst = exports.between = exports.beforeLast = exports.before = exports.ascii = exports.afterLast = exports.after = void 0;
-exports.preg_quote = exports.wordCount = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = exports.trim = exports.swap = exports.substrReplace = exports.substrCount = void 0;
+exports.preg_quote = exports.wordCount = exports.unwrap = exports.ucsplit = exports.ucfirst = exports.lcfirst = exports.ltrim = exports.rtrim = exports.trim = exports.take = exports.swap = exports.substrReplace = exports.substrCount = void 0;
 const after = (subject, search = '') => {
     if (search !== '' && subject.indexOf(search) >= 0) {
         return subject.substring(subject.indexOf(search) + search.length);
@@ -502,6 +502,13 @@ const swap = (map, subject) => {
         .join('');
 };
 exports.swap = swap;
+const take = (value, limit) => {
+    if (limit < 0) {
+        return (0, exports.substr)(value, limit);
+    }
+    return (0, exports.substr)(value, 0, limit);
+};
+exports.take = take;
 const trim = (value, characters) => {
     return characters
         ? (0, exports.rtrim)((0, exports.ltrim)(value, characters), characters)
@@ -532,6 +539,16 @@ const ucsplit = (string) => {
     return string.split(/(?=\p{Lu})/u).map(i => i.trim());
 };
 exports.ucsplit = ucsplit;
+const unwrap = (value, before, after) => {
+    if (value.startsWith(before)) {
+        value = value.substring(before.length);
+    }
+    if (value.endsWith(after !== null && after !== void 0 ? after : (after = before))) {
+        value = value.slice(0, -after.length);
+    }
+    return value;
+};
+exports.unwrap = unwrap;
 const wordCount = (value) => {
     return value.trim().split(/\s+/).length;
 };
