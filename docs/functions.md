@@ -377,6 +377,14 @@ replace('6.x', '7.x', 'Laravel 6.x');
 
 // 'Laravel 7.x'
 ```
+
+The `replace` function also accepts a `caseSensitive` argument. By default, the `replace` function is case-sensitive:
+
+```js
+replace('10.X', '11.x', 'Laravel 10.x', false);
+
+// 'Laravel 11.x'
+```
 ### replaceArray
 The `replaceArray` function replaces a given value in the string sequentially using an array:
 ```js

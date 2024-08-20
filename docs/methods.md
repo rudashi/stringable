@@ -533,6 +533,14 @@ Stringable.of('Laravel 6.x').replace('6.x', '7.x');
 
 // 'Laravel 7.x'
 ```
+
+The `replace` method also accepts a `caseSensitive` argument. By default, the `replace` method is case-sensitive:
+
+```js
+Stringable.of('Laravel 10.x').replace('10.X', '11.x', false);
+
+// 'Laravel 11.x'
+```
 ### replaceArray
 The `replaceArray` method replaces a given value in the string sequentially using an array:
 ```js
