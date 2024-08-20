@@ -306,8 +306,8 @@ export class Stringable {
         return this;
     }
 
-    public replace = (search: string | Array<string>, replace: string | Array<string>): this => {
-        this._value = Str.replace(search, replace, this._value);
+    public replace = (search: string | Array<string>, replace: string | Array<string>, caseSensitive: boolean = true): this => {
+        this._value = Str.replace(search, replace, this._value, caseSensitive);
 
         return this;
     }
