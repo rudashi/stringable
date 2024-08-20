@@ -23,15 +23,17 @@ it('truncates the given string to the specified length', () => {
     expect(Stringable.of('The PHP framework for web artisans.').limit(100).toString())
         .toBe('The PHP framework for web artisans.');
 
-    expect(Stringable.of('这是一段中文').limit(3).toString())
-        .toBe('这是一...');
-
-    expect(Stringable.of('这是一段中文').limit(3, '').toString())
-        .toBe('这是一');
-
     expect(Str.limit('The quick brown fox jumps over the lazy dog', 20))
         .toBe('The quick brown fox...');
 
     expect(limit('The quick brown fox jumps over the lazy dog', 20))
         .toBe('The quick brown fox...');
+});
+
+it('truncates a non ascii string', () => {
+    expect(Stringable.of('这是一段中文').limit(3).toString())
+        .toBe('这是一...');
+
+    expect(Stringable.of('这是一段中文').limit(3, '').toString())
+        .toBe('这是一');
 });
