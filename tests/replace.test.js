@@ -23,3 +23,17 @@ test.each([
     expect(replace(search, replaced, string))
         .toBe(expected);
 });
+
+test.each([
+    ['foo bar Baz', 'baz', 'laravel', 'foo bar laravel'],
+    ['foo bar baz X', 'x', '8.x', 'foo bar baz 8.x'],
+])('.replace from %p ignores the case %p and replace with %p then returns %p', (string, search, replaced, expected) => {
+    expect(Stringable.of(string).replace(search, replaced, false).toString())
+        .toBe(expected);
+
+    expect(Str.replace(search, replaced, string, false))
+        .toBe(expected);
+
+    expect(replace(search, replaced, string, false))
+        .toBe(expected);
+});

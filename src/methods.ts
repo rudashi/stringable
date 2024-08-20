@@ -407,9 +407,9 @@ export const replaceArray = (search: string, replace: Array<string>, subject: st
     return results;
 }
 
-export const replace = (search: string | Array<string>, replace: string | Array<string>, subject: string): string => {
+export const replace = (search: string | Array<string>, replace: string | Array<string>, subject: string, caseSensitive: boolean = true,): string => {
     if (typeof search === 'string' && typeof replace === 'string') {
-        return subject.replace(new RegExp(preg_quote(search), 'g'), replace);
+        return subject.replace(new RegExp(preg_quote(search), caseSensitive ? 'g' : 'gi'), replace);
     }
 
     let searchArray = search instanceof Array ? search : [search];
