@@ -179,7 +179,7 @@ export const wordWrap = (str: string, width: number = 75, breakChar: string = "\
         return result.slice(0, breakChar.length * -1);
     }
 
-    return str.replace(new RegExp(pattern, 'gu'),  '$1' + breakChar);
+    return str.replace(new RegExp(pattern, 'gu'), '$1' + breakChar);
 }
 
 export const is = (pattern: string | Array<string | null>, value: string): boolean => {
@@ -465,7 +465,7 @@ export const reverse = (value: string): string => {
 }
 
 export const start = (value: string, prefix: string): string => {
-    if (! startsWith(value, prefix)) {
+    if (!startsWith(value, prefix)) {
         return `${prefix}${value}`;
     }
 
@@ -506,7 +506,7 @@ export const slug = (title: string, separator: string = '-', language: string | 
     title = lower(title);
     title = title.replace(new RegExp(/\s/, 'g'), separator)
 
-    return title.replace(new RegExp('('+separator+')(?=\\1)', 'g'), '');
+    return title.replace(new RegExp('(' + separator + ')(?=\\1)', 'g'), '');
 }
 
 export const squish = (value: string): string => {

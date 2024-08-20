@@ -1,7 +1,7 @@
 import Str, {ExcerptOptions} from './Str';
 import {MarkdownConfiguration, defaultConfiguration} from './types/markdown';
 
-type Closure = Function | null | string | { (callback: Stringable, value: string ): Stringable };
+type Closure = Function | null | string | { (callback: Stringable, value: string): Stringable };
 
 type PipeCallback =
     Function
@@ -652,7 +652,7 @@ export class Stringable {
     }
 
     public toBoolean = (): boolean => {
-        switch(this.lower().trim().toString()){
+        switch (this.lower().trim().toString()) {
             case 'true':
             case 'yes':
             case 'on':
