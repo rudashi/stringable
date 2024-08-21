@@ -12,7 +12,7 @@ test.each([
     ['БГДЖИЛЁ', -3, 1, 'И'],
     ['БГДЖИЛЁ', 2, -1, 'ДЖИЛ'],
     ['БГДЖИЛЁ', 4, -4, ''],
-    ['БГДЖИЛЁ',  -3, -1, 'ИЛ'],
+    ['БГДЖИЛЁ', -3, -1, 'ИЛ'],
     ['БГДЖИЛЁ', 1, undefined, 'ГДЖИЛЁ'],
     ['БГДЖИЛЁ', 1, 3, 'ГДЖ'],
     ['БГДЖИЛЁ', 0, 4, 'БГДЖ'],
@@ -23,15 +23,16 @@ test.each([
      * @param {string} string
      * @param {number} start
      * @param {number} length
-     * @param {E} expected
-    */
-(string, start, length, expected) => {
-    expect(Stringable.of(string).substr(start, length).toString())
-        .toBe(expected);
+     * @param {string} expected
+     */
+    (string, start, length, expected) => {
+        expect(Stringable.of(string).substr(start, length).toString())
+            .toBe(expected);
 
-    expect(Str.substr(string, start, length))
-        .toBe(expected);
+        expect(Str.substr(string, start, length))
+            .toBe(expected);
 
-    expect(substr(string, start, length))
-        .toBe(expected);
-});
+        expect(substr(string, start, length))
+            .toBe(expected);
+    }
+);

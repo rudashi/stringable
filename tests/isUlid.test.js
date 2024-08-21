@@ -22,13 +22,19 @@ test.each([
     ['01BX5ZZKBKZZZZZZZZZZZZZZZZ ', false],
     [' 01BX5ZZKBKZZZZZZZZZZZZZZZZ', false],
     ['01BX5ZZKBKZZZZZZZZZZZZZZZą', false],
-])('determines if string %p is a valid ULID', (string, expected) => {
-    expect(Stringable.of(string).isUlid())
-        .toBe(expected);
+])('determines if string %p is a valid ULID',
+    /**
+     * @param {string} string
+     * @param {string} expected
+     */
+    (string, expected) => {
+        expect(Stringable.of(string).isUlid())
+            .toBe(expected);
 
-    expect(Str.isUlid(string))
-        .toBe(expected);
+        expect(Str.isUlid(string))
+            .toBe(expected);
 
-    expect(isUlid(string))
-        .toBe(expected);
-});
+        expect(isUlid(string))
+            .toBe(expected);
+    }
+);

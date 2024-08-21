@@ -15,13 +15,21 @@ test.each([
     ['Jönköping Malmö', 'ö', 'xxx', 'Jxxxnköping Malmö'],
     ['Jönköping Malmö', '', 'yyy', 'Jönköping Malmö'],
 
-])('.replaceFirst from %p search %p and replace with %p then returns %p', (string, search, replace, expected) => {
-    expect(Stringable.of(string).replaceFirst(search, replace).toString())
-        .toBe(expected);
+])('.replaceFirst from %p search %p and replace with %p then returns %p',
+    /**
+     * @param {string} string
+     * @param {string|number} search
+     * @param {string} replace
+     * @param {string} expected
+     */
+    (string, search, replace, expected) => {
+        expect(Stringable.of(string).replaceFirst(search, replace).toString())
+            .toBe(expected);
 
-    expect(Str.replaceFirst(search, replace, string))
-        .toBe(expected);
+        expect(Str.replaceFirst(search, replace, string))
+            .toBe(expected);
 
-    expect(replaceFirst(search, replace, string))
-        .toBe(expected);
-});
+        expect(replaceFirst(search, replace, string))
+            .toBe(expected);
+    }
+);

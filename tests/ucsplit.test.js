@@ -13,13 +13,19 @@ test.each([
     ['ŻółtaŁódka', ['Żółta', 'Łódka']],
     ['sindÖdeUndSo', ['sind', 'Öde', 'Und', 'So']],
     ['ÖffentlicheÜberraschungen', ['Öffentliche', 'Überraschungen']],
-])('.ucsplit from %p returns %p', (string, expected) => {
-    expect(Stringable.of(string).ucsplit())
-        .toStrictEqual(expected);
+])('.ucsplit from %p returns %p',
+    /**
+     * @param {string} string
+     * @param {E} expected
+     */
+    (string, expected) => {
+        expect(Stringable.of(string).ucsplit())
+            .toStrictEqual(expected);
 
-    expect(Str.ucsplit(string))
-        .toStrictEqual(expected);
+        expect(Str.ucsplit(string))
+            .toStrictEqual(expected);
 
-    expect(ucsplit(string))
-        .toStrictEqual(expected);
-});
+        expect(ucsplit(string))
+            .toStrictEqual(expected);
+    }
+);

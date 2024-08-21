@@ -18,13 +18,19 @@ it('should returns string with prefix', () => {
 test.each([
     ['/this/string', '/'],
     ['//test/string', '/'],
-])('.start from %p with (%p) returns base string', (expected, prefix) => {
-    expect(Stringable.of(expected).start(prefix).toString())
-        .toBe(expected);
+])('.start from %p with (%p) returns base string',
+    /**
+     * @param {string} expected
+     * @param {string} prefix
+     */
+    (expected, prefix) => {
+        expect(Stringable.of(expected).start(prefix).toString())
+            .toBe(expected);
 
-    expect(Str.start(expected, prefix))
-        .toBe(expected);
+        expect(Str.start(expected, prefix))
+            .toBe(expected);
 
-    expect(start(expected, prefix))
-        .toBe(expected);
-});
+        expect(start(expected, prefix))
+            .toBe(expected);
+    }
+);

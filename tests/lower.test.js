@@ -9,13 +9,19 @@ test.each([
     ['FOO BAR BAZ', 'foo bar baz'],
     ['foO bAr BaZ', 'foo bar baz'],
     ['ĄĘÓ ŻŹĆ ŚŃŁ', 'ąęó żźć śńł'],
-])('.lower from %p returns %p', (string, expected) => {
-    expect(Stringable.of(string).lower().toString())
-        .toBe(expected);
+])('.lower from %p returns %p',
+    /**
+     * @param {string} string
+     * @param {string} expected
+     */
+    (string, expected) => {
+        expect(Stringable.of(string).lower().toString())
+            .toBe(expected);
 
-    expect(Str.lower(string))
-        .toBe(expected);
+        expect(Str.lower(string))
+            .toBe(expected);
 
-    expect(lower(string))
-        .toBe(expected);
-});
+        expect(lower(string))
+            .toBe(expected);
+    }
+);

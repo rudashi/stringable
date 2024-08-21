@@ -82,32 +82,42 @@ describe('provided URLs are valid', function () {
         ['http://symfony.com/#one_more%20test'],
         ['http://example.com/exploit.html?hello[0]=test'],
         ['http://বিডিআইএ.বাংলা'],
-    ])('url [%p] is valid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(true);
+    ])('url [%p] is valid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(true);
 
-        expect(Str.isUrl(string))
-            .toBe(true);
+            expect(Str.isUrl(string))
+                .toBe(true);
 
-        expect(isUrl(string))
-            .toBe(true);
-    });
+            expect(isUrl(string))
+                .toBe(true);
+        }
+    );
 
     test.each([
         ['//example.com'],
         ['//examp_le.com'],
         ['//symfony.fake/blog/'],
         ['//symfony.com/search?type=&q=url+validator'],
-    ])('relative URL [%p] is valid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(true);
+    ])('relative URL [%p] is valid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(true);
 
-        expect(Str.isUrl(string))
-            .toBe(true);
+            expect(Str.isUrl(string))
+                .toBe(true);
 
-        expect(isUrl(string))
-            .toBe(true);
-    });
+            expect(isUrl(string))
+                .toBe(true);
+        }
+    );
 
     test.each([
         ["\x20http://www.example.com"],
@@ -116,31 +126,41 @@ describe('provided URLs are valid', function () {
         ["http://symfony.com/search?type=&q=url+validator\x0D\x0D"],
         ["\x00https://example.com:80\x00"],
         ["\x0B\x0Bhttp://username:password@symfony.com\x0B\x0B"],
-    ])('whitespace URL [%p] is valid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(true);
+    ])('whitespace URL [%p] is valid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(true);
 
-        expect(Str.isUrl(string))
-            .toBe(true);
+            expect(Str.isUrl(string))
+                .toBe(true);
 
-        expect(isUrl(string))
-            .toBe(true);
-    });
+            expect(isUrl(string))
+                .toBe(true);
+        }
+    );
 
     test.each([
         ['ftp://example.com'],
         ['file://127.0.0.1'],
         ['git://[::1]/'],
-    ])('custom protocol [%p] is valid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(true);
+    ])('custom protocol [%p] is valid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(true);
 
-        expect(Str.isUrl(string))
-            .toBe(true);
+            expect(Str.isUrl(string))
+                .toBe(true);
 
-        expect(isUrl(string))
-            .toBe(true);
-    });
+            expect(isUrl(string))
+                .toBe(true);
+        }
+    );
 });
 
 describe('provided URLs are invalid', function () {
@@ -152,16 +172,21 @@ describe('provided URLs are invalid', function () {
         ['//[::1'],
         ['//username:passwordsymfony.com'],
         ['//'],
-    ])('incorrect relative URL [%p] is invalid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(false);
+    ])('incorrect relative URL [%p] is invalid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(false);
 
-        expect(Str.isUrl(string))
-            .toBe(false);
+            expect(Str.isUrl(string))
+                .toBe(false);
 
-        expect(isUrl(string))
-            .toBe(false);
-    });
+            expect(isUrl(string))
+                .toBe(false);
+        }
+    );
 
     test.each([
         ['example.com'],
@@ -181,14 +206,19 @@ describe('provided URLs are invalid', function () {
         ['http://wwww.example..com'],
         ['http://.www.example.com'],
         ['http:///path'],
-    ])('incorrect URL [%p] is invalid', (string) => {
-        expect(Stringable.of(string).isUrl())
-            .toBe(false);
+    ])('incorrect URL [%p] is invalid',
+        /**
+         * @param {string} string
+         */
+        (string) => {
+            expect(Stringable.of(string).isUrl())
+                .toBe(false);
 
-        expect(Str.isUrl(string))
-            .toBe(false);
+            expect(Str.isUrl(string))
+                .toBe(false);
 
-        expect(isUrl(string))
-            .toBe(false);
-    });
+            expect(isUrl(string))
+                .toBe(false);
+        }
+    );
 });
