@@ -1,7 +1,7 @@
 import Str, {ExcerptOptions} from './Str';
 import {MarkdownConfiguration, defaultConfiguration} from './types/markdown';
 
-type Closure = Function | null | string | { (callback: Stringable, value: string ): Stringable };
+type Closure = Function | null | string | { (callback: Stringable, value: string): Stringable };
 
 type PipeCallback =
     Function
@@ -207,8 +207,8 @@ export class Stringable {
         return this._value.length;
     }
 
-    public limit = (limit: number = 100, end: string = '...'): this => {
-        this._value = Str.limit(this._value, limit, end);
+    public limit = (limit: number = 100, end: string = '...', preserveWords: boolean = false): this => {
+        this._value = Str.limit(this._value, limit, end, preserveWords);
 
         return this;
     }
@@ -652,7 +652,7 @@ export class Stringable {
     }
 
     public toBoolean = (): boolean => {
-        switch(this.lower().trim().toString()){
+        switch (this.lower().trim().toString()) {
             case 'true':
             case 'yes':
             case 'on':

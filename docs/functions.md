@@ -238,7 +238,9 @@ length('Laravel');
 
 // 7
 ```
+
 ### limit
+
 The `limit` function truncates the given string to the specified length:
 
 ```js
@@ -246,12 +248,24 @@ limit('The quick brown fox jumps over the lazy dog', 20);
 
 // 'The quick brown fox...'
 ```
-You may also pass a second argument to change the string that will be appended to the end of the truncated string:
+
+You may also pass a third argument to change the string that will be appended to the end of the truncated string:
+
 ```js
 limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
 
 // 'The quick brown fox (...)'
 ```
+
+If you want to keep whole words when truncating a string, you can use the fourth argument.
+When this argument is true, the string will be truncated to the nearest full word boundary:
+
+```js
+limit('The quick brown fox jumps over the lazy dog', 12, '...', true);
+
+// 'The quick...'
+```
+
 ### lower
 The `lower` function converts the given string to lowercase:
 ```js
@@ -376,6 +390,14 @@ The `replace` function replaces a given string within the string:
 replace('6.x', '7.x', 'Laravel 6.x');
 
 // 'Laravel 7.x'
+```
+
+The `replace` function also accepts a `caseSensitive` argument. By default, the `replace` function is case-sensitive:
+
+```js
+replace('10.X', '11.x', 'Laravel 10.x', false);
+
+// 'Laravel 11.x'
 ```
 ### replaceArray
 The `replaceArray` function replaces a given value in the string sequentially using an array:

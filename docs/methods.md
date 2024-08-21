@@ -354,7 +354,9 @@ Stringable.of('Laravel').length();
 
 // 7
 ```
+
 ### limit
+
 The `limit` method truncates the given string to the specified length:
 
 ```js
@@ -362,12 +364,24 @@ Stringable.of('The quick brown fox jumps over the lazy dog').limit(20);
 
 // 'The quick brown fox...'
 ```
+
 You may also pass a second argument to change the string that will be appended to the end of the truncated string:
+
 ```js
 Stringable.of('The quick brown fox jumps over the lazy dog').limit(20, ' (...)');
 
 // 'The quick brown fox (...)'
 ```
+
+If you want to keep whole words when truncating a string, you can use the third argument. 
+When this argument is true, the string will be truncated to the nearest full word boundary:
+
+```js
+Stringable.of('The quick brown fox jumps over the lazy dog').limit(12, '...', true);
+
+// 'The quick...'
+```
+
 ### lower
 The `lower` method converts the given string to lowercase:
 ```js
@@ -532,6 +546,14 @@ The `replace` method replaces a given string within the string:
 Stringable.of('Laravel 6.x').replace('6.x', '7.x');
 
 // 'Laravel 7.x'
+```
+
+The `replace` method also accepts a `caseSensitive` argument. By default, the `replace` method is case-sensitive:
+
+```js
+Stringable.of('Laravel 10.x').replace('10.X', '11.x', false);
+
+// 'Laravel 11.x'
 ```
 ### replaceArray
 The `replaceArray` method replaces a given value in the string sequentially using an array:

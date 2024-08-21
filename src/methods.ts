@@ -179,7 +179,7 @@ export const wordWrap = (str: string, width: number = 75, breakChar: string = "\
         return result.slice(0, breakChar.length * -1);
     }
 
-    return str.replace(new RegExp(pattern, 'gu'),  '$1' + breakChar);
+    return str.replace(new RegExp(pattern, 'gu'), '$1' + breakChar);
 }
 
 export const is = (pattern: string | Array<string | null>, value: string): boolean => {
@@ -281,12 +281,16 @@ export const length = (value: string): number => {
     return value.length;
 }
 
-export const limit = (value: string, limit: number = 100, end: string = '...'): string => {
+export const limit = (value: string, limit: number = 100, end: string = '...', preserveWords: boolean = false): string => {
     if (limit >= value.length) {
         return value;
     }
 
-    return value.slice(0, limit).trimEnd() + end;
+    if (!preserveWords) {
+        return value.slice(0, limit).trimEnd() + end;
+    }
+
+    return value.slice(0, limit).replace(/\s+\S*$/, '') + end;
 }
 
 export const lower = (value: string): string => {
@@ -465,7 +469,7 @@ export const reverse = (value: string): string => {
 }
 
 export const start = (value: string, prefix: string): string => {
-    if (! startsWith(value, prefix)) {
+    if (!startsWith(value, prefix)) {
         return `${prefix}${value}`;
     }
 
@@ -506,7 +510,7 @@ export const slug = (title: string, separator: string = '-', language: string | 
     title = lower(title);
     title = title.replace(new RegExp(/\s/, 'g'), separator)
 
-    return title.replace(new RegExp('('+separator+')(?=\\1)', 'g'), '');
+    return title.replace(new RegExp('(' + separator + ')(?=\\1)', 'g'), '');
 }
 
 export const squish = (value: string): string => {
