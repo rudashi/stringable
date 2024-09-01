@@ -51,7 +51,7 @@ export class Stringable {
         return this;
     }
 
-    public append = (...values: Array<string>): this => {
+    public append = (...values: string[]): this => {
 
         this._value += values.join('');
 
@@ -109,11 +109,11 @@ export class Stringable {
         return this;
     }
 
-    public contains = (needles: string | Array<string>, ignoreCase: boolean = false): boolean => {
+    public contains = (needles: string | string[], ignoreCase: boolean = false): boolean => {
         return Str.contains(this._value, needles, ignoreCase);
     }
 
-    public containsAll = (needles: Array<string>, ignoreCase: boolean = false): boolean => {
+    public containsAll = (needles: string[], ignoreCase: boolean = false): boolean => {
         return Str.containsAll(this._value, needles, ignoreCase);
     }
 
@@ -125,7 +125,7 @@ export class Stringable {
         return this;
     }
 
-    public endsWith = (needles: null | string | number | Array<string>): boolean => {
+    public endsWith = (needles: null | string | number | string[]): boolean => {
         return Str.endsWith(this._value, needles);
     }
 
@@ -143,7 +143,7 @@ export class Stringable {
         return this._value === value;
     }
 
-    public explode = (delimiter: string, limit?: number): Array<string> => {
+    public explode = (delimiter: string, limit?: number): string[] => {
         return Str.explode(this._value, delimiter, limit);
     }
 
@@ -159,7 +159,7 @@ export class Stringable {
         return this;
     }
 
-    public is = (pattern: string | Array<string | null>): boolean => {
+    public is = (pattern: string | string[]): boolean => {
         return Str.is(pattern, this._value);
     }
 
@@ -244,11 +244,11 @@ export class Stringable {
         return Str.match(pattern, this._value);
     }
 
-    public isMatch = (pattern: RegExp | string | Array<string | RegExp>): boolean => {
+    public isMatch = (pattern: RegExp | string | string[] | RegExp[]): boolean => {
         return Str.isMatch(pattern, this._value);
     }
 
-    public matchAll = (pattern: RegExp | string): Array<string> => {
+    public matchAll = (pattern: RegExp | string): string[] => {
         return Str.matchAll(pattern, this._value);
     }
 
@@ -288,13 +288,13 @@ export class Stringable {
         return this;
     }
 
-    public prepend = (...values: Array<string>): this => {
+    public prepend = (...values: string[]): this => {
         this._value = values.join('') + this._value;
 
         return this;
     }
 
-    public remove = (search: string | Array<string>, caseSensitive: boolean = true): this => {
+    public remove = (search: string | string[], caseSensitive: boolean = true): this => {
         this._value = Str.remove(search, this._value, caseSensitive);
 
         return this;
@@ -306,13 +306,13 @@ export class Stringable {
         return this;
     }
 
-    public replace = (search: string | Array<string>, replace: string | Array<string>, caseSensitive: boolean = true): this => {
+    public replace = (search: string | string[], replace: string | string[], caseSensitive: boolean = true): this => {
         this._value = Str.replace(search, replace, this._value, caseSensitive);
 
         return this;
     }
 
-    public replaceArray = (search: string, replace: Array<string>): this => {
+    public replaceArray = (search: string, replace: string[]): this => {
         this._value = Str.replaceArray(search, replace, this._value);
 
         return this;
@@ -350,7 +350,7 @@ export class Stringable {
 
     public scan = (format: string): Array<string | null> => {
         const selectors = format.match(new RegExp(/(%\[.*?]|%[.*]|[^%]+|(%.))/, 'g'));
-        const result: Array<string> = [];
+        const result: string[] = [];
 
         if (selectors === null) {
             return [null];
@@ -398,7 +398,7 @@ export class Stringable {
         return this;
     }
 
-    public split = (pattern: RegExp | number | string): Array<string> => {
+    public split = (pattern: RegExp | number | string): string[] => {
         if (typeof pattern === 'number') {
             return pattern === 0 ? [] : this.matchAll('.{1,' + pattern + '}');
         }
@@ -420,7 +420,7 @@ export class Stringable {
         return this;
     }
 
-    public startsWith = (needles: null | string | number | Array<string>): boolean => {
+    public startsWith = (needles: null | string | number | string[]): boolean => {
         return Str.startsWith(this._value, needles);
     }
 
@@ -486,7 +486,7 @@ export class Stringable {
         return this;
     }
 
-    public ucsplit = (): Array<string> => {
+    public ucsplit = (): string[] => {
         return Str.ucsplit(this._value);
     }
 
@@ -528,11 +528,11 @@ export class Stringable {
         return this;
     }
 
-    public whenContains = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenContains = (needles: string | string[], callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.contains(needles), callback, defaultValue);
     }
 
-    public whenContainsAll = (needles: Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenContainsAll = (needles: string[], callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.containsAll(needles), callback, defaultValue);
     }
 
@@ -544,11 +544,11 @@ export class Stringable {
         return this.when(this.isNotEmpty(), callback, defaultValue);
     }
 
-    public whenEndsWith = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenEndsWith = (needles: string | string[], callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.endsWith(needles), callback, defaultValue);
     }
 
-    public whenStartsWith = (needles: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenStartsWith = (needles: string | string[], callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.startsWith(needles), callback, defaultValue);
     }
 
@@ -560,7 +560,7 @@ export class Stringable {
         return this.when(!this.exactly(value), callback, defaultValue);
     }
 
-    public whenIs = (pattern: string | Array<string>, callback: Closure, defaultValue: Closure = null): this => {
+    public whenIs = (pattern: string | string[], callback: Closure, defaultValue: Closure = null): this => {
         return this.when(this.is(pattern), callback, defaultValue);
     }
 

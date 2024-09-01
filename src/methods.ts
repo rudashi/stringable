@@ -65,7 +65,7 @@ export const charAt = (subject: string, index: number): string | false => {
     return pos === '' ? false : pos;
 }
 
-export const contains = (haystack: string, needles: string | Array<string>, ignoreCase: boolean = false): boolean => {
+export const contains = (haystack: string, needles: string | string[], ignoreCase: boolean = false): boolean => {
     if (needles === '') {
         return false;
     }
@@ -80,7 +80,7 @@ export const contains = (haystack: string, needles: string | Array<string>, igno
     return values.some(needle => haystack.includes(String(needle)));
 }
 
-export const containsAll = (haystack: string, needles: Array<string>, ignoreCase: boolean = false): boolean => {
+export const containsAll = (haystack: string, needles: string[], ignoreCase: boolean = false): boolean => {
     if (ignoreCase) {
         needles = needles.map(needle => needle.toLowerCase());
         haystack = lower(haystack);
@@ -89,7 +89,7 @@ export const containsAll = (haystack: string, needles: Array<string>, ignoreCase
     return needles.every(needle => haystack.includes(needle));
 }
 
-export const endsWith = (haystack: string, needles: null | string | number | Array<string>): boolean => {
+export const endsWith = (haystack: string, needles: null | string | number | string[]): boolean => {
     if (needles === null || needles === '') {
         return false;
     }
@@ -125,7 +125,7 @@ export const excerpt = (text: string, phrase: string = '', {radius = 100, omissi
     return start + matches[2] + end;
 }
 
-export const explode = (text: string, delimiter: string, limit?: number): Array<string> => {
+export const explode = (text: string, delimiter: string, limit?: number): string[] => {
     const array = text.split(delimiter);
 
     if (limit !== undefined && array.length >= limit) {
@@ -182,7 +182,7 @@ export const wordWrap = (str: string, width: number = 75, breakChar: string = "\
     return str.replace(new RegExp(pattern, 'gu'), '$1' + breakChar);
 }
 
-export const is = (pattern: string | Array<string | null>, value: string): boolean => {
+export const is = (pattern: string | string[], value: string): boolean => {
     pattern = pattern instanceof Array ? pattern : [pattern];
 
     if (pattern.length === 0) {
@@ -355,7 +355,7 @@ export const isMatch = (pattern: RegExp | string | Array<string | RegExp>, value
     return false;
 }
 
-export const matchAll = (pattern: RegExp | string, subject: string): Array<string> => {
+export const matchAll = (pattern: RegExp | string, subject: string): string[] => {
     const matches = subject.matchAll(new RegExp(pattern, 'g'));
     const result = [];
 
@@ -398,7 +398,7 @@ export const repeat = (string: string, times: number): string => {
     return string.repeat(times)
 }
 
-export const replaceArray = (search: string, replace: Array<string>, subject: string): string => {
+export const replaceArray = (search: string, replace: string[], subject: string): string => {
     if (typeof replace === 'object') {
         replace = Object.values(replace);
     }
@@ -411,7 +411,7 @@ export const replaceArray = (search: string, replace: Array<string>, subject: st
     return results;
 }
 
-export const replace = (search: string | Array<string>, replace: string | Array<string>, subject: string, caseSensitive: boolean = true,): string => {
+export const replace = (search: string | string[], replace: string | string[], subject: string, caseSensitive: boolean = true,): string => {
     if (typeof search === 'string' && typeof replace === 'string') {
         return subject.replace(new RegExp(preg_quote(search), caseSensitive ? 'g' : 'gi'), replace);
     }
@@ -454,7 +454,7 @@ export const replaceLast = (search: string, replace: string, subject: string): s
     return subject;
 }
 
-export const remove = (search: string | Array<string>, subject: string, caseSensitive: boolean = true): string => {
+export const remove = (search: string | string[], subject: string, caseSensitive: boolean = true): string => {
     search = search instanceof Array ? search : [search];
 
     search.map(e => {
@@ -517,7 +517,7 @@ export const squish = (value: string): string => {
     return value.trim().replace(new RegExp(/\s+|\u3164+|\u1160+/, 'g'), ' ');
 }
 
-export const startsWith = (haystack: string, needles: null | string | number | Array<string>): boolean => {
+export const startsWith = (haystack: string, needles: null | string | number | string[]): boolean => {
     if (needles === null || needles === '') {
         return false;
     }
@@ -641,7 +641,7 @@ export const ucfirst = (string: string): string => {
     return string[0].toLocaleUpperCase() + string.slice(1);
 }
 
-export const ucsplit = (string: string): Array<string> => {
+export const ucsplit = (string: string): string[] => {
     return string.split(/(?=\p{Lu})/u).map(i => i.trim());
 }
 
