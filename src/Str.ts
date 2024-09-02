@@ -32,6 +32,7 @@ import {
     padLeft,
     padRight,
     parseCallback,
+    position,
     repeat,
     replaceArray,
     replace,
@@ -183,6 +184,7 @@ export const Str = {
             .map(() => characters[Math.floor(crypto.randomInt(random) % characters.length)])
             .join('');
     },
+    position,
     random: (length: number = 16): string => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const size = characters.length;
