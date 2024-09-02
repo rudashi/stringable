@@ -394,6 +394,12 @@ export const parseCallback = (callback: string, method: string | null = null): A
         : [callback, method];
 }
 
+export const position = (haystack: string, needle: string, offset: number = 0): number|boolean => {
+    const index = haystack.indexOf(needle, offset);
+
+    return index < 0 ? false : index;
+}
+
 export const repeat = (string: string, times: number): string => {
     return string.repeat(times)
 }

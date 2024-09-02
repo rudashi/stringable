@@ -288,6 +288,10 @@ export class Stringable {
         return this;
     }
 
+    public position = (needle: string, offset: number = 0): number|boolean => {
+        return Str.position(this._value, needle, offset);
+    }
+
     public prepend = (...values: Array<string>): this => {
         this._value = values.join('') + this._value;
 

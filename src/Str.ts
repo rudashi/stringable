@@ -32,6 +32,7 @@ import {
     padLeft,
     padRight,
     parseCallback,
+    position,
     repeat,
     replaceArray,
     replace,
@@ -294,6 +295,7 @@ export const Str = {
     ulid: (): Stringable => {
         return Stringable.of(ulid());
     },
+    position,
     preg_quote,
     unwrap,
     flushCache(): void {
