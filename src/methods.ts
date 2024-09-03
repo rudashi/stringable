@@ -436,6 +436,18 @@ export const replace = (search: string | string[], replace: string | string[], s
     return subject;
 }
 
+export const replaceEnd = (search: string, replace: string, subject: string): string => {
+    if (search === '') {
+        return subject;
+    }
+
+    if (endsWith(subject, search)) {
+        return replaceLast(search, replace, subject);
+    }
+
+    return subject;
+}
+
 export const replaceFirst = (search: string, replace: string, subject: string): string => {
     if (search === '') {
         return subject;
@@ -455,6 +467,18 @@ export const replaceLast = (search: string, replace: string, subject: string): s
         return subject.substring(0, position)
             + replace
             + subject.substring(position + search.length, subject.length);
+    }
+
+    return subject;
+}
+
+export const replaceStart = (search: string, replace: string, subject: string): string => {
+    if (search === '') {
+        return subject;
+    }
+
+    if (startsWith(subject, search)) {
+        return replaceFirst(search, replace, subject);
     }
 
     return subject;

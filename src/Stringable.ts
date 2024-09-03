@@ -322,6 +322,12 @@ export class Stringable {
         return this;
     }
 
+    public replaceEnd = (search: string, replace: string): this => {
+        this._value = Str.replaceEnd(search, replace, this._value);
+
+        return this;
+    }
+
     public replaceFirst = (search: string, replace: string): this => {
         this._value = Str.replaceFirst(search, replace, this._value);
 
@@ -330,6 +336,12 @@ export class Stringable {
 
     public replaceLast = (search: string, replace: string): this => {
         this._value = Str.replaceLast(search, replace, this._value);
+
+        return this;
+    }
+
+    public replaceStart = (search: string, replace: string): this => {
+        this._value = Str.replaceStart(search, replace, this._value);
 
         return this;
     }
