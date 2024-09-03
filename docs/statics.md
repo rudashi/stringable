@@ -442,6 +442,17 @@ Str.replace('6.x', '7.x', 'Laravel 6.x');
 
 // 'Laravel 7.x'
 ```
+
+### replaceEnd
+
+The `replaceEnd` function replaces the last occurrence of the given value only if the value appears at the start of the string:
+
+```js
+Str.replaceEnd('World', 'Laravel', 'Hello World');
+
+// Hello Laravel
+```
+
 ### replaceFirst
 The `replaceFirst` function replaces the first occurrence of a given value in a string:
 ```js
@@ -456,6 +467,17 @@ Str.replaceLast('the', 'a', 'the quick brown fox jumps over the lazy dog');
 
 // 'the quick brown fox jumps over a lazy dog'
 ```
+
+### replaceStart
+
+The `replaceStart` function replaces the first occurrence of the given value only if the value appears at the start of the string:
+
+```js
+Str.replaceStart('Hello', 'Laravel', 'Hello World');
+
+// Laravel World
+```
+
 ### remove
 The `remove` function removes the given value or array of values from the string:
 ```js
