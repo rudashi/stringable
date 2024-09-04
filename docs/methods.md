@@ -562,6 +562,17 @@ Stringable.of('The event will take place between ? and ?').replaceArray('?', ['8
 
 // 'The event will take place between 8:30 and 9:00'
 ```
+
+### replaceEnd
+
+The `replaceEnd` method replaces the last occurrence of the given value only if the value appears at the start of the string:
+
+```js
+Stringable.of('Hello World').replaceEnd('World', 'Laravel');
+
+// Hello Laravel
+```
+
 ### replaceFirst
 The `replaceFirst` method replaces the first occurrence of a given value in a string:
 ```js
@@ -576,6 +587,17 @@ Stringable.of('the quick brown fox jumps over the lazy dog').replaceLast('the', 
 
 // 'the quick brown fox jumps over a lazy dog'
 ```
+
+### replaceStart
+
+The `replaceStart` method replaces the first occurrence of the given value only if the value appears at the start of the string:
+
+```js
+Stringable.of('Hello World').replaceStart('Hello', 'Laravel');
+
+// Laravel World
+```
+
 ### replaceMatches
 The `replaceMatches` method replaces all portions of a string matching a pattern with the given replacement string:
 ```js

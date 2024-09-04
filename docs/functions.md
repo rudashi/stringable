@@ -406,6 +406,17 @@ replaceArray('?', ['8:30', '9:00'], 'The event will take place between ? and ?')
 
 // 'The event will take place between 8:30 and 9:00'
 ```
+
+### replaceEnd
+
+The `replaceEnd` function replaces the last occurrence of the given value only if the value appears at the start of the string:
+
+```js
+replaceEnd('World', 'Laravel', 'Hello World');
+
+// Hello Laravel
+```
+
 ### replaceFirst
 The `replaceFirst` function replaces the first occurrence of a given value in a string:
 ```js
@@ -419,6 +430,16 @@ The `replaceLast` function replaces the last occurrence of a given value in a st
 replaceLast('the', 'a', 'the quick brown fox jumps over the lazy dog');
 
 // 'the quick brown fox jumps over a lazy dog'
+```
+
+### replaceStart
+
+The `replaceStart` function replaces the first occurrence of the given value only if the value appears at the start of the string:
+
+```js
+replaceStart('Hello', 'Laravel', 'Hello World');
+
+// Laravel World
 ```
 
 You may also pass `false` as a third parameter to ignore case when removing strings.
