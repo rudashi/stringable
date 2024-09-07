@@ -1,5 +1,6 @@
 import Str, {ExcerptOptions} from './Str';
 import {MarkdownConfiguration, defaultConfiguration} from './types/markdown';
+import {CASE_MODE, MB_CASE_FOLD} from './types/case';
 
 type Closure = Function | null | string | { (callback: Stringable, value: string): Stringable };
 
@@ -115,6 +116,12 @@ export class Stringable {
 
     public containsAll = (needles: string[], ignoreCase: boolean = false): boolean => {
         return Str.containsAll(this._value, needles, ignoreCase);
+    }
+
+    public convertCase = (mode: CASE_MODE = MB_CASE_FOLD): this => {
+        this._value = Str.convertCase(this._value, mode);
+
+        return this;
     }
 
     public dirname = (levels: number = 1): this => {

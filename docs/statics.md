@@ -92,6 +92,17 @@ Str.containsAll('This is my name', ['my', 'name']);
 
 // true
 ```
+
+### convertCase
+
+The `convertCase` function converts the given string to given mode:
+
+```js
+Str.convertCase('HeLLo WoRLD', MB_CASE_LOWER);
+
+// 'hello world'
+```
+
 ### endsWith
 The `endsWith` function determines if the given string ends with the given value:
 ```js

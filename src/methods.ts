@@ -1,3 +1,13 @@
+import {
+    CASE_MODE,
+    MB_CASE_FOLD, MB_CASE_FOLD_SIMPLE,
+    MB_CASE_LOWER,
+    MB_CASE_LOWER_SIMPLE,
+    MB_CASE_TITLE, MB_CASE_TITLE_SIMPLE,
+    MB_CASE_UPPER,
+    MB_CASE_UPPER_SIMPLE
+} from './types/case';
+
 export type ExcerptOptions = {
     radius?: number,
     omission?: string,
@@ -89,6 +99,22 @@ export const containsAll = (haystack: string, needles: string[], ignoreCase: boo
     return needles.every(needle => haystack.includes(needle));
 }
 
+export const convertCase = (string: string, mode: CASE_MODE = MB_CASE_FOLD): string => {
+    if ([MB_CASE_UPPER, MB_CASE_UPPER_SIMPLE].includes(mode)) {
+        return upper(string);
+    }
+
+    if ([MB_CASE_FOLD, MB_CASE_LOWER, MB_CASE_LOWER_SIMPLE, MB_CASE_FOLD_SIMPLE].includes(mode)) {
+        return lower(string);
+    }
+
+    if ([MB_CASE_TITLE, MB_CASE_TITLE_SIMPLE].includes(mode)) {
+        return title(string);
+    }
+
+    throw new Error(`Unsupported mode.`);
+}
+
 export const endsWith = (haystack: string, needles: null | string | number | string[]): boolean => {
     if (needles === null || needles === '') {
         return false;
@@ -99,7 +125,10 @@ export const endsWith = (haystack: string, needles: null | string | number | str
     return values.some(needle => haystack.endsWith(String(needle)));
 }
 
-export const excerpt = (text: string, phrase: string = '', {radius = 100, omission = '...'}: ExcerptOptions = {radius: 100, omission: '...'}): string => {
+export const excerpt = (text: string, phrase: string = '', {
+    radius = 100,
+    omission = '...'
+}: ExcerptOptions = {radius: 100, omission: '...'}): string => {
     if (text === phrase) {
         return text;
     }
@@ -394,7 +423,7 @@ export const parseCallback = (callback: string, method: string | null = null): A
         : [callback, method];
 }
 
-export const position = (haystack: string, needle: string, offset: number = 0): number|boolean => {
+export const position = (haystack: string, needle: string, offset: number = 0): number | boolean => {
     const index = haystack.indexOf(needle, offset);
 
     return index < 0 ? false : index;
