@@ -124,6 +124,17 @@ Stringable.of('This is my name').containsAll(['my', 'name']);
 
 // true
 ```
+
+### convertCase
+
+The `convertCase` method converts the given string to given mode:
+
+```js
+Stringable.of('HeLLo WoRLD').convertCase(MB_CASE_LOWER);
+
+// 'hello world'
+```
+
 ### dirname
 The `dirname` method returns the parent directory portion of the given string:
 ```js
