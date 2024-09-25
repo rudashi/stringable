@@ -2,7 +2,7 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/rudashi/stringable)
 ![GitHub repo size](https://img.shields.io/github/repo-size/rudashi/stringable)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rudashi/stringable/node.js.yml)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rudashi/stringable/test-node.js.yml)
 ![Twitter Follow](https://img.shields.io/twitter/follow/BorysZmuda?style=social)
 
 Javascript version's of Laravel's `Illuminate\Support\Str`
